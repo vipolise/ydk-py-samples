@@ -2,7 +2,7 @@
 This repository provides a collection of sample applications that use [YDK-Py](https://github.com/CiscoDevNet/ydk-py) for network programmability.  YDK-Py is the Python package for the Cisco YANG development kit (YDK) which provides model-driven APIs generated from a variety of YANG models.  
 
 # A "hello, world" App
-The `hello-ydk.py` script illustrates a minimalistic app that prints the uptime of a device running Cisco IOS XR device.  The script opens a NETCONF session to a device with address 10.0.0.1, reads the system time and prints the formatted uptime.
+The `hello-ydk.py` script illustrates a minimalistic app that prints the uptime of a device running Cisco IOS XR.  The script opens a NETCONF session to a device with address 10.0.0.1, reads the system time and prints the formatted uptime.
 
 ```python
 from ydk.services import CRUDService
@@ -46,13 +46,13 @@ Sample apps in this repository are classified as either basic or intermediate.  
 * Intermediate: may have some programming logic and combine more than one model.  They are classified separately by use case.
 
 ## Installation
-Before running any app, make sure you are using the Python 2.7 interpreter installed:
+The sample apps do not require any special installation, but they do require that YDK-Py is  installed.  First, verify that you have Python 2.7 (or later) installed:
 ```
 $ python --version
 Python 2.7.6
 $
 ```
-Then, [download](https://github.com/CiscoDevNet/ydk-py/archive/master.zip) the package and follow the installation instructions in the README file.
+[Download](https://github.com/CiscoDevNet/ydk-py/archive/master.zip) or clone the [YDK-Py repository](https://github.com/CiscoDevNet/ydk-py).  Then, and follow the installation instructions for YDK-Py in its README file.
 
 ## Running an App
 Instructions for using the basic apps can be found in their [README](https://github.com/CiscoDevNet/ydk-py-samples/tree/master/samples/basic) file.
