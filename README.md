@@ -52,7 +52,7 @@ $ python --version
 Python 2.7.6
 $
 ```
-[Download](https://github.com/CiscoDevNet/ydk-py/archive/master.zip) or clone the [YDK-Py repository](https://github.com/CiscoDevNet/ydk-py).  Then, and follow the installation instructions for YDK-Py in its README file.
+[Download](https://github.com/CiscoDevNet/ydk-py/archive/master.zip) or clone the [YDK-Py repository](https://github.com/CiscoDevNet/ydk-py).  Then, follow the installation instructions for YDK-Py in its README file.
 
 ## Running an App
 Instructions for using the basic apps can be found in their [README](https://github.com/CiscoDevNet/ydk-py-samples/tree/master/samples/basic) file.
