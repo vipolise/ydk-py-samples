@@ -1,0 +1,2 @@
+no router bgp 65001
+end
