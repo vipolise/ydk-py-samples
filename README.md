@@ -16,10 +16,10 @@ if __name__ == "__main__":
 
     # create NETCONF session
     provider = NetconfServiceProvider(address="10.0.0.1",
-                                     port=830,
-                                     username="admin",
-                                     password="admin",
-                                     protocol="ssh")
+                                      port=830,
+                                      username="admin",
+                                      password="admin",
+                                      protocol="ssh")
     # create CRUD service
     crud = CRUDService()
 
