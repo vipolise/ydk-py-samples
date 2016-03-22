@@ -15,7 +15,7 @@ if __name__ == "__main__":
     """Main execution path"""
 
     # create NETCONF session
-    session = NetconfServiceProvider(address="10.0.0.1",
+    provider = NetconfServiceProvider(address="10.0.0.1",
                                      port=830,
                                      username="admin",
                                      password="admin",
@@ -24,10 +24,10 @@ if __name__ == "__main__":
     crud = CRUDService()
 
     system_time = xr_shellutil_oper.SystemTime()  # create oper object
-    system_time = crud.read(session, system_time)  # read object from device
+    system_time = crud.read(provider, system_time)  # read object from device
     print "System uptime is", str(timedelta(seconds=system_time.uptime.uptime))
 
-    session.close()
+    provider.close()
     exit()
 ```
 
