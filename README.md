@@ -43,10 +43,17 @@ Sample apps in this repository are classified as either basic or intermediate.  
 
 * Basic apps: focus on a single model and have no or minimal programming logic (conditionals, loops, etc).  They should be your starting point if you don't have strong experience with models or with programming.  They are grouped by model.
 
-* Intermediate: may have some programming logic and combine more than one model.  They are classified separately by use case.
+* Intermediate: may have some programming logic and combine more than one model
 
 ## Installation
-The sample apps do not require any special installation, but they do require that YDK-Py is  installed.  First, verify that you have Python 2.7 (or later) installed:
+The sample apps do not require any special installation, but they do require that YDK-Py is installed
+```
+$ pip list | grep ydk
+ydk (0.3.0)
+$
+```
+
+If it is not installed, verify first that you have Python 2.7 (or later) installed:
 ```
 $ python --version
 Python 2.7.6
