@@ -27,25 +27,29 @@ from urlparse import urlparse
 from ydk.services import CRUDService
 from ydk.providers import NetconfServiceProvider
 from ydk.models.bgp import bgp as oc_bgp
-# import logging
+import logging
 
 
 if __name__ == "__main__":
     """Main execution path.  Takes target device URL as single argument. URL
     must have format ssh://user:password@host:port"""
     parser = ArgumentParser()
+    parser.add_argument("-v", "--verbose", help="print debugging messages",
+                        action="store_true")
     parser.add_argument("device",
                         help="NETCONF device (ssh://user:password@host:port)")
-    device = urlparse(parser.parse_args().device)
+    args = parser.parse_args()
+    device = urlparse(args.device)
 
-    # YDK logger
-    # logger = logging.getLogger("ydk")
-    # logger.setLevel(logging.DEBUG)
-    # handler = logging.FileHandler("nc-delete-config-bgp-10-ydk.log")
-    # formatter = logging.Formatter(("%(asctime)s - %(name)s - "
-    #                                "%(levelname)s - %(message)s"))
-    # handler.setFormatter(formatter)
-    # logger.addHandler(handler)
+    # log debug messages if verbose argument specified
+    if args.verbose:
+        logger = logging.getLogger("ydk")
+        logger.setLevel(logging.DEBUG)
+        handler = logging.StreamHandler()
+        formatter = logging.Formatter(("%(asctime)s - %(name)s - "
+                                      "%(levelname)s - %(message)s"))
+        handler.setFormatter(formatter)
+        logger.addHandler(handler)
 
     # create NETCONF provider
     provider = NetconfServiceProvider(address=device.hostname,
