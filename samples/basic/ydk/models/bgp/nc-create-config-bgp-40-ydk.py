@@ -14,7 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-# nc-create-config-bgp-10-ydk.py
+# nc-create-config-bgp-40-ydk.py
 # Create config for model openconfig-bgp. Additions to
 # config data are contained in the config_bgp() function.
 #

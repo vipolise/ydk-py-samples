@@ -14,7 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-# nc-delete-config-bgp-10-ydk.py
+# nc-delete-config-bgp-20-ydk.py
 # Delete all config data for model openconfig-bgp.  Config
 # changes are permanent.  If you want to restore the configuration, make
 # sure you read the configuration before deletion and create it again
