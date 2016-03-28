@@ -14,10 +14,19 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-# nc-read-config-bgp-10-ydk.py
-# Read all data for model openconfig-bgp.  Actions performed on
-# the data are contained in the process_bgp() function.
-#
+
+"""
+Read all data for model openconfig-bgp.
+
+usage: nc-read-config-bgp-10-ydk.py [-h] [-v] device
+
+positional arguments:
+  device         NETCONF device (ssh://user:password@host:port)
+
+optional arguments:
+  -h, --help     show this help message and exit
+  -v, --verbose  print debugging messages
+"""
 
 from argparse import ArgumentParser
 from urlparse import urlparse
@@ -34,8 +43,7 @@ def process_bgp(bgp):
 
 
 if __name__ == "__main__":
-    """Main execution path.  Takes target device URL as single argument. URL
-    must have format ssh://user:password@host:port"""
+    """Execute main program."""
     parser = ArgumentParser()
     parser.add_argument("-v", "--verbose", help="print debugging messages",
                         action="store_true")

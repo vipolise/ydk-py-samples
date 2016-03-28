@@ -14,10 +14,19 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-# nc-create-config-bgp-40-ydk.py
-# Create config for model openconfig-bgp. Additions to
-# config data are contained in the config_bgp() function.
-#
+
+"""
+Create config for model openconfig-bgp.
+
+usage: nc-create-config-bgp-40-ydk.py [-h] [-v] device
+
+positional arguments:
+  device         NETCONF device (ssh://user:password@host:port)
+
+optional arguments:
+  -h, --help     show this help message and exit
+  -v, --verbose  print debugging messages
+"""
 
 from argparse import ArgumentParser
 from urlparse import urlparse
@@ -28,8 +37,8 @@ from ydk.models.bgp import bgp as oc_bgp
 import logging
 
 
-# add config data to 'bgp' object
 def config_bgp(bgp):
+    """Add config data to bgp object."""
     # global configuration
     bgp.global_.config.as_ = 65001
     v4_afi_safi = bgp.global_.afi_safis.AfiSafi()
@@ -60,8 +69,7 @@ def config_bgp(bgp):
 
 
 if __name__ == "__main__":
-    """Main execution path.  Takes target device URL as single argument. URL
-    must have format ssh://user:password@host:port"""
+    """Execute main program."""
     parser = ArgumentParser()
     parser.add_argument("-v", "--verbose", help="print debugging messages",
                         action="store_true")

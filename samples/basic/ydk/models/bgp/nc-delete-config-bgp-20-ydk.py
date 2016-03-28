@@ -14,12 +14,19 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-# nc-delete-config-bgp-20-ydk.py
-# Delete all config data for model openconfig-bgp.  Config
-# changes are permanent.  If you want to restore the configuration, make
-# sure you read the configuration before deletion and create it again
-# after deletion.
-#
+
+"""
+Delete all config data for model openconfig-bgp.
+
+usage: nc-delete-config-bgp-20-ydk.py [-h] [-v] device
+
+positional arguments:
+  device         NETCONF device (ssh://user:password@host:port)
+
+optional arguments:
+  -h, --help     show this help message and exit
+  -v, --verbose  print debugging messages
+"""
 
 from argparse import ArgumentParser
 from urlparse import urlparse
@@ -31,8 +38,7 @@ import logging
 
 
 if __name__ == "__main__":
-    """Main execution path.  Takes target device URL as single argument. URL
-    must have format ssh://user:password@host:port"""
+    """Execute main program."""
     parser = ArgumentParser()
     parser.add_argument("-v", "--verbose", help="print debugging messages",
                         action="store_true")
