@@ -37,8 +37,8 @@ from ydk.models.bgp import bgp as oc_bgp
 import logging
 
 
-# process data in 'bgp' object
 def process_bgp(bgp):
+    """Process data in bgp object."""
     pass
 
 
