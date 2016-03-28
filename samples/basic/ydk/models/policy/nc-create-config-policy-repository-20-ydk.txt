@@ -1,0 +1,6 @@
+route-policy PASS-ALL
+  #statement-name pass-all
+  pass
+end-policy
+!
+end
