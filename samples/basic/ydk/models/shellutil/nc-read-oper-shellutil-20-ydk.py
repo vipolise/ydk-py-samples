@@ -14,10 +14,19 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-# nc-read-oper-shellutil-20-ydk.py
-# Read all data for model Cisco-IOS-XR-shellutil-oper.  Actions performed on
-# the data are contained in the process_system_time() function.
-#
+
+"""
+Read all data for model Cisco-IOS-XR-shellutil-oper.
+
+usage: nc-read-oper-shellutil-20-ydk.py [-h] [-v] device
+
+positional arguments:
+  device         NETCONF device (ssh://user:password@host:port)
+
+optional arguments:
+  -h, --help     show this help message and exit
+  -v, --verbose  print debugging messages
+"""
 
 from argparse import ArgumentParser
 from urlparse import urlparse
@@ -31,8 +40,8 @@ import textwrap
 import logging
 
 
-# process data in 'system_time' object
 def process_system_time(system_time):
+    """Process data in system_time object."""
     # format string for system time
     show_system_time = textwrap.dedent("""
         Host: {host}
@@ -65,8 +74,7 @@ def process_system_time(system_time):
 
 
 if __name__ == "__main__":
-    """Main execution path.  Takes target device URL as single argument. URL
-    must have format ssh://user:password@host:port"""
+    """Execute main program."""
     parser = ArgumentParser()
     parser.add_argument("-v", "--verbose", help="print debugging messages",
                         action="store_true")
