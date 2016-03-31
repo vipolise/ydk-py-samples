@@ -57,9 +57,10 @@ def process_file_system(file_system):
         {size:>12} {free:>11} {type:>11} {flags:>6}  {prefixes}
         """).rstrip()
 
+    show_file_system = str()
     # iterate over all nodes
     for node in file_system.node:
-        show_file_system = file_system_header.format(node=node.node_name)
+        show_file_system += file_system_header.format(node=node.node_name)
         # iterate over all file systems
         for fsys in node.file_system:
             show_file_system += file_system_row.format(size=fsys.size,
