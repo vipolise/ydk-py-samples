@@ -39,11 +39,7 @@ $
 ```
 
 # Sample App Library
-Sample apps in this repository are classified as either basic or intermediate.  They have the following characteristics:
-
-* Basic apps: focus on a single model and have no or minimal programming logic (conditionals, loops, etc).  They should be your starting point if you don't have strong experience with models or with programming.  They are grouped by model.
-
-* Intermediate: may have some programming logic and combine more than one model
+This repository include a large number of basic sample apps. They focus on a single model and have no or minimal programming logic (conditionals, loops, etc).  They should be your starting point if you don't have strong experience with models or with programming.  They are grouped by model.
 
 ## Installation
 The sample apps do not require any special installation, but they do require that YDK-Py is installed
