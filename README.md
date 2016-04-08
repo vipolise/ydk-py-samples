@@ -60,14 +60,14 @@ $
 ## Running an App
 Instructions for using the basic apps can be found in their [README](https://github.com/CiscoDevNet/ydk-py-samples/tree/master/samples/basic) file.
 
-## Sandbox
-You can instantiate a sandbox environment for YDK-Py on your computer using Vagrant.  The sandbox will provide an Ubuntu (14.04) VM with YDK-Py pre-installed.  Make sure you have these prerequisites installed on your computer:
+## Vagrant Sandbox
+You can instantiate a YDK-PY sandbox on your computer using Vagrant.  The sandbox will provide an Ubuntu (14.04) VM with YDK-Py pre-installed.  Make sure you have these prerequisites installed on your computer:
 * [Virtualbox](https://www.virtualbox.org/wiki/Downloads)
 * [Vagrant](https://www.vagrantup.com/downloads.html)
 * An ssh client
 * ssh keys generated on your system
 
-To create a sandbox, issue the following command from the directory where `Vagrantfile` resides:
+To create a sandbox, issue the following command from the directory where the `Vagrantfile` resides:
 ```
 $ vagrant up
 ```
@@ -77,7 +77,7 @@ To verify the status of your sandbox use:
 $ vagrant status
 ```
 
-Once your sandbox is running, you can then connect to using:
+Once your sandbox is running, you can connect to it using:
 ```
 $ vagrant ssh
 ```
@@ -90,7 +90,7 @@ $ vagrant suspend
 $ vagrant resume
 ```
 
-To destroy your sandbox, issue the following command from the directory where `Vagrantfile` resides on your host:
+To destroy your sandbox, issue the following command:
 ```
 $ vagrant destroy
 ```
