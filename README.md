@@ -45,7 +45,7 @@ This repository include a large number of basic sample apps. They focus on a sin
 The sample apps do not require any special installation, but they do require that YDK-Py is installed
 ```
 $ pip list | grep ydk
-ydk (0.3.0)
+ydk (0.4.0)
 $
 ```
 
@@ -58,7 +58,7 @@ $
 [Download](https://github.com/CiscoDevNet/ydk-py/archive/master.zip) or clone the [YDK-Py repository](https://github.com/CiscoDevNet/ydk-py).  Then, follow the installation instructions for YDK-Py in its README file.
 
 ## Running an App
-Instructions for using the basic apps can be found in their [README](https://github.com/CiscoDevNet/ydk-py-samples/tree/master/samples/basic) file.
+Instructions for using the basic apps can be found in their [README](https://github.com/CiscoDevNet/ydk-py-samples/tree/master/samples/basic) file.  For Cisco IOS XR models, you would need a device running version 6.0.0 or later as the target.
 
 ## Vagrant Sandbox
 You can instantiate a YDK-PY sandbox on your computer using Vagrant.  The sandbox will provide an Ubuntu (14.04) VM with YDK-Py pre-installed.  Make sure you have these prerequisites installed on your computer:
