@@ -5,6 +5,7 @@ This repository provides a collection of sample applications that use [YDK-Py](h
 The `hello-ydk.py` script illustrates a minimalistic app that prints the uptime of a device running Cisco IOS XR.  The script opens a NETCONF session to a device with address 10.0.0.1, reads the system time and prints the formatted uptime.
 
 ```python
+# import providers, services and models
 from ydk.services import CRUDService
 from ydk.providers import NetconfServiceProvider
 from ydk.models.shellutil import Cisco_IOS_XR_shellutil_oper as xr_shellutil_oper
@@ -23,10 +24,16 @@ if __name__ == "__main__":
     # create CRUD service
     crud = CRUDService()
 
-    system_time = xr_shellutil_oper.SystemTime()  # create oper object
-    system_time = crud.read(provider, system_time)  # read object from device
+    # create system time object
+    system_time = xr_shellutil_oper.SystemTime()
+
+    # read system time from device
+    system_time = crud.read(provider, system_time)
+
+    # print system time
     print "System uptime is", str(timedelta(seconds=system_time.uptime.uptime))
 
+    # close NETCONF session and exit
     provider.close()
     exit()
 ```
