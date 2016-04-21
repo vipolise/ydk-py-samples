@@ -37,10 +37,16 @@ if __name__ == "__main__":
     # create CRUD service
     crud = CRUDService()
 
-    system_time = xr_shellutil_oper.SystemTime()  # create oper object
-    system_time = crud.read(provider, system_time)  # read object from device
+    # create system time object
+    system_time = xr_shellutil_oper.SystemTime()
+
+    # read system time from device
+    system_time = crud.read(provider, system_time)
+
+    # print system time
     print "System uptime is", str(timedelta(seconds=system_time.uptime.uptime))
 
+    # close NETCONF session and exit
     provider.close()
     exit()
 # End of script
