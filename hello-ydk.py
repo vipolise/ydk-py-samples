@@ -19,6 +19,7 @@
 # uptime.
 #
 
+# import providers, services and models
 from ydk.services import CRUDService
 from ydk.providers import NetconfServiceProvider
 from ydk.models.shellutil import Cisco_IOS_XR_shellutil_oper as xr_shellutil_oper
