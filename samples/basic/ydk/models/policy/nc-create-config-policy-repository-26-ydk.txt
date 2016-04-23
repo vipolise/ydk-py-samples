@@ -3,6 +3,10 @@ prefix-set PREFIX-SET1
   172.0.0.0/8 ge 16 le 32
 end-set
 !
+community-set COMMUNITY-SET2
+  65172:17001
+end-set
+!
 route-policy POLICY3
   #statement-name prefix-set1
   if destination in PREFIX-SET1 then
