@@ -47,6 +47,12 @@ def config_routing_policy(routing_policy):
           172.0.0.0/8 ge 16 le 32
         end-set
         """
+    community_set_name = "COMMUNITY-SET2"
+    rpl_community_set = """
+        community-set COMMUNITY-SET2
+          65172:17001
+        end-set
+        """
     route_policy_name = "POLICY3"
     rpl_route_policy = """
         route-policy POLICY3
@@ -65,6 +71,12 @@ def config_routing_policy(routing_policy):
     prefix_set.set_name = set_name
     prefix_set.rpl_prefix_set = rpl_prefix_set
     routing_policy.sets.prefix_sets.prefix_set.append(prefix_set)
+
+    # configure community set
+    community_set = routing_policy.sets.community_sets.CommunitySet()
+    community_set.set_name = community_set_name
+    community_set.rpl_community_set = rpl_community_set
+    routing_policy.sets.community_sets.community_set.append(community_set)
 
     # configure RPL policy
     route_policy = routing_policy.route_policies.RoutePolicy()

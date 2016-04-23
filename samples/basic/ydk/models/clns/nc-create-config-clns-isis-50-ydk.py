@@ -44,23 +44,23 @@ def config_isis(isis):
     instance = isis.instances.Instance()
     instance.instance_name = "DEFAULT"
     instance.running = Empty()
-    instance.is_type = xr_clns_isis_cfg.IsisConfigurableLevels_Enum.LEVEL2
+    instance.is_type = xr_clns_isis_cfg.IsisConfigurableLevelsEnum.LEVEL2
     net = instance.nets.Net()
     net.net_name = "49.0000.1720.1625.5001.00"
     instance.nets.net.append(net)
     isis.instances.instance.append(instance)
     # global address family
     af = instance.afs.Af()
-    af.af_name = xr_clns_isis_cfg.IsisAddressFamily_Enum.IPV4
-    af.saf_name = xr_clns_isis_cfg.IsisSubAddressFamily_Enum.UNICAST
+    af.af_name = xr_clns_isis_cfg.IsisAddressFamilyEnum.IPV4
+    af.saf_name = xr_clns_isis_cfg.IsisSubAddressFamilyEnum.UNICAST
     af.af_data = af.AfData()
     metric_style = af.af_data.metric_styles.MetricStyle()
-    metric_style.style = xr_clns_isis_cfg.IsisMetricStyle_Enum.NEW_METRIC_STYLE
-    metric_style.level = xr_clns_isis_cfg.IsisInternalLevel_Enum.NOT_SET
-    transition_state = xr_clns_isis_cfg.IsisMetricStyleTransition_Enum.DISABLED
+    metric_style.style = xr_clns_isis_cfg.IsisMetricStyleEnum.NEW_METRIC_STYLE
+    metric_style.level = xr_clns_isis_cfg.IsisInternalLevelEnum.NOT_SET
+    transition_state = xr_clns_isis_cfg.IsisMetricStyleTransitionEnum.DISABLED
     metric_style.transition_state = transition_state
     # segment routing
-    mpls = xr_clns_isis_cfg.IsisLabelPreference_Enum.LDP
+    mpls = xr_clns_isis_cfg.IsisLabelPreferenceEnum.LDP
     af.af_data.segment_routing.mpls = mpls
     af.af_data.metric_styles.metric_style.append(metric_style)
     instance.afs.af.append(af)
@@ -69,20 +69,20 @@ def config_isis(isis):
     interface = instance.interfaces.Interface()
     interface.interface_name = "Loopback0"
     interface.running = Empty()
-    interface.state = xr_clns_isis_cfg.IsisInterfaceState_Enum.PASSIVE
+    interface.state = xr_clns_isis_cfg.IsisInterfaceStateEnum.PASSIVE
     # interface address family
     interface_af = interface.interface_afs.InterfaceAf()
-    interface_af.af_name = xr_clns_isis_cfg.IsisAddressFamily_Enum.IPV4
-    interface_af.saf_name = xr_clns_isis_cfg.IsisSubAddressFamily_Enum.UNICAST
+    interface_af.af_name = xr_clns_isis_cfg.IsisAddressFamilyEnum.IPV4
+    interface_af.saf_name = xr_clns_isis_cfg.IsisSubAddressFamilyEnum.UNICAST
     interface_af.interface_af_data.running = Empty()
     # segment routing
     prefix_sid = interface_af.interface_af_data.PrefixSid()
-    prefix_sid.type = xr_clns_isis_cfg.Isissid_Enum.ABSOLUTE
+    prefix_sid.type = xr_clns_isis_cfg.IsissidEnum.ABSOLUTE
     prefix_sid.value = 16041
-    prefix_sid.php = xr_clns_isis_cfg.IsisphpFlag_Enum.ENABLE
-    explicit_null = xr_clns_isis_cfg.IsisexplicitNullFlag_Enum.DISABLE
+    prefix_sid.php = xr_clns_isis_cfg.IsisphpFlagEnum.ENABLE
+    explicit_null = xr_clns_isis_cfg.IsisexplicitNullFlagEnum.DISABLE
     prefix_sid.explicit_null = explicit_null
-    prefix_sid.nflag_clear = xr_clns_isis_cfg.NflagClear_Enum.DISABLE
+    prefix_sid.nflag_clear = xr_clns_isis_cfg.NflagClearEnum.DISABLE
     interface_af.interface_af_data.prefix_sid = prefix_sid
     interface.interface_afs.interface_af.append(interface_af)
     instance.interfaces.interface.append(interface)
@@ -94,8 +94,8 @@ def config_isis(isis):
     interface.point_to_point = Empty()
     # interface address familiy
     interface_af = interface.interface_afs.InterfaceAf()
-    interface_af.af_name = xr_clns_isis_cfg.IsisAddressFamily_Enum.IPV4
-    interface_af.saf_name = xr_clns_isis_cfg.IsisSubAddressFamily_Enum.UNICAST
+    interface_af.af_name = xr_clns_isis_cfg.IsisAddressFamilyEnum.IPV4
+    interface_af.saf_name = xr_clns_isis_cfg.IsisSubAddressFamilyEnum.UNICAST
     interface_af.interface_af_data.running = Empty()
     interface.interface_afs.interface_af.append(interface_af)
     instance.interfaces.interface.append(interface)
