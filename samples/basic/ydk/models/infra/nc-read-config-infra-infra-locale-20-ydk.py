@@ -48,8 +48,8 @@ def process_locale(locale):
         """).strip()
 
     # return formatted string
-    return(show_locale.format(country=locale.country,
-                              language=locale.language))
+    return(show_locale.format(country=locale.country.name,
+                              language=locale.language.name))
 
 
 if __name__ == "__main__":
