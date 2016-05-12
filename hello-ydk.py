@@ -14,7 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-# nc-read-oper-shellutil-10-ydk.py
+# hello-ydk.py
 # Read all data for model Cisco-IOS-XR-shellutil-oper and print system
 # uptime.
 #
@@ -22,7 +22,8 @@
 # import providers, services and models
 from ydk.services import CRUDService
 from ydk.providers import NetconfServiceProvider
-from ydk.models.shellutil import Cisco_IOS_XR_shellutil_oper as xr_shellutil_oper
+from ydk.models.shellutil import Cisco_IOS_XR_shellutil_oper \
+    as xr_shellutil_oper
 from datetime import timedelta
 
 
@@ -44,8 +45,9 @@ if __name__ == "__main__":
     # read system time from device
     system_time = crud.read(provider, system_time)
 
-    # print system time
-    print "System uptime is", str(timedelta(seconds=system_time.uptime.uptime))
+    # print system uptime
+    print("System uptime is" +
+          str(timedelta(seconds=system_time.uptime.uptime)))
 
     # close NETCONF session and exit
     provider.close()
