@@ -8,7 +8,8 @@ The `hello-ydk.py` script illustrates a minimalistic app that prints the uptime 
 # import providers, services and models
 from ydk.services import CRUDService
 from ydk.providers import NetconfServiceProvider
-from ydk.models.shellutil import Cisco_IOS_XR_shellutil_oper as xr_shellutil_oper
+from ydk.models.shellutil import Cisco_IOS_XR_shellutil_oper \
+    as xr_shellutil_oper
 from datetime import timedelta
 
 
@@ -30,8 +31,9 @@ if __name__ == "__main__":
     # read system time from device
     system_time = crud.read(provider, system_time)
 
-    # print system time
-    print "System uptime is", str(timedelta(seconds=system_time.uptime.uptime))
+    # print system uptime
+    print("System uptime is" +
+          str(timedelta(seconds=system_time.uptime.uptime)))
 
     # close NETCONF session and exit
     provider.close()
