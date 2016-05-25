@@ -69,7 +69,7 @@ def process_system_time(system_time):
                                    time=clock_time,
                                    tzone=system_time.clock.time_zone,
                                    date=clock_date,
-                                   source=system_time.clock.time_source,
+                                   source=system_time.clock.time_source.name,
                                    uptime=clock_delta))
 
 
