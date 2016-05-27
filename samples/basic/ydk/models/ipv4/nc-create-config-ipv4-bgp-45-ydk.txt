@@ -1,0 +1,16 @@
+router bgp 65001
+ address-family ipv6 unicast
+ !
+ neighbor-group EBGP
+  remote-as 65002
+  address-family ipv6 unicast
+   route-policy POLICY3 in
+   route-policy POLICY1 out
+  !
+ !
+ neighbor 2001:db8::ff:2
+  use neighbor-group EBGP
+ !
+!
+end
+
