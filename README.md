@@ -70,7 +70,7 @@ $
 Instructions for using the basic apps can be found in their [README](https://github.com/CiscoDevNet/ydk-py-samples/tree/master/samples/basic) file.  For Cisco IOS XR models, you would need a device running version 6.0.0 or later as the target.
 
 ## Vagrant Sandbox
-You can instantiate a YDK-PY sandbox on your computer using Vagrant.  The sandbox will provide an Ubuntu (14.04) VM with YDK-Py pre-installed.  Make sure you have these prerequisites installed on your computer:
+You can instantiate a YDK-Py sandbox on your computer using Vagrant.  The sandbox will provide an Ubuntu (14.04) VM with YDK-Py pre-installed.  Make sure you have these prerequisites installed on your computer:
 * [Virtualbox](https://www.virtualbox.org/wiki/Downloads)
 * [Vagrant](https://www.vagrantup.com/downloads.html)
 * An ssh client
@@ -102,4 +102,14 @@ $ vagrant resume
 To destroy your sandbox, issue the following command:
 ```
 $ vagrant destroy
+```
+
+If you previously instantiated a YDK-Py sandbox, you can check for updates using:
+```
+$ vagrant box outdated
+```
+
+If a newer version is available, you can update your sandbox automatically using:
+```
+$ vagrant box update
 ```
