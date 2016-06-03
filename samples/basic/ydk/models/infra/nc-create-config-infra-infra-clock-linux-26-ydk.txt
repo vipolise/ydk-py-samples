@@ -1,2 +1,2 @@
-clock timezone WAT Africa/Douala
+clock timezone BRT Brazil/East
 end
