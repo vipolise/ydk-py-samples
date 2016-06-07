@@ -1,0 +1,7 @@
+Node: RP/0/RP0/CPU0
+------------------------------------------------------------
+No  Time                      Cause Code  Reason
+--------------------------------------------------------------------------------
+01  Thu Jun  2 20:50:48 2016  0x00000001  User initiated forced reload
+02  Thu Jun  2 20:55:56 2016  0x00000001  User initiated forced reload
+03  Mon Jun  6 23:41:18 2016  0x00000001  User initiated forced reload
