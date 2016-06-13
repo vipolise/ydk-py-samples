@@ -62,8 +62,8 @@ def config_bgp(bgp):
 
     # configure IBGP neighbor
     ibgp_nbr = bgp.neighbors.Neighbor()
-    ibgp_nbr.neighbor_address = "172.16.255.3"
-    ibgp_nbr.config.neighbor_address = "172.16.255.3"
+    ibgp_nbr.neighbor_address = "172.16.255.2"
+    ibgp_nbr.config.neighbor_address = "172.16.255.2"
     ibgp_nbr.config.peer_group = "IBGP"
     bgp.neighbors.neighbor.append(ibgp_nbr)
 
