@@ -8,7 +8,7 @@ router bgp 65001
    route-policy POLICY2 out
   !
  !
- neighbor 172.16.255.3
+ neighbor 172.16.255.2
   use neighbor-group IBGP
  !
 !
