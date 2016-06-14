@@ -79,7 +79,7 @@ def config_bgp(bgp):
 
     # configure IBGP neighbor
     neighbor = four_byte_as.default_vrf.bgp_entity.neighbors.Neighbor()
-    neighbor.neighbor_address = "172.16.255.3"
+    neighbor.neighbor_address = "172.16.255.2"
     neighbor.neighbor_group_add_member = "IBGP"
     four_byte_as.default_vrf.bgp_entity.neighbors.neighbor.append(neighbor)
 
