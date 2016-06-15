@@ -1,4 +1,4 @@
 *.log
-TODO.*
+TODO*
 samples/intermediate
 .vagrant/
