@@ -1,0 +1,6 @@
+mpls traffic-eng
+ reoptimize 3600
+ reoptimize timers delay cleanup 20
+ reoptimize timers delay installation 20
+!
+end

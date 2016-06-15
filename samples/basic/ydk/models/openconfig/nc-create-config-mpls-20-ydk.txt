@@ -1,0 +1,11 @@
+rsvp
+ interface GigabitEthernet0/0/0/0
+  bandwidth percentage 100
+ !
+ interface GigabitEthernet0/0/0/1
+  bandwidth percentage 100
+ !
+!
+mpls traffic-eng
+!
+end
