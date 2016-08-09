@@ -1,0 +1,43 @@
+<routing-policy xmlns="http://cisco.com/ns/yang/Cisco-IOS-XR-policy-repository-cfg">
+  <route-policies>
+    <route-policy>
+      <route-policy-name>POLICY3</route-policy-name>
+      <rpl-route-policy>
+        route-policy POLICY3
+          #statement-name prefix-set1
+          if destination in PREFIX-SET1 then
+            set local-preference 1000
+            set community COMMUNITY-SET2
+            done
+          endif
+          #statement-name reject
+          drop
+        end-policy
+        </rpl-route-policy>
+    </route-policy>
+  </route-policies>
+  <sets>
+    <community-sets>
+      <community-set>
+        <set-name>COMMUNITY-SET2</set-name>
+        <rpl-community-set>
+        community-set COMMUNITY-SET2
+          65172:17001
+        end-set
+        </rpl-community-set>
+      </community-set>
+    </community-sets>
+    <prefix-sets>
+      <prefix-set>
+        <set-name>PREFIX-SET1</set-name>
+        <rpl-prefix-set>
+        prefix-set PREFIX-SET1
+          10.0.0.0/16 ge 24 le 32,
+          172.0.0.0/8 ge 16 le 32
+        end-set
+        </rpl-prefix-set>
+      </prefix-set>
+    </prefix-sets>
+  </sets>
+</routing-policy>
+

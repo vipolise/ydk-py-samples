@@ -1,0 +1,15 @@
+<routing-policy xmlns="http://cisco.com/ns/yang/Cisco-IOS-XR-policy-repository-cfg">
+  <route-policies>
+    <route-policy>
+      <route-policy-name>POLICY4</route-policy-name>
+      <rpl-route-policy>
+        route-policy POLICY4
+          #statement-name next-hop-self
+          set next-hop self
+          done
+        end-policy
+        </rpl-route-policy>
+    </route-policy>
+  </route-policies>
+</routing-policy>
+
