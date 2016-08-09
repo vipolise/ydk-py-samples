@@ -1,0 +1,19 @@
+<routing-policy xmlns="http://openconfig.net/yang/routing-policy">
+  <policy-definitions>
+    <policy-definition>
+      <name>POLICY4</name>
+      <statements>
+        <statement>
+          <name>next-hop-self</name>
+          <actions>
+            <accept-route></accept-route>
+            <bgp-actions xmlns="http://openconfig.net/yang/bgp-policy">
+              <set-next-hop>SELF</set-next-hop>
+            </bgp-actions>
+          </actions>
+        </statement>
+      </statements>
+    </policy-definition>
+  </policy-definitions>
+</routing-policy>
+
