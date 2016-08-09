@@ -1,0 +1,14 @@
+<routing-policy xmlns="http://cisco.com/ns/yang/Cisco-IOS-XR-policy-repository-cfg">
+  <route-policies>
+    <route-policy>
+      <route-policy-name>POLICY1</route-policy-name>
+      <rpl-route-policy>
+        route-policy POLICY1
+          #statement-name accept route
+          done
+        end-policy
+        </rpl-route-policy>
+    </route-policy>
+  </route-policies>
+</routing-policy>
+
