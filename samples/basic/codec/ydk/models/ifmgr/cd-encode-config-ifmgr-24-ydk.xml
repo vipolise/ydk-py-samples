@@ -1,0 +1,4 @@
+<global-interface-configuration xmlns="http://cisco.com/ns/yang/Cisco-IOS-XR-ifmgr-cfg">
+  <link-status>software-interfaces</link-status>
+</global-interface-configuration>
+
