@@ -1,0 +1,17 @@
+<interface-configurations xmlns="http://cisco.com/ns/yang/Cisco-IOS-XR-ifmgr-cfg">
+  <interface-configuration>
+    <active>act</active>
+    <interface-name>Loopback0</interface-name>
+    <description>PRIMARY ROUTER LOOPBACK</description>
+    <interface-virtual></interface-virtual>
+    <ipv4-network xmlns="http://cisco.com/ns/yang/Cisco-IOS-XR-ipv4-io-cfg">
+      <addresses>
+        <primary>
+          <address>172.16.255.1</address>
+          <netmask>255.255.255.255</netmask>
+        </primary>
+      </addresses>
+    </ipv4-network>
+  </interface-configuration>
+</interface-configurations>
+
