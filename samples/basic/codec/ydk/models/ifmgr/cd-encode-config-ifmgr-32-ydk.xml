@@ -1,0 +1,19 @@
+<interface-configurations xmlns="http://cisco.com/ns/yang/Cisco-IOS-XR-ifmgr-cfg">
+  <interface-configuration>
+    <active>act</active>
+    <interface-name>Loopback0</interface-name>
+    <description>PRIMARY ROUTER LOOPBACK</description>
+    <interface-virtual></interface-virtual>
+    <ipv6-network xmlns="http://cisco.com/ns/yang/Cisco-IOS-XR-ipv6-ma-cfg">
+      <addresses>
+        <regular-addresses>
+          <regular-address>
+            <address>2001:db8::ff:1</address>
+            <prefix-length>128</prefix-length>
+          </regular-address>
+        </regular-addresses>
+      </addresses>
+    </ipv6-network>
+  </interface-configuration>
+</interface-configurations>
+
