@@ -34,7 +34,6 @@ from urlparse import urlparse
 from ydk.services import CRUDService
 from ydk.providers import NetconfServiceProvider
 from ydk.models.ifmgr import Cisco_IOS_XR_ifmgr_cfg as xr_ifmgr_cfg
-from ydk.types import Empty
 import logging
 
 
