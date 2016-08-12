@@ -1,0 +1,7 @@
+<clock xmlns="http://cisco.com/ns/yang/Cisco-IOS-XR-infra-infra-clock-linux-cfg">
+  <time-zone>
+    <area-name>PRC</area-name>
+    <time-zone-name>CST</time-zone-name>
+  </time-zone>
+</clock>
+
