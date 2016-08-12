@@ -1,0 +1,7 @@
+<clock xmlns="http://cisco.com/ns/yang/Cisco-IOS-XR-infra-infra-clock-linux-cfg">
+  <time-zone>
+    <area-name>Africa/Douala</area-name>
+    <time-zone-name>WAT</time-zone-name>
+  </time-zone>
+</clock>
+
