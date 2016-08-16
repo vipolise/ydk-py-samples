@@ -1,0 +1,26 @@
+<router-static xmlns="http://cisco.com/ns/yang/Cisco-IOS-XR-ip-static-cfg">
+  <default-vrf>
+    <address-family>
+      <vrfipv6>
+        <vrf-unicast>
+          <vrf-prefixes>
+            <vrf-prefix>
+              <prefix>2001:db8:a::</prefix>
+              <prefix-length>64</prefix-length>
+              <vrf-route>
+                <vrf-next-hop-table>
+                  <vrf-next-hop-next-hop-address>
+                    <next-hop-address>2001:db8::1:3</next-hop-address>
+                    <metric>254</metric>
+                    <object-name>TRACKED_OBJ</object-name>
+                  </vrf-next-hop-next-hop-address>
+                </vrf-next-hop-table>
+              </vrf-route>
+            </vrf-prefix>
+          </vrf-prefixes>
+        </vrf-unicast>
+      </vrfipv6>
+    </address-family>
+  </default-vrf>
+</router-static>
+
