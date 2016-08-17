@@ -1,0 +1,5 @@
+ntp
+ server 171.68.38.66 source Loopback0
+!
+end
+
