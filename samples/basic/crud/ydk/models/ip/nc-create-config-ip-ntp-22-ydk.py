@@ -43,7 +43,7 @@ def config_ntp(ntp):
     peer_vrf = ntp.peer_vrfs.PeerVrf()
     peer_vrf.vrf_name = "default"
     peer_ipv4 = peer_vrf.peer_ipv4s.PeerIpv4()
-    peer_ipv4.address_ipv4 = "171.68.38.66"
+    peer_ipv4.address_ipv4 = "10.0.0.1"
     peer_type_ipv4 = peer_ipv4.PeerTypeIpv4()
     peer_type_ipv4.peer_type = xr_ip_ntp_cfg.NtpPeerEnum.SERVER
     peer_type_ipv4.source_interface = "Loopback0"
