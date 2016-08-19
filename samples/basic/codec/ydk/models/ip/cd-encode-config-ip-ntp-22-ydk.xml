@@ -1,0 +1,18 @@
+<ntp xmlns="http://cisco.com/ns/yang/Cisco-IOS-XR-ip-ntp-cfg">
+  <peer-vrfs>
+    <peer-vrf>
+      <vrf-name>default</vrf-name>
+      <peer-ipv4s>
+        <peer-ipv4>
+          <address-ipv4>10.0.0.1</address-ipv4>
+          <peer-type-ipv4>
+            <peer-type>server</peer-type>
+            <source-interface>Loopback0</source-interface>
+          </peer-type-ipv4>
+        </peer-ipv4>
+      </peer-ipv4s>
+    </peer-vrf>
+  </peer-vrfs>
+  <update-calendar></update-calendar>
+</ntp>
+
