@@ -48,13 +48,13 @@ $
 ```
 
 ## Sample App Library
-This repository include a large number of basic sample apps. They focus on a single model and have no or minimal programming logic (conditionals, loops, etc).  They should be your starting point if you don't have strong experience with models or with programming.  They are grouped by model.
+This repository include a large number of basic sample apps. They focus on a single model and have no or minimal programming logic (conditionals, loops, etc).  They should be your starting point if you don't have strong experience with models or with programming.  They are grouped by service and model. Version 0.4.2 of the YDK Python (YDK-Py) package is required to run the applications.
 
 ## Installation
 The sample apps do not require any special installation, but they do require that YDK-Py is installed
 ```
 $ pip list | grep ydk
-ydk (0.4.0)
+ydk (0.4.2)
 $
 ```
 
