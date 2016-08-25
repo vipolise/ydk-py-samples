@@ -34,7 +34,6 @@ from urlparse import urlparse
 from ydk.services import CRUDService
 from ydk.providers import NetconfServiceProvider
 from ydk.models.cdp import Cisco_IOS_XR_cdp_cfg as xr_cdp_cfg
-from ydk.types import Empty
 import logging
 
 
