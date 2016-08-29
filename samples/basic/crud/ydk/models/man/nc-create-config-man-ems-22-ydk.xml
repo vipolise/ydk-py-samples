@@ -1,0 +1,7 @@
+<grpc xmlns="http://cisco.com/ns/yang/Cisco-IOS-XR-man-ems-cfg">
+  <enable></enable>
+  <tls>
+    <enable></enable>
+  </tls>
+</grpc>
+
