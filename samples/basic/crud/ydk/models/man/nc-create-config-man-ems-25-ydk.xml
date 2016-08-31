@@ -1,0 +1,10 @@
+<grpc xmlns="http://cisco.com/ns/yang/Cisco-IOS-XR-man-ems-cfg">
+  <address-family>ipv6</address-family>
+  <enable></enable>
+  <max-request-per-user>8</max-request-per-user>
+  <max-request-total>32</max-request-total>
+  <tls>
+    <enable></enable>
+  </tls>
+</grpc>
+
