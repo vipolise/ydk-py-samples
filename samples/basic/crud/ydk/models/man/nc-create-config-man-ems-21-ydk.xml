@@ -1,0 +1,5 @@
+<grpc xmlns="http://cisco.com/ns/yang/Cisco-IOS-XR-man-ems-cfg">
+  <address-family>ipv6</address-family>
+  <enable></enable>
+</grpc>
+
