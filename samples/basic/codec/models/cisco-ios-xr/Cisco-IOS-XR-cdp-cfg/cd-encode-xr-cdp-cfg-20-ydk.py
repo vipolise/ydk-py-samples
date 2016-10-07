@@ -16,9 +16,9 @@
 #
 
 """
-Encode config for model Cisco-IOS-XR-cdp-cfg.
+Encode configuration for model Cisco-IOS-XR-cdp-cfg.
 
-usage: cd-encode-config-cdp-24-ydk.py [-h] [-v]
+usage: cd-encode-xr-cdp-cfg-20-ydk.py [-h] [-v]
 
 optional arguments:
   -h, --help     show this help message and exit
@@ -30,17 +30,14 @@ from urlparse import urlparse
 
 from ydk.services import CodecService
 from ydk.providers import CodecServiceProvider
-from ydk.models.cdp import Cisco_IOS_XR_cdp_cfg as xr_cdp_cfg
-from ydk.types import Empty
+from ydk.models.cisco_ios_xr import Cisco_IOS_XR_cdp_cfg \
+    as xr_cdp_cfg
 import logging
 
 
 def config_cdp(cdp):
     """Add config data to cdp object."""
     cdp.enable = True
-    cdp.timer = 15
-    cdp.hold_time = 60
-    cdp.log_adjacency = Empty()
 
 
 if __name__ == "__main__":
@@ -66,10 +63,12 @@ if __name__ == "__main__":
     # create codec service
     codec = CodecService()
 
-    cdp = xr_cdp_cfg.Cdp()  # create config object
+    cdp = xr_cdp_cfg.Cdp()  # create object
     config_cdp(cdp)  # add object configuration
 
-    print(codec.encode(provider, cdp))  # encode and print object
+    # encode and print object
+    print(codec.encode(provider, cdp))
+
     provider.close()
     exit()
 # End of script
