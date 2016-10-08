@@ -16,9 +16,9 @@
 #
 
 """
-Encode config for model Cisco-IOS-XR-crypto-macsec-mka-cfg.
+Encode configuration for model Cisco-IOS-XR-crypto-macsec-mka-cfg.
 
-usage: cd-encode-config-crypto-macsec-mka-10-ydk.py [-h] [-v]
+usage: cd-encode-xr-crypto-macsec-mka-cfg-10-ydk.py [-h] [-v]
 
 optional arguments:
   -h, --help     show this help message and exit
@@ -30,12 +30,13 @@ from urlparse import urlparse
 
 from ydk.services import CodecService
 from ydk.providers import CodecServiceProvider
-from ydk.models.crypto import Cisco_IOS_XR_crypto_macsec_mka_cfg as xr_crypto_macsec_mka_cfg
+from ydk.models.cisco_ios_xr import Cisco_IOS_XR_crypto_macsec_mka_cfg \
+    as xr_crypto_macsec_mka_cfg
 import logging
 
 
-def config_mac_sec(mac_sec):
-    """Add config data to mac_sec object."""
+def config_macsec(macsec):
+    """Add config data to macsec object."""
     pass
 
 
@@ -62,10 +63,12 @@ if __name__ == "__main__":
     # create codec service
     codec = CodecService()
 
-    mac_sec = xr_crypto_macsec_mka_cfg.MacSec()  # create config object
-    config_mac_sec(mac_sec)  # add object configuration
+    macsec = xr_crypto_macsec_mka_cfg.Macsec()  # create object
+    config_macsec(macsec)  # add object configuration
 
-    # print(codec.encode(provider, mac_sec))  # encode and print object
+    # encode and print object
+    # print(codec.encode(provider, macsec))
+
     provider.close()
     exit()
 # End of script
