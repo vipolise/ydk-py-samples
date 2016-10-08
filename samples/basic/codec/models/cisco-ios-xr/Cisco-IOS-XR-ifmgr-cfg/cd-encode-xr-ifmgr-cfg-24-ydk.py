@@ -16,9 +16,9 @@
 #
 
 """
-Encode config for model Cisco-IOS-XR-ifmgr-cfg.
+Encode configuration for model Cisco-IOS-XR-ifmgr-cfg.
 
-usage: cd-encode-config-ifmgr-11-ydk.py [-h] [-v]
+usage: cd-encode-xr-ifmgr-cfg-24-ydk.py [-h] [-v]
 
 optional arguments:
   -h, --help     show this help message and exit
@@ -30,13 +30,15 @@ from urlparse import urlparse
 
 from ydk.services import CodecService
 from ydk.providers import CodecServiceProvider
-from ydk.models.ifmgr import Cisco_IOS_XR_ifmgr_cfg as xr_ifmgr_cfg
+from ydk.models.cisco_ios_xr import Cisco_IOS_XR_ifmgr_cfg \
+    as xr_ifmgr_cfg
 import logging
 
 
-def config_interface_configurations(interface_configurations):
-    """Add config data to interface_configurations object."""
-    pass
+def config_global_interface_configuration(global_interface_configuration):
+    """Add config data to global_interface_configuration object."""
+    # display link status messages for all interfaces
+    global_interface_configuration.link_status = xr_ifmgr_cfg.LinkStatusEnumEnum.SOFTWARE_INTERFACES
 
 
 if __name__ == "__main__":
@@ -62,10 +64,12 @@ if __name__ == "__main__":
     # create codec service
     codec = CodecService()
 
-    interface_configurations = xr_ifmgr_cfg.InterfaceConfigurations()  # create config object
-    config_interface_configurations(interface_configurations)  # add object configuration
+    global_interface_configuration = xr_ifmgr_cfg.GlobalInterfaceConfiguration()  # create object
+    config_global_interface_configuration(global_interface_configuration)  # add object configuration
 
-    # print(codec.encode(provider, interface_configurations))  # encode and print object
+    # encode and print object
+    print(codec.encode(provider, global_interface_configuration))
+
     provider.close()
     exit()
 # End of script
