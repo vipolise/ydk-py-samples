@@ -16,9 +16,9 @@
 #
 
 """
-Encode config for model Cisco-IOS-XR-ethernet-lldp-cfg.
+Encode configuration for model Cisco-IOS-XR-ethernet-lldp-cfg.
 
-usage: cd-encode-config-ethernet-lldp-10-ydk.py [-h] [-v]
+usage: cd-encode-xr-ethernet-lldp-cfg-22-ydk.py [-h] [-v]
 
 optional arguments:
   -h, --help     show this help message and exit
@@ -30,13 +30,16 @@ from urlparse import urlparse
 
 from ydk.services import CodecService
 from ydk.providers import CodecServiceProvider
-from ydk.models.ethernet import Cisco_IOS_XR_ethernet_lldp_cfg as xr_ethernet_lldp_cfg
+from ydk.models.cisco_ios_xr import Cisco_IOS_XR_ethernet_lldp_cfg \
+    as xr_ethernet_lldp_cfg
 import logging
 
 
 def config_lldp(lldp):
     """Add config data to lldp object."""
-    pass
+    lldp.enable = True
+    lldp.timer = 15
+    lldp.holdtime = 60
 
 
 if __name__ == "__main__":
@@ -62,10 +65,12 @@ if __name__ == "__main__":
     # create codec service
     codec = CodecService()
 
-    lldp = xr_ethernet_lldp_cfg.Lldp()  # create config object
+    lldp = xr_ethernet_lldp_cfg.Lldp()  # create object
     config_lldp(lldp)  # add object configuration
 
-    # print(codec.encode(provider, lldp))  # encode and print object
+    # encode and print object
+    print(codec.encode(provider, lldp))
+
     provider.close()
     exit()
 # End of script
