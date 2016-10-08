@@ -16,9 +16,9 @@
 #
 
 """
-Encode config for model Cisco-IOS-XR-clns-isis-cfg.
+Encode configuration for model Cisco-IOS-XR-clns-isis-cfg.
 
-usage: cd-encode-config-clns-isis-36-ydk.py [-h] [-v]
+usage: cd-encode-xr-clns-isis-cfg-34-ydk.py [-h] [-v]
 
 optional arguments:
   -h, --help     show this help message and exit
@@ -30,7 +30,8 @@ from urlparse import urlparse
 
 from ydk.services import CodecService
 from ydk.providers import CodecServiceProvider
-from ydk.models.clns import Cisco_IOS_XR_clns_isis_cfg as xr_clns_isis_cfg
+from ydk.models.cisco_ios_xr import Cisco_IOS_XR_clns_isis_cfg \
+    as xr_clns_isis_cfg
 from ydk.types import Empty
 import logging
 
@@ -42,7 +43,7 @@ def config_isis(isis):
     instance.instance_name = "DEFAULT"
     instance.running = Empty()
     net = instance.nets.Net()
-    net.net_name = "49.0000.1720.1625.5101.00"
+    net.net_name = "49.0000.1720.1625.5001.00"
     instance.nets.net.append(net)
     isis.instances.instance.append(instance)
     # global address family
@@ -56,11 +57,6 @@ def config_isis(isis):
     transition_state = xr_clns_isis_cfg.IsisMetricStyleTransitionEnum.DISABLED
     metric_style.transition_state = transition_state
     af.af_data.metric_styles.metric_style.append(metric_style)
-    propagation = af.af_data.propagations.Propagation()
-    propagation.source_level = xr_clns_isis_cfg.IsisInternalLevelEnum.LEVEL2
-    propagation.destination_level = xr_clns_isis_cfg.IsisInternalLevelEnum.LEVEL1
-    propagation.route_policy_name = "LOOPBACKS"
-    af.af_data.propagations.propagation.append(propagation)
     instance.afs.af.append(af)
 
     # loopback interface
@@ -113,10 +109,12 @@ if __name__ == "__main__":
     # create codec service
     codec = CodecService()
 
-    isis = xr_clns_isis_cfg.Isis()  # create config object
+    isis = xr_clns_isis_cfg.Isis()  # create object
     config_isis(isis)  # add object configuration
 
-    print(codec.encode(provider, isis))  # encode and print object
+    # encode and print object
+    print(codec.encode(provider, isis))
+
     provider.close()
     exit()
 # End of script
