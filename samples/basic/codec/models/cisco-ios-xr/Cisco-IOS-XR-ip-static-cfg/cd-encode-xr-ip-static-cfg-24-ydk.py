@@ -16,9 +16,9 @@
 #
 
 """
-Encode config for model Cisco-IOS-XR-ip-static-cfg.
+Encode configuration for model Cisco-IOS-XR-ip-static-cfg.
 
-usage: cd-encode-config-ip-static-22-ydk.py [-h] [-v]
+usage: cd-encode-xr-ip-static-cfg-10-ydk.py [-h] [-v]
 
 optional arguments:
   -h, --help     show this help message and exit
@@ -30,7 +30,8 @@ from urlparse import urlparse
 
 from ydk.services import CodecService
 from ydk.providers import CodecServiceProvider
-from ydk.models.ip import Cisco_IOS_XR_ip_static_cfg as xr_ip_static_cfg
+from ydk.models.cisco_ios_xr import Cisco_IOS_XR_ip_static_cfg \
+    as xr_ip_static_cfg
 import logging
 
 
@@ -40,11 +41,13 @@ def config_router_static(router_static):
     vrf_prefix = vrf_unicast.vrf_prefixes.VrfPrefix()
     vrf_prefix.prefix = "172.16.0.0"
     vrf_prefix.prefix_length = 16
-    vrf_next_hop_interface_name = vrf_prefix.vrf_route. \
-        vrf_next_hop_table.VrfNextHopInterfaceName()
-    vrf_next_hop_interface_name.interface_name = "Null0"
-    vrf_prefix.vrf_route.vrf_next_hop_table.vrf_next_hop_interface_name. \
-        append(vrf_next_hop_interface_name)
+    vrf_next_hop_next_hop_address = vrf_prefix.vrf_route.vrf_next_hop_table. \
+        VrfNextHopNextHopAddress()
+    vrf_next_hop_next_hop_address.next_hop_address = "172.16.1.3"
+    vrf_next_hop_next_hop_address.metric = 254
+    vrf_next_hop_next_hop_address.object_name = "TRACKED_OBJ"
+    vrf_prefix.vrf_route.vrf_next_hop_table.vrf_next_hop_next_hop_address. \
+        append(vrf_next_hop_next_hop_address)
     vrf_unicast.vrf_prefixes.vrf_prefix.append(vrf_prefix)
 
 
@@ -71,10 +74,12 @@ if __name__ == "__main__":
     # create codec service
     codec = CodecService()
 
-    router_static = xr_ip_static_cfg.RouterStatic()  # create config object
+    router_static = xr_ip_static_cfg.RouterStatic()  # create object
     config_router_static(router_static)  # add object configuration
 
-    print(codec.encode(provider, router_static))  # encode and print object
+    # encode and print object
+    print(codec.encode(provider, router_static))
+
     provider.close()
     exit()
 # End of script
