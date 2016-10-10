@@ -16,9 +16,9 @@
 #
 
 """
-Encode config for model Cisco-IOS-XR-ipv4-bgp-cfg.
+Encode configuration for model Cisco-IOS-XR-ipv4-bgp-cfg.
 
-usage: cd-encode-config-ipv4-bgp-40-ydk.py [-h] [-v]
+usage: cd-encode-xr-ipv4-bgp-cfg-41-ydk.py [-h] [-v]
 
 optional arguments:
   -h, --help     show this help message and exit
@@ -30,8 +30,9 @@ from urlparse import urlparse
 
 from ydk.services import CodecService
 from ydk.providers import CodecServiceProvider
-from ydk.models.ipv4 import Cisco_IOS_XR_ipv4_bgp_cfg as xr_ipv4_bgp_cfg
-from ydk.models.ipv4.Cisco_IOS_XR_ipv4_bgp_datatypes \
+from ydk.models.cisco_ios_xr import Cisco_IOS_XR_ipv4_bgp_cfg \
+    as xr_ipv4_bgp_cfg
+from ydk.models.cisco_ios_xr.Cisco_IOS_XR_ipv4_bgp_datatypes \
     import BgpAddressFamilyEnum
 from ydk.types import Empty
 import logging
@@ -49,7 +50,7 @@ def config_bgp(bgp):
     four_byte_as.bgp_running = Empty()
     # global address family
     global_af = four_byte_as.default_vrf.global_.global_afs.GlobalAf()
-    global_af.af_name = BgpAddressFamilyEnum.IPV4_UNICAST
+    global_af.af_name = BgpAddressFamilyEnum.IPV6_UNICAST
     global_af.enable = Empty()
     four_byte_as.default_vrf.global_.global_afs.global_af.append(global_af)
     instance_as.four_byte_as.append(four_byte_as)
@@ -68,14 +69,14 @@ def config_bgp(bgp):
     neighbor_groups.neighbor_group.append(neighbor_group)
     # ipv4 unicast
     neighbor_group_af = neighbor_group.neighbor_group_afs.NeighborGroupAf()
-    neighbor_group_af.af_name = BgpAddressFamilyEnum.IPV4_UNICAST
+    neighbor_group_af.af_name = BgpAddressFamilyEnum.IPV6_UNICAST
     neighbor_group_af.activate = Empty()
     neighbor_group_afs = neighbor_group.neighbor_group_afs
     neighbor_group_afs.neighbor_group_af.append(neighbor_group_af)
 
     # configure IBGP neighbor
     neighbor = four_byte_as.default_vrf.bgp_entity.neighbors.Neighbor()
-    neighbor.neighbor_address = "172.16.255.2"
+    neighbor.neighbor_address = "2001:db8::ff:2"
     neighbor.neighbor_group_add_member = "IBGP"
     four_byte_as.default_vrf.bgp_entity.neighbors.neighbor.append(neighbor)
 
@@ -103,10 +104,12 @@ if __name__ == "__main__":
     # create codec service
     codec = CodecService()
 
-    bgp = xr_ipv4_bgp_cfg.Bgp()  # create config object
+    bgp = xr_ipv4_bgp_cfg.Bgp()  # create object
     config_bgp(bgp)  # add object configuration
 
-    print(codec.encode(provider, bgp))  # encode and print object
+    # encode and print object
+    print(codec.encode(provider, bgp))
+
     provider.close()
     exit()
 # End of script

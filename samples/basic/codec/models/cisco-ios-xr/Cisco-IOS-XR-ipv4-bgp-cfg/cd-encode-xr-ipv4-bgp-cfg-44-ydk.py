@@ -16,9 +16,9 @@
 #
 
 """
-Encode config for model Cisco-IOS-XR-ipv4-bgp-cfg.
+Encode configuration for model Cisco-IOS-XR-ipv4-bgp-cfg.
 
-usage: cd-encode-config-ipv4-bgp-44-ydk.py [-h] [-v]
+usage: cd-encode-xr-ipv4-bgp-cfg-44-ydk.py [-h] [-v]
 
 optional arguments:
   -h, --help     show this help message and exit
@@ -30,8 +30,9 @@ from urlparse import urlparse
 
 from ydk.services import CodecService
 from ydk.providers import CodecServiceProvider
-from ydk.models.ipv4 import Cisco_IOS_XR_ipv4_bgp_cfg as xr_ipv4_bgp_cfg
-from ydk.models.ipv4.Cisco_IOS_XR_ipv4_bgp_datatypes \
+from ydk.models.cisco_ios_xr import Cisco_IOS_XR_ipv4_bgp_cfg \
+    as xr_ipv4_bgp_cfg
+from ydk.models.cisco_ios_xr.Cisco_IOS_XR_ipv4_bgp_datatypes \
     import BgpAddressFamilyEnum
 from ydk.types import Empty
 import logging
@@ -104,10 +105,12 @@ if __name__ == "__main__":
     # create codec service
     codec = CodecService()
 
-    bgp = xr_ipv4_bgp_cfg.Bgp()  # create config object
+    bgp = xr_ipv4_bgp_cfg.Bgp()  # create object
     config_bgp(bgp)  # add object configuration
 
-    print(codec.encode(provider, bgp))  # encode and print object
+    # encode and print object
+    print(codec.encode(provider, bgp))
+
     provider.close()
     exit()
 # End of script
