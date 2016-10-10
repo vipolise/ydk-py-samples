@@ -16,9 +16,9 @@
 #
 
 """
-Encode config for model Cisco-IOS-XR-ip-ntp-cfg.
+Encode configuration for model Cisco-IOS-XR-ip-ntp-cfg.
 
-usage: cd-encode-config-ip-ntp-24-ydk.py [-h] [-v]
+usage: cd-encode-xr-ip-ntp-cfg-22-ydk.py [-h] [-v]
 
 optional arguments:
   -h, --help     show this help message and exit
@@ -30,7 +30,8 @@ from urlparse import urlparse
 
 from ydk.services import CodecService
 from ydk.providers import CodecServiceProvider
-from ydk.models.ip import Cisco_IOS_XR_ip_ntp_cfg as xr_ip_ntp_cfg
+from ydk.models.cisco_ios_xr import Cisco_IOS_XR_ip_ntp_cfg \
+    as xr_ip_ntp_cfg
 from ydk.types import Empty
 import logging
 
@@ -38,14 +39,11 @@ import logging
 def config_ntp(ntp):
     """Add config data to ntp object."""
     peer_vrf = ntp.peer_vrfs.PeerVrf()
-    peer_vrf.vrf_name = "MGMT-PLANE"
+    peer_vrf.vrf_name = "default"
     peer_ipv4 = peer_vrf.peer_ipv4s.PeerIpv4()
     peer_ipv4.address_ipv4 = "10.0.0.1"
     peer_type_ipv4 = peer_ipv4.PeerTypeIpv4()
     peer_type_ipv4.peer_type = xr_ip_ntp_cfg.NtpPeerEnum.SERVER
-    peer_type_ipv4.ntp_version = 4
-    peer_type_ipv4.iburst = Empty()
-    peer_type_ipv4.preferred_peer = Empty()
     peer_type_ipv4.source_interface = "Loopback0"
     peer_ipv4.peer_type_ipv4.append(peer_type_ipv4)
     peer_vrf.peer_ipv4s.peer_ipv4.append(peer_ipv4)
@@ -76,10 +74,12 @@ if __name__ == "__main__":
     # create codec service
     codec = CodecService()
 
-    ntp = xr_ip_ntp_cfg.Ntp()  # create config object
+    ntp = xr_ip_ntp_cfg.Ntp()  # create object
     config_ntp(ntp)  # add object configuration
 
-    print(codec.encode(provider, ntp))  # encode and print object
+    # encode and print object
+    print(codec.encode(provider, ntp))
+
     provider.close()
     exit()
 # End of script
