@@ -16,9 +16,9 @@
 #
 
 """
-Encode config for model Cisco-IOS-XR-infra-infra-locale-cfg.
+Encode configuration for model Cisco-IOS-XR-infra-infra-locale-cfg.
 
-usage: cd-encode-config-infra-infra-locale-10-ydk.py [-h] [-v]
+usage: cd-encode-xr-infra-infra-locale-cfg-20-ydk.py [-h] [-v]
 
 optional arguments:
   -h, --help     show this help message and exit
@@ -30,13 +30,16 @@ from urlparse import urlparse
 
 from ydk.services import CodecService
 from ydk.providers import CodecServiceProvider
-from ydk.models.infra import Cisco_IOS_XR_infra_infra_locale_cfg as xr_infra_infra_locale_cfg
+from ydk.models.cisco_ios_xr import Cisco_IOS_XR_infra_infra_locale_cfg \
+    as xr_infra_infra_locale_cfg
 import logging
 
 
 def config_locale(locale):
     """Add config data to locale object."""
-    pass
+    # country and language configuration
+    locale.country = xr_infra_infra_locale_cfg.LocaleCountryEnum.US
+    locale.language = xr_infra_infra_locale_cfg.LocaleLanguageEnum.EN
 
 
 if __name__ == "__main__":
@@ -62,10 +65,12 @@ if __name__ == "__main__":
     # create codec service
     codec = CodecService()
 
-    locale = xr_infra_infra_locale_cfg.Locale()  # create config object
+    locale = xr_infra_infra_locale_cfg.Locale()  # create object
     config_locale(locale)  # add object configuration
 
-    # print(codec.encode(provider, locale))  # encode and print object
+    # encode and print object
+    print(codec.encode(provider, locale))
+
     provider.close()
     exit()
 # End of script
