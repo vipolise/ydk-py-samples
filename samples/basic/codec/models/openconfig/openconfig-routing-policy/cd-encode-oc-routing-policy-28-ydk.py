@@ -16,9 +16,9 @@
 #
 
 """
-Encode config for model openconfig-routing-policy.
+Encode configuration for model openconfig-routing-policy.
 
-usage: cd-encode-config-routing-policy-10-ydk.py [-h] [-v]
+usage: cd-encode-oc-routing-policy-28-ydk.py [-h] [-v]
 
 optional arguments:
   -h, --help     show this help message and exit
@@ -30,13 +30,25 @@ from urlparse import urlparse
 
 from ydk.services import CodecService
 from ydk.providers import CodecServiceProvider
-from ydk.models.openconfig import openconfig_routing_policy as oc_routing_policy
+from ydk.models.openconfig import openconfig_routing_policy \
+    as oc_routing_policy
+from ydk.models.openconfig import openconfig_bgp_policy as oc_bgp_policy
+from ydk.types import Empty
 import logging
 
 
 def config_routing_policy(routing_policy):
     """Add config data to routing_policy object."""
-    pass
+    # configure policy definition
+    policy_definition = routing_policy.policy_definitions.PolicyDefinition()
+    policy_definition.name = "POLICY4"
+    statement = policy_definition.statements.Statement()
+    statement.name = "next-hop-self"
+    set_next_hop = oc_bgp_policy.BgpNextHopTypeEnum.SELF
+    statement.actions.bgp_actions.set_next_hop = set_next_hop
+    statement.actions.accept_route = Empty()
+    policy_definition.statements.statement.append(statement)
+    routing_policy.policy_definitions.policy_definition.append(policy_definition)
 
 
 if __name__ == "__main__":
@@ -62,10 +74,12 @@ if __name__ == "__main__":
     # create codec service
     codec = CodecService()
 
-    routing_policy = oc_routing_policy.RoutingPolicy()  # create config object
+    routing_policy = oc_routing_policy.RoutingPolicy()  # create object
     config_routing_policy(routing_policy)  # add object configuration
 
-    # print(codec.encode(provider, routing_policy))  # encode and print object
+    # encode and print object
+    print(codec.encode(provider, routing_policy))
+
     provider.close()
     exit()
 # End of script
