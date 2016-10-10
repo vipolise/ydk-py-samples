@@ -16,9 +16,9 @@
 #
 
 """
-Encode config for model Cisco-IOS-XR-man-ems-cfg.
+Encode configuration for model Cisco-IOS-XR-man-ems-cfg.
 
-usage: cd-encode-config-man-ems-21-ydk.py [-h] [-v]
+usage: cd-encode-xr-man-ems-cfg-10-ydk.py [-h] [-v]
 
 optional arguments:
   -h, --help     show this help message and exit
@@ -30,15 +30,14 @@ from urlparse import urlparse
 
 from ydk.services import CodecService
 from ydk.providers import CodecServiceProvider
-from ydk.models.cisco_ios_xr import Cisco_IOS_XR_man_ems_cfg as xr_man_ems_cfg
-from ydk.types import Empty
+from ydk.models.cisco_ios_xr import Cisco_IOS_XR_man_ems_cfg \
+    as xr_man_ems_cfg
 import logging
 
 
 def config_grpc(grpc):
     """Add config data to grpc object."""
-    grpc.enable = Empty()
-    grpc.address_family = "ipv6"
+    pass
 
 
 if __name__ == "__main__":
@@ -64,10 +63,12 @@ if __name__ == "__main__":
     # create codec service
     codec = CodecService()
 
-    grpc = xr_man_ems_cfg.Grpc()  # create config object
+    grpc = xr_man_ems_cfg.Grpc()  # create object
     config_grpc(grpc)  # add object configuration
 
-    print(codec.encode(provider, grpc))  # encode and print object
+    # encode and print object
+    # print(codec.encode(provider, grpc))
+
     provider.close()
     exit()
 # End of script
