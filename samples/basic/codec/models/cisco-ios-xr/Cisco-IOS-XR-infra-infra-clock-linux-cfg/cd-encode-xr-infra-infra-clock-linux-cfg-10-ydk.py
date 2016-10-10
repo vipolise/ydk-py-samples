@@ -16,9 +16,9 @@
 #
 
 """
-Encode config for model Cisco-IOS-XR-infra-infra-clock-linux-cfg.
+Encode configuration for model Cisco-IOS-XR-infra-infra-clock-linux-cfg.
 
-usage: cd-encode-config-infra-infra-clock-linux-10-ydk.py [-h] [-v]
+usage: cd-encode-xr-infra-infra-clock-linux-cfg-10-ydk.py [-h] [-v]
 
 optional arguments:
   -h, --help     show this help message and exit
@@ -30,7 +30,8 @@ from urlparse import urlparse
 
 from ydk.services import CodecService
 from ydk.providers import CodecServiceProvider
-from ydk.models.infra import Cisco_IOS_XR_infra_infra_clock_linux_cfg as xr_infra_infra_clock_linux_cfg
+from ydk.models.cisco_ios_xr import Cisco_IOS_XR_infra_infra_clock_linux_cfg \
+    as xr_infra_infra_clock_linux_cfg
 import logging
 
 
@@ -62,10 +63,12 @@ if __name__ == "__main__":
     # create codec service
     codec = CodecService()
 
-    clock = xr_infra_infra_clock_linux_cfg.Clock()  # create config object
+    clock = xr_infra_infra_clock_linux_cfg.Clock()  # create object
     config_clock(clock)  # add object configuration
 
-    # print(codec.encode(provider, clock))  # encode and print object
+    # encode and print object
+    # print(codec.encode(provider, clock))
+
     provider.close()
     exit()
 # End of script
