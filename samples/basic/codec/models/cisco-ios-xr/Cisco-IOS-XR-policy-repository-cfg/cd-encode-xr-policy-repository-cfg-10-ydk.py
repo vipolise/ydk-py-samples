@@ -16,9 +16,9 @@
 #
 
 """
-Encode config for model Cisco-IOS-XR-policy-repository-cfg.
+Encode configuration for model Cisco-IOS-XR-policy-repository-cfg.
 
-usage: cd-encode-config-policy-repository-10-ydk.py [-h] [-v]
+usage: cd-encode-xr-policy-repository-cfg-10-ydk.py [-h] [-v]
 
 optional arguments:
   -h, --help     show this help message and exit
@@ -30,7 +30,8 @@ from urlparse import urlparse
 
 from ydk.services import CodecService
 from ydk.providers import CodecServiceProvider
-from ydk.models.policy import Cisco_IOS_XR_policy_repository_cfg as xr_policy_repository_cfg
+from ydk.models.cisco_ios_xr import Cisco_IOS_XR_policy_repository_cfg \
+    as xr_policy_repository_cfg
 import logging
 
 
@@ -62,10 +63,12 @@ if __name__ == "__main__":
     # create codec service
     codec = CodecService()
 
-    routing_policy = xr_policy_repository_cfg.RoutingPolicy()  # create config object
+    routing_policy = xr_policy_repository_cfg.RoutingPolicy()  # create object
     config_routing_policy(routing_policy)  # add object configuration
 
-    # print(codec.encode(provider, routing_policy))  # encode and print object
+    # encode and print object
+    # print(codec.encode(provider, routing_policy))
+
     provider.close()
     exit()
 # End of script

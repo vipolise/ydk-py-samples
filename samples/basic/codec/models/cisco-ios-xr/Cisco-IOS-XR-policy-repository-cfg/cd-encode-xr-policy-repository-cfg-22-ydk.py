@@ -16,9 +16,9 @@
 #
 
 """
-Encode config for model Cisco-IOS-XR-policy-repository-cfg.
+Encode configuration for model Cisco-IOS-XR-policy-repository-cfg.
 
-usage: cd-encode-config-policy-repository-24-ydk.py [-h] [-v]
+usage: cd-encode-xr-policy-repository-cfg-22-ydk.py [-h] [-v]
 
 optional arguments:
   -h, --help     show this help message and exit
@@ -30,54 +30,20 @@ from urlparse import urlparse
 
 from ydk.services import CodecService
 from ydk.providers import CodecServiceProvider
-from ydk.models.policy import Cisco_IOS_XR_policy_repository_cfg \
+from ydk.models.cisco_ios_xr import Cisco_IOS_XR_policy_repository_cfg \
     as xr_policy_repository_cfg
 import logging
 
 
 def config_routing_policy(routing_policy):
     """Add config data to routing_policy object."""
-    community_set_name = "COMMUNITY-SET1"
-    rpl_community_set = """
-        community-set COMMUNITY-SET1
-          ios-regex '^65172:17...$',
-          65172:16001
-        end-set
-        """
-    as_path_set_name = "AS-PATH-SET1"
-    rplas_path_set = """
-        as-path-set AS-PATH-SET1
-          ios-regex '^65172'
-        end-set
-        """
-    route_policy_name = "POLICY2"
+    route_policy_name = "POLICY1"
     rpl_route_policy = """
-        route-policy POLICY2
-          #statement-name community-set1
-          if community matches-every COMMUNITY-SET1 then
-            done
-          endif
-          #statement-name as-path-set1
-          if as-path in AS-PATH-SET1 then
-            set local-preference 50
-            done
-          endif
-          #statement-name reject route
-          drop
+        route-policy POLICY1
+          #statement-name accept route
+          done
         end-policy
         """
-    # configure community set
-    community_set = routing_policy.sets.community_sets.CommunitySet()
-    community_set.set_name = community_set_name
-    community_set.rpl_community_set = rpl_community_set
-    routing_policy.sets.community_sets.community_set.append(community_set)
-
-    # configure as-path set
-    as_path_set = routing_policy.sets.as_path_sets.AsPathSet()
-    as_path_set.set_name = as_path_set_name
-    as_path_set.rplas_path_set = rplas_path_set
-    routing_policy.sets.as_path_sets.as_path_set.append(as_path_set)
-
     # configure RPL policy
     route_policy = routing_policy.route_policies.RoutePolicy()
     route_policy.route_policy_name = route_policy_name
@@ -111,7 +77,9 @@ if __name__ == "__main__":
     routing_policy = xr_policy_repository_cfg.RoutingPolicy()  # create object
     config_routing_policy(routing_policy)  # add object configuration
 
-    print(codec.encode(provider, routing_policy))  # encode and print object
+    # encode and print object
+    print(codec.encode(provider, routing_policy))
+
     provider.close()
     exit()
 # End of script
