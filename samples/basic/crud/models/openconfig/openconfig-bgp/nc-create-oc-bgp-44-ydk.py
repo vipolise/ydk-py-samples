@@ -16,9 +16,9 @@
 #
 
 """
-Delete all config data for model openconfig-bgp.
+Create configuration for model openconfig-bgp.
 
-usage: nc-delete-config-bgp-20-ydk.py [-h] [-v] device
+usage: nc-create-oc-bgp-44-ydk.py [-h] [-v] device
 
 positional arguments:
   device         NETCONF device (ssh://user:password@host:port)
@@ -33,8 +33,42 @@ from urlparse import urlparse
 
 from ydk.services import CRUDService
 from ydk.providers import NetconfServiceProvider
-from ydk.models.bgp import bgp as oc_bgp
+from ydk.models.openconfig import openconfig_bgp \
+    as oc_bgp
 import logging
+
+
+def config_bgp(bgp):
+    """Add config data to bgp object."""
+    # global configuration
+    bgp.global_.config.as_ = 65001
+    afi_safi = bgp.global_.afi_safis.AfiSafi()
+    afi_safi.afi_safi_name = "ipv4-unicast"
+    afi_safi.config.afi_safi_name = "ipv4-unicast"
+    afi_safi.config.enabled = True
+    bgp.global_.afi_safis.afi_safi.append(afi_safi)
+
+    # configure IBGP peer group
+    peer_group = bgp.peer_groups.PeerGroup()
+    peer_group.peer_group_name = "EBGP"
+    peer_group.config.peer_group_name = "EBGP"
+    peer_group.config.peer_as = 65002
+    peer_group.transport.config.local_address = "Loopback0"
+    afi_safi = peer_group.afi_safis.AfiSafi()
+    afi_safi.afi_safi_name = "ipv4-unicast"
+    afi_safi.config.afi_safi_name = "ipv4-unicast"
+    afi_safi.config.enabled = True
+    afi_safi.apply_policy.config.import_policy.append("POLICY3")
+    afi_safi.apply_policy.config.export_policy.append("POLICY1")
+    peer_group.afi_safis.afi_safi.append(afi_safi)
+    bgp.peer_groups.peer_group.append(peer_group)
+
+    # configure IBGP neighbor
+    neighbor = bgp.neighbors.Neighbor()
+    neighbor.neighbor_address = "192.168.1.1"
+    neighbor.config.neighbor_address = "192.168.1.1"
+    neighbor.config.peer_group = "EBGP"
+    bgp.neighbors.neighbor.append(neighbor)
 
 
 if __name__ == "__main__":
@@ -66,8 +100,12 @@ if __name__ == "__main__":
     # create CRUD service
     crud = CRUDService()
 
-    bgp = oc_bgp.Bgp()  # create config object
-    crud.delete(provider, bgp)  # delete object on NETCONF device
+    bgp = oc_bgp.Bgp()  # create object
+    config_bgp(bgp)  # add object configuration
+
+    # create configuration on NETCONF device
+    crud.create(provider, bgp)
+
     provider.close()
     exit()
 # End of script

@@ -16,9 +16,9 @@
 #
 
 """
-Create config for model openconfig-bgp.
+Update configuration for model openconfig-bgp.
 
-usage: nc-create-config-bgp-10-ydk.py [-h] [-v] device
+usage: nc-update-oc-bgp-10-ydk.py [-h] [-v] device
 
 positional arguments:
   device         NETCONF device (ssh://user:password@host:port)
@@ -33,7 +33,8 @@ from urlparse import urlparse
 
 from ydk.services import CRUDService
 from ydk.providers import NetconfServiceProvider
-from ydk.models.bgp import bgp as oc_bgp
+from ydk.models.openconfig import openconfig_bgp \
+    as oc_bgp
 import logging
 
 
@@ -71,10 +72,12 @@ if __name__ == "__main__":
     # create CRUD service
     crud = CRUDService()
 
-    bgp = oc_bgp.Bgp()  # create config object
+    bgp = oc_bgp.Bgp()  # create object
     config_bgp(bgp)  # add object configuration
 
-    # crud.create(provider, bgp)  # create object on NETCONF device
+    # update configuration on NETCONF device
+    # crud.update(provider, bgp)
+
     provider.close()
     exit()
 # End of script

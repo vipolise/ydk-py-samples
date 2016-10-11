@@ -16,9 +16,9 @@
 #
 
 """
-Read all data for model openconfig-bgp.
+Delete all config data for model openconfig-bgp.
 
-usage: nc-read-config-bgp-10-ydk.py [-h] [-v] device
+usage: nc-delete-oc-bgp-10-ydk.py [-h] [-v] device
 
 positional arguments:
   device         NETCONF device (ssh://user:password@host:port)
@@ -33,13 +33,9 @@ from urlparse import urlparse
 
 from ydk.services import CRUDService
 from ydk.providers import NetconfServiceProvider
-from ydk.models.bgp import bgp as oc_bgp
+from ydk.models.openconfig import openconfig_bgp \
+    as oc_bgp
 import logging
-
-
-def process_bgp(bgp):
-    """Process data in bgp object."""
-    pass
 
 
 if __name__ == "__main__":
@@ -71,9 +67,9 @@ if __name__ == "__main__":
     # create CRUD service
     crud = CRUDService()
 
-    bgp = oc_bgp.Bgp()  # create config object
-    # bgp = crud.read(provider, bgp)  # read object from NETCONF device
-    process_bgp(bgp)  # process object data
+    bgp = oc_bgp.Bgp()  # create object
+    # delete configuration on NETCONF device
+    # crud.delete(provider, bgp)
 
     provider.close()
     exit()

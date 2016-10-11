@@ -16,9 +16,9 @@
 #
 
 """
-Create config for model openconfig-bgp.
+Create configuration for model openconfig-bgp.
 
-usage: nc-create-config-bgp-45-ydk.py [-h] [-v] device
+usage: nc-create-oc-bgp-40-ydk.py [-h] [-v] device
 
 positional arguments:
   device         NETCONF device (ssh://user:password@host:port)
@@ -33,7 +33,8 @@ from urlparse import urlparse
 
 from ydk.services import CRUDService
 from ydk.providers import NetconfServiceProvider
-from ydk.models.bgp import bgp as oc_bgp
+from ydk.models.openconfig import openconfig_bgp \
+    as oc_bgp
 import logging
 
 
@@ -41,33 +42,31 @@ def config_bgp(bgp):
     """Add config data to bgp object."""
     # global configuration
     bgp.global_.config.as_ = 65001
-    afi_safi = bgp.global_.afi_safis.AfiSafi()
-    afi_safi.afi_safi_name = "ipv6-unicast"
-    afi_safi.config.afi_safi_name = "ipv6-unicast"
-    afi_safi.config.enabled = True
-    bgp.global_.afi_safis.afi_safi.append(afi_safi)
+    v4_afi_safi = bgp.global_.afi_safis.AfiSafi()
+    v4_afi_safi.afi_safi_name = "ipv4-unicast"
+    v4_afi_safi.config.afi_safi_name = "ipv4-unicast"
+    v4_afi_safi.config.enabled = True
+    bgp.global_.afi_safis.afi_safi.append(v4_afi_safi)
 
     # configure IBGP peer group
-    peer_group = bgp.peer_groups.PeerGroup()
-    peer_group.peer_group_name = "EBGP"
-    peer_group.config.peer_group_name = "EBGP"
-    peer_group.config.peer_as = 65002
-    peer_group.transport.config.local_address = "Loopback0"
-    afi_safi = peer_group.afi_safis.AfiSafi()
-    afi_safi.afi_safi_name = "ipv6-unicast"
-    afi_safi.config.afi_safi_name = "ipv6-unicast"
-    afi_safi.config.enabled = True
-    afi_safi.apply_policy.config.import_policy.append("POLICY3")
-    afi_safi.apply_policy.config.export_policy.append("POLICY1")
-    peer_group.afi_safis.afi_safi.append(afi_safi)
-    bgp.peer_groups.peer_group.append(peer_group)
+    ibgp_pg = bgp.peer_groups.PeerGroup()
+    ibgp_pg.peer_group_name = "IBGP"
+    ibgp_pg.config.peer_group_name = "IBGP"
+    ibgp_pg.config.peer_as = 65001
+    ibgp_pg.transport.config.local_address = "Loopback0"
+    v4_afi_safi = ibgp_pg.afi_safis.AfiSafi()
+    v4_afi_safi.afi_safi_name = "ipv4-unicast"
+    v4_afi_safi.config.afi_safi_name = "ipv4-unicast"
+    v4_afi_safi.config.enabled = True
+    ibgp_pg.afi_safis.afi_safi.append(v4_afi_safi)
+    bgp.peer_groups.peer_group.append(ibgp_pg)
 
     # configure IBGP neighbor
-    neighbor = bgp.neighbors.Neighbor()
-    neighbor.neighbor_address = "2001:db8:e:1::1"
-    neighbor.config.neighbor_address = "2001:db8:e:1::1"
-    neighbor.config.peer_group = "EBGP"
-    bgp.neighbors.neighbor.append(neighbor)
+    ibgp_nbr = bgp.neighbors.Neighbor()
+    ibgp_nbr.neighbor_address = "172.16.255.2"
+    ibgp_nbr.config.neighbor_address = "172.16.255.2"
+    ibgp_nbr.config.peer_group = "IBGP"
+    bgp.neighbors.neighbor.append(ibgp_nbr)
 
 
 if __name__ == "__main__":
@@ -99,10 +98,12 @@ if __name__ == "__main__":
     # create CRUD service
     crud = CRUDService()
 
-    bgp = oc_bgp.Bgp()  # create config object
+    bgp = oc_bgp.Bgp()  # create object
     config_bgp(bgp)  # add object configuration
 
-    crud.create(provider, bgp)  # create object on NETCONF device
+    # create configuration on NETCONF device
+    crud.create(provider, bgp)
+
     provider.close()
     exit()
 # End of script

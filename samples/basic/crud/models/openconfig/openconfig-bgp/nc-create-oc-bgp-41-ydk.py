@@ -16,9 +16,9 @@
 #
 
 """
-Create config for model openconfig-bgp.
+Create configuration for model openconfig-bgp.
 
-usage: nc-create-config-bgp-43-ydk.py [-h] [-v] device
+usage: nc-create-oc-bgp-41-ydk.py [-h] [-v] device
 
 positional arguments:
   device         NETCONF device (ssh://user:password@host:port)
@@ -33,7 +33,8 @@ from urlparse import urlparse
 
 from ydk.services import CRUDService
 from ydk.providers import NetconfServiceProvider
-from ydk.models.bgp import bgp as oc_bgp
+from ydk.models.openconfig import openconfig_bgp \
+    as oc_bgp
 import logging
 
 
@@ -57,7 +58,6 @@ def config_bgp(bgp):
     afi_safi.afi_safi_name = "ipv6-unicast"
     afi_safi.config.afi_safi_name = "ipv6-unicast"
     afi_safi.config.enabled = True
-    afi_safi.apply_policy.config.export_policy.append("POLICY2")
     peer_group.afi_safis.afi_safi.append(afi_safi)
     bgp.peer_groups.peer_group.append(peer_group)
 
@@ -98,10 +98,12 @@ if __name__ == "__main__":
     # create CRUD service
     crud = CRUDService()
 
-    bgp = oc_bgp.Bgp()  # create config object
+    bgp = oc_bgp.Bgp()  # create object
     config_bgp(bgp)  # add object configuration
 
-    crud.create(provider, bgp)  # create object on NETCONF device
+    # create configuration on NETCONF device
+    crud.create(provider, bgp)
+
     provider.close()
     exit()
 # End of script

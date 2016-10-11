@@ -16,9 +16,9 @@
 #
 
 """
-Create config for model openconfig-bgp.
+Create configuration for model openconfig-bgp.
 
-usage: nc-create-config-bgp-41-ydk.py [-h] [-v] device
+usage: nc-create-oc-bgp-42-ydk.py [-h] [-v] device
 
 positional arguments:
   device         NETCONF device (ssh://user:password@host:port)
@@ -33,7 +33,8 @@ from urlparse import urlparse
 
 from ydk.services import CRUDService
 from ydk.providers import NetconfServiceProvider
-from ydk.models.bgp import bgp as oc_bgp
+from ydk.models.openconfig import openconfig_bgp \
+    as oc_bgp
 import logging
 
 
@@ -42,8 +43,8 @@ def config_bgp(bgp):
     # global configuration
     bgp.global_.config.as_ = 65001
     afi_safi = bgp.global_.afi_safis.AfiSafi()
-    afi_safi.afi_safi_name = "ipv6-unicast"
-    afi_safi.config.afi_safi_name = "ipv6-unicast"
+    afi_safi.afi_safi_name = "ipv4-unicast"
+    afi_safi.config.afi_safi_name = "ipv4-unicast"
     afi_safi.config.enabled = True
     bgp.global_.afi_safis.afi_safi.append(afi_safi)
 
@@ -54,16 +55,17 @@ def config_bgp(bgp):
     peer_group.config.peer_as = 65001
     peer_group.transport.config.local_address = "Loopback0"
     afi_safi = peer_group.afi_safis.AfiSafi()
-    afi_safi.afi_safi_name = "ipv6-unicast"
-    afi_safi.config.afi_safi_name = "ipv6-unicast"
+    afi_safi.afi_safi_name = "ipv4-unicast"
+    afi_safi.config.afi_safi_name = "ipv4-unicast"
     afi_safi.config.enabled = True
+    afi_safi.apply_policy.config.export_policy.append("POLICY2")
     peer_group.afi_safis.afi_safi.append(afi_safi)
     bgp.peer_groups.peer_group.append(peer_group)
 
     # configure IBGP neighbor
     neighbor = bgp.neighbors.Neighbor()
-    neighbor.neighbor_address = "2001:db8::ff:2"
-    neighbor.config.neighbor_address = "2001:db8::ff:2"
+    neighbor.neighbor_address = "172.16.255.2"
+    neighbor.config.neighbor_address = "172.16.255.2"
     neighbor.config.peer_group = "IBGP"
     bgp.neighbors.neighbor.append(neighbor)
 
@@ -97,10 +99,12 @@ if __name__ == "__main__":
     # create CRUD service
     crud = CRUDService()
 
-    bgp = oc_bgp.Bgp()  # create config object
+    bgp = oc_bgp.Bgp()  # create object
     config_bgp(bgp)  # add object configuration
 
-    crud.create(provider, bgp)  # create object on NETCONF device
+    # create configuration on NETCONF device
+    crud.create(provider, bgp)
+
     provider.close()
     exit()
 # End of script
