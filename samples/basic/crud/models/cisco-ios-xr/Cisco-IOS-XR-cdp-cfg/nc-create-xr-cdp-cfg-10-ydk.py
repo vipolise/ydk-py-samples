@@ -16,9 +16,9 @@
 #
 
 """
-Read all data for model Cisco-IOS-XR-cdp-cfg.
+Create configuration for model Cisco-IOS-XR-cdp-cfg.
 
-usage: nc-read-config-cdp-10-ydk.py [-h] [-v] device
+usage: nc-create-xr-cdp-cfg-10-ydk.py [-h] [-v] device
 
 positional arguments:
   device         NETCONF device (ssh://user:password@host:port)
@@ -33,12 +33,13 @@ from urlparse import urlparse
 
 from ydk.services import CRUDService
 from ydk.providers import NetconfServiceProvider
-from ydk.models.cdp import Cisco_IOS_XR_cdp_cfg as xr_cdp_cfg
+from ydk.models.cisco_ios_xr import Cisco_IOS_XR_cdp_cfg \
+    as xr_cdp_cfg
 import logging
 
 
-def process_cdp(cdp):
-    """Process data in cdp object."""
+def config_cdp(cdp):
+    """Add config data to cdp object."""
     pass
 
 
@@ -71,9 +72,11 @@ if __name__ == "__main__":
     # create CRUD service
     crud = CRUDService()
 
-    cdp = xr_cdp_cfg.Cdp()  # create config object
-    # cdp = crud.read(provider, cdp)  # read object from NETCONF device
-    process_cdp(cdp)  # process object data
+    cdp = xr_cdp_cfg.Cdp()  # create object
+    config_cdp(cdp)  # add object configuration
+
+    # create configuration on NETCONF device
+    # crud.create(provider, cdp)
 
     provider.close()
     exit()
