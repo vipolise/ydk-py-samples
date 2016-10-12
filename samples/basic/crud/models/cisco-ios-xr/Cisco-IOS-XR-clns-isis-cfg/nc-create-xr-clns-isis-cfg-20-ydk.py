@@ -16,9 +16,9 @@
 #
 
 """
-Create config for model Cisco-IOS-XR-clns-isis-cfg.
+Create configuration for model Cisco-IOS-XR-clns-isis-cfg.
 
-usage: nc-create-config-clns-isis-30-ydk.py [-h] [-v] device
+usage: nc-create-xr-clns-isis-cfg-20-ydk.py [-h] [-v] device
 
 positional arguments:
   device         NETCONF device (ssh://user:password@host:port)
@@ -33,7 +33,8 @@ from urlparse import urlparse
 
 from ydk.services import CRUDService
 from ydk.providers import NetconfServiceProvider
-from ydk.models.clns import Cisco_IOS_XR_clns_isis_cfg as xr_clns_isis_cfg
+from ydk.models.cisco_ios_xr import Cisco_IOS_XR_clns_isis_cfg \
+    as xr_clns_isis_cfg
 from ydk.types import Empty
 import logging
 
@@ -44,8 +45,9 @@ def config_isis(isis):
     instance = isis.instances.Instance()
     instance.instance_name = "DEFAULT"
     instance.running = Empty()
+    instance.is_type = xr_clns_isis_cfg.IsisConfigurableLevelsEnum.LEVEL2
     net = instance.nets.Net()
-    net.net_name = "49.0000.1720.1625.5101.00"
+    net.net_name = "49.0000.1720.1625.5001.00"
     instance.nets.net.append(net)
     isis.instances.instance.append(instance)
     # global address family
@@ -117,10 +119,12 @@ if __name__ == "__main__":
     # create CRUD service
     crud = CRUDService()
 
-    isis = xr_clns_isis_cfg.Isis()  # create config object
+    isis = xr_clns_isis_cfg.Isis()  # create object
     config_isis(isis)  # add object configuration
 
-    crud.create(provider, isis)  # create object on NETCONF device
+    # create configuration on NETCONF device
+    crud.create(provider, isis)
+
     provider.close()
     exit()
 # End of script

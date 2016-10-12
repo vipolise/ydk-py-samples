@@ -16,9 +16,9 @@
 #
 
 """
-Create config for model Cisco-IOS-XR-clns-isis-cfg.
+Create configuration for model Cisco-IOS-XR-clns-isis-cfg.
 
-usage: nc-create-config-clns-isis-20-ydk.py [-h] [-v] device
+usage: nc-create-xr-clns-isis-cfg-50-ydk.py [-h] [-v] device
 
 positional arguments:
   device         NETCONF device (ssh://user:password@host:port)
@@ -33,7 +33,8 @@ from urlparse import urlparse
 
 from ydk.services import CRUDService
 from ydk.providers import NetconfServiceProvider
-from ydk.models.clns import Cisco_IOS_XR_clns_isis_cfg as xr_clns_isis_cfg
+from ydk.models.cisco_ios_xr import Cisco_IOS_XR_clns_isis_cfg \
+    as xr_clns_isis_cfg
 from ydk.types import Empty
 import logging
 
@@ -59,6 +60,9 @@ def config_isis(isis):
     metric_style.level = xr_clns_isis_cfg.IsisInternalLevelEnum.NOT_SET
     transition_state = xr_clns_isis_cfg.IsisMetricStyleTransitionEnum.DISABLED
     metric_style.transition_state = transition_state
+    # segment routing
+    mpls = xr_clns_isis_cfg.IsisLabelPreferenceEnum.LDP
+    af.af_data.segment_routing.mpls = mpls
     af.af_data.metric_styles.metric_style.append(metric_style)
     instance.afs.af.append(af)
 
@@ -72,6 +76,15 @@ def config_isis(isis):
     interface_af.af_name = xr_clns_isis_cfg.IsisAddressFamilyEnum.IPV4
     interface_af.saf_name = xr_clns_isis_cfg.IsisSubAddressFamilyEnum.UNICAST
     interface_af.interface_af_data.running = Empty()
+    # segment routing
+    prefix_sid = interface_af.interface_af_data.PrefixSid()
+    prefix_sid.type = xr_clns_isis_cfg.IsissidEnum.ABSOLUTE
+    prefix_sid.value = 16041
+    prefix_sid.php = xr_clns_isis_cfg.IsisphpFlagEnum.ENABLE
+    explicit_null = xr_clns_isis_cfg.IsisexplicitNullFlagEnum.DISABLE
+    prefix_sid.explicit_null = explicit_null
+    prefix_sid.nflag_clear = xr_clns_isis_cfg.NflagClearEnum.DISABLE
+    interface_af.interface_af_data.prefix_sid = prefix_sid
     interface.interface_afs.interface_af.append(interface_af)
     instance.interfaces.interface.append(interface)
 
@@ -118,10 +131,12 @@ if __name__ == "__main__":
     # create CRUD service
     crud = CRUDService()
 
-    isis = xr_clns_isis_cfg.Isis()  # create config object
+    isis = xr_clns_isis_cfg.Isis()  # create object
     config_isis(isis)  # add object configuration
 
-    crud.create(provider, isis)  # create object on NETCONF device
+    # create configuration on NETCONF device
+    crud.create(provider, isis)
+
     provider.close()
     exit()
 # End of script

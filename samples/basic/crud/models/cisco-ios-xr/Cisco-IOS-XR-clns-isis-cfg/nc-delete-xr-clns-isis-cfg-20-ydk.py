@@ -18,7 +18,7 @@
 """
 Delete all config data for model Cisco-IOS-XR-clns-isis-cfg.
 
-usage: nc-delete-config-clns-isis-20-ydk.py [-h] [-v] device
+usage: nc-delete-xr-clns-isis-cfg-20-ydk.py [-h] [-v] device
 
 positional arguments:
   device         NETCONF device (ssh://user:password@host:port)
@@ -33,7 +33,8 @@ from urlparse import urlparse
 
 from ydk.services import CRUDService
 from ydk.providers import NetconfServiceProvider
-from ydk.models.clns import Cisco_IOS_XR_clns_isis_cfg as xr_clns_isis_cfg
+from ydk.models.cisco_ios_xr import Cisco_IOS_XR_clns_isis_cfg \
+    as xr_clns_isis_cfg
 import logging
 
 
@@ -66,8 +67,10 @@ if __name__ == "__main__":
     # create CRUD service
     crud = CRUDService()
 
-    isis = xr_clns_isis_cfg.Isis()  # create config object
-    crud.delete(provider, isis)  # delete object on NETCONF device
+    isis = xr_clns_isis_cfg.Isis()  # create object
+    # delete configuration on NETCONF device
+    crud.delete(provider, isis)
+
     provider.close()
     exit()
 # End of script

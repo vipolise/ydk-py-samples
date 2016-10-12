@@ -16,9 +16,9 @@
 #
 
 """
-Read all data for model Cisco-IOS-XR-clns-isis-cfg.
+Create configuration for model Cisco-IOS-XR-clns-isis-cfg.
 
-usage: nc-read-config-clns-isis-10-ydk.py [-h] [-v] device
+usage: nc-create-xr-clns-isis-cfg-10-ydk.py [-h] [-v] device
 
 positional arguments:
   device         NETCONF device (ssh://user:password@host:port)
@@ -33,12 +33,13 @@ from urlparse import urlparse
 
 from ydk.services import CRUDService
 from ydk.providers import NetconfServiceProvider
-from ydk.models.clns import Cisco_IOS_XR_clns_isis_cfg as xr_clns_isis_cfg
+from ydk.models.cisco_ios_xr import Cisco_IOS_XR_clns_isis_cfg \
+    as xr_clns_isis_cfg
 import logging
 
 
-def process_isis(isis):
-    """Process data in isis object."""
+def config_isis(isis):
+    """Add config data to isis object."""
     pass
 
 
@@ -71,9 +72,11 @@ if __name__ == "__main__":
     # create CRUD service
     crud = CRUDService()
 
-    isis = xr_clns_isis_cfg.Isis()  # create config object
-    # isis = crud.read(provider, isis)  # read object from NETCONF device
-    process_isis(isis)  # process object data
+    isis = xr_clns_isis_cfg.Isis()  # create object
+    config_isis(isis)  # add object configuration
+
+    # create configuration on NETCONF device
+    # crud.create(provider, isis)
 
     provider.close()
     exit()

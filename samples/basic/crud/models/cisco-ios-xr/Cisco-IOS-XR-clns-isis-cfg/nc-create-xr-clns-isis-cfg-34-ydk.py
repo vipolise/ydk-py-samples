@@ -16,9 +16,9 @@
 #
 
 """
-Create config for model Cisco-IOS-XR-clns-isis-cfg.
+Create configuration for model Cisco-IOS-XR-clns-isis-cfg.
 
-usage: nc-create-config-clns-isis-32-ydk.py [-h] [-v] device
+usage: nc-create-xr-clns-isis-cfg-34-ydk.py [-h] [-v] device
 
 positional arguments:
   device         NETCONF device (ssh://user:password@host:port)
@@ -33,7 +33,8 @@ from urlparse import urlparse
 
 from ydk.services import CRUDService
 from ydk.providers import NetconfServiceProvider
-from ydk.models.clns import Cisco_IOS_XR_clns_isis_cfg as xr_clns_isis_cfg
+from ydk.models.cisco_ios_xr import Cisco_IOS_XR_clns_isis_cfg \
+    as xr_clns_isis_cfg
 from ydk.types import Empty
 import logging
 
@@ -45,12 +46,12 @@ def config_isis(isis):
     instance.instance_name = "DEFAULT"
     instance.running = Empty()
     net = instance.nets.Net()
-    net.net_name = "49.0000.1720.1625.5101.00"
+    net.net_name = "49.0000.1720.1625.5001.00"
     instance.nets.net.append(net)
     isis.instances.instance.append(instance)
     # global address family
     af = instance.afs.Af()
-    af.af_name = xr_clns_isis_cfg.IsisAddressFamilyEnum.IPV4
+    af.af_name = xr_clns_isis_cfg.IsisAddressFamilyEnum.IPV6
     af.saf_name = xr_clns_isis_cfg.IsisSubAddressFamilyEnum.UNICAST
     af.af_data = af.AfData()
     metric_style = af.af_data.metric_styles.MetricStyle()
@@ -59,11 +60,6 @@ def config_isis(isis):
     transition_state = xr_clns_isis_cfg.IsisMetricStyleTransitionEnum.DISABLED
     metric_style.transition_state = transition_state
     af.af_data.metric_styles.metric_style.append(metric_style)
-    propagation = af.af_data.propagations.Propagation()
-    propagation.source_level = xr_clns_isis_cfg.IsisInternalLevelEnum.LEVEL2
-    propagation.destination_level = xr_clns_isis_cfg.IsisInternalLevelEnum.LEVEL1
-    propagation.route_policy_name = "LOOPBACKS"
-    af.af_data.propagations.propagation.append(propagation)
     instance.afs.af.append(af)
 
     # loopback interface
@@ -73,7 +69,7 @@ def config_isis(isis):
     interface.state = xr_clns_isis_cfg.IsisInterfaceStateEnum.PASSIVE
     # interface address family
     interface_af = interface.interface_afs.InterfaceAf()
-    interface_af.af_name = xr_clns_isis_cfg.IsisAddressFamilyEnum.IPV4
+    interface_af.af_name = xr_clns_isis_cfg.IsisAddressFamilyEnum.IPV6
     interface_af.saf_name = xr_clns_isis_cfg.IsisSubAddressFamilyEnum.UNICAST
     interface_af.interface_af_data.running = Empty()
     interface.interface_afs.interface_af.append(interface_af)
@@ -86,7 +82,7 @@ def config_isis(isis):
     interface.point_to_point = Empty()
     # interface address familiy
     interface_af = interface.interface_afs.InterfaceAf()
-    interface_af.af_name = xr_clns_isis_cfg.IsisAddressFamilyEnum.IPV4
+    interface_af.af_name = xr_clns_isis_cfg.IsisAddressFamilyEnum.IPV6
     interface_af.saf_name = xr_clns_isis_cfg.IsisSubAddressFamilyEnum.UNICAST
     interface_af.interface_af_data.running = Empty()
     interface.interface_afs.interface_af.append(interface_af)
@@ -122,10 +118,12 @@ if __name__ == "__main__":
     # create CRUD service
     crud = CRUDService()
 
-    isis = xr_clns_isis_cfg.Isis()  # create config object
+    isis = xr_clns_isis_cfg.Isis()  # create object
     config_isis(isis)  # add object configuration
 
-    crud.create(provider, isis)  # create object on NETCONF device
+    # create configuration on NETCONF device
+    crud.create(provider, isis)
+
     provider.close()
     exit()
 # End of script
