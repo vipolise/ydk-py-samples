@@ -18,7 +18,7 @@
 """
 Delete all config data for model Cisco-IOS-XR-ethernet-lldp-cfg.
 
-usage: nc-delete-config-ethernet-lldp-20-ydk.py [-h] [-v] device
+usage: nc-delete-xr-ethernet-lldp-cfg-10-ydk.py [-h] [-v] device
 
 positional arguments:
   device         NETCONF device (ssh://user:password@host:port)
@@ -33,7 +33,7 @@ from urlparse import urlparse
 
 from ydk.services import CRUDService
 from ydk.providers import NetconfServiceProvider
-from ydk.models.ethernet import Cisco_IOS_XR_ethernet_lldp_cfg \
+from ydk.models.cisco_ios_xr import Cisco_IOS_XR_ethernet_lldp_cfg \
     as xr_ethernet_lldp_cfg
 import logging
 
@@ -67,8 +67,10 @@ if __name__ == "__main__":
     # create CRUD service
     crud = CRUDService()
 
-    lldp = xr_ethernet_lldp_cfg.Lldp()  # create config object
-    crud.delete(provider, lldp)  # delete object on NETCONF device
+    lldp = xr_ethernet_lldp_cfg.Lldp()  # create object
+    # delete configuration on NETCONF device
+    # crud.delete(provider, lldp)
+
     provider.close()
     exit()
 # End of script

@@ -16,9 +16,9 @@
 #
 
 """
-Update config for model Cisco-IOS-XR-ethernet-lldp-cfg.
+Read all data for model Cisco-IOS-XR-ethernet-lldp-cfg.
 
-usage: nc-update-config-ethernet-lldp-10-ydk.py [-h] [-v] device
+usage: nc-read-xr-ethernet-lldp-cfg-10-ydk.py [-h] [-v] device
 
 positional arguments:
   device         NETCONF device (ssh://user:password@host:port)
@@ -33,12 +33,13 @@ from urlparse import urlparse
 
 from ydk.services import CRUDService
 from ydk.providers import NetconfServiceProvider
-from ydk.models.ethernet import Cisco_IOS_XR_ethernet_lldp_cfg as xr_ethernet_lldp_cfg
+from ydk.models.cisco_ios_xr import Cisco_IOS_XR_ethernet_lldp_cfg \
+    as xr_ethernet_lldp_cfg
 import logging
 
 
-def config_lldp(lldp):
-    """Add config data to lldp object."""
+def process_lldp(lldp):
+    """Process data in lldp object."""
     pass
 
 
@@ -71,10 +72,12 @@ if __name__ == "__main__":
     # create CRUD service
     crud = CRUDService()
 
-    lldp = xr_ethernet_lldp_cfg.Lldp()  # create config object
-    config_lldp(lldp)  # add object configuration
+    lldp = xr_ethernet_lldp_cfg.Lldp()  # create object
 
-    # crud.update(provider, lldp)  # update object on NETCONF device
+    # read data from NETCONF device
+    # lldp = crud.read(provider, lldp)
+    process_lldp(lldp)  # process object data
+
     provider.close()
     exit()
 # End of script
