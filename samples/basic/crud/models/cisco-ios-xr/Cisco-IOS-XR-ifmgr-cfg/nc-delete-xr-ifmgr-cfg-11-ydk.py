@@ -16,9 +16,9 @@
 #
 
 """
-Create config for model Cisco-IOS-XR-ifmgr-cfg.
+Delete all config data for model Cisco-IOS-XR-ifmgr-cfg.
 
-usage: nc-create-config-ifmgr-11-ydk.py [-h] [-v] device
+usage: nc-delete-xr-ifmgr-cfg-11-ydk.py [-h] [-v] device
 
 positional arguments:
   device         NETCONF device (ssh://user:password@host:port)
@@ -33,13 +33,9 @@ from urlparse import urlparse
 
 from ydk.services import CRUDService
 from ydk.providers import NetconfServiceProvider
-from ydk.models.ifmgr import Cisco_IOS_XR_ifmgr_cfg as xr_ifmgr_cfg
+from ydk.models.cisco_ios_xr import Cisco_IOS_XR_ifmgr_cfg \
+    as xr_ifmgr_cfg
 import logging
-
-
-def config_interface_configurations(interface_configurations):
-    """Add config data to interface_configurations object."""
-    pass
 
 
 if __name__ == "__main__":
@@ -71,10 +67,10 @@ if __name__ == "__main__":
     # create CRUD service
     crud = CRUDService()
 
-    interface_configurations = xr_ifmgr_cfg.InterfaceConfigurations()  # create config object
-    config_interface_configurations(interface_configurations)  # add object configuration
+    interface_configurations = xr_ifmgr_cfg.InterfaceConfigurations()  # create object
+    # delete configuration on NETCONF device
+    # crud.delete(provider, interface_configurations)
 
-    # crud.create(provider, interface_configurations)  # create object on NETCONF device
     provider.close()
     exit()
 # End of script

@@ -16,9 +16,9 @@
 #
 
 """
-Read all data for model Cisco-IOS-XR-ifmgr-cfg.
+Create configuration for model Cisco-IOS-XR-ifmgr-cfg.
 
-usage: nc-read-config-ifmgr-10-ydk.py [-h] [-v] device
+usage: nc-create-xr-ifmgr-cfg-34-ydk.py [-h] [-v] device
 
 positional arguments:
   device         NETCONF device (ssh://user:password@host:port)
@@ -33,13 +33,28 @@ from urlparse import urlparse
 
 from ydk.services import CRUDService
 from ydk.providers import NetconfServiceProvider
-from ydk.models.ifmgr import Cisco_IOS_XR_ifmgr_cfg as xr_ifmgr_cfg
+from ydk.models.cisco_ios_xr import Cisco_IOS_XR_ifmgr_cfg \
+    as xr_ifmgr_cfg
 import logging
 
 
-def process_global_interface_configuration(global_interface_configuration):
-    """Process data in global_interface_configuration object."""
-    pass
+def config_interface_configurations(interface_configurations):
+    """Add config data to interface_configurations object."""
+    # configure IPv4 loopback
+    interface_configuration = interface_configurations.InterfaceConfiguration()
+    interface_configuration.active = "act"
+    interface_configuration.interface_name = "GigabitEthernet0/0/0/0"
+    interface_configuration.description = "CONNECTS TO LSR1 (g0/0/0/1)"
+    mtu = interface_configuration.mtus.Mtu()
+    mtu.owner = "GigabitEthernet"
+    mtu.mtu = 9192
+    interface_configuration.mtus.mtu.append(mtu)
+    primary = interface_configuration.ipv4_network.addresses.Primary()
+    primary.address = "172.16.1.0"
+    primary.netmask = "255.255.255.254"
+    interface_configuration.ipv4_network.addresses.primary = primary
+    interface_configuration.statistics.load_interval = 30
+    interface_configurations.interface_configuration.append(interface_configuration)
 
 
 if __name__ == "__main__":
@@ -71,9 +86,11 @@ if __name__ == "__main__":
     # create CRUD service
     crud = CRUDService()
 
-    global_interface_configuration = xr_ifmgr_cfg.GlobalInterfaceConfiguration()  # create config object
-    # global_interface_configuration = crud.read(provider, global_interface_configuration)  # read object from NETCONF device
-    process_global_interface_configuration(global_interface_configuration)  # process object data
+    interface_configurations = xr_ifmgr_cfg.InterfaceConfigurations()  # create object
+    config_interface_configurations(interface_configurations)  # add object configuration
+
+    # create configuration on NETCONF device
+    crud.create(provider, interface_configurations)
 
     provider.close()
     exit()

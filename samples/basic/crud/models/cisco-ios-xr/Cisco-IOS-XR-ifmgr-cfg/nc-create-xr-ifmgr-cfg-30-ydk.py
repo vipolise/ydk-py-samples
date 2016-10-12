@@ -16,9 +16,9 @@
 #
 
 """
-Create config for model Cisco-IOS-XR-ifmgr-cfg.
+Create configuration for model Cisco-IOS-XR-ifmgr-cfg.
 
-usage: nc-create-config-ifmgr-32-ydk.py [-h] [-v] device
+usage: nc-create-xr-ifmgr-cfg-30-ydk.py [-h] [-v] device
 
 positional arguments:
   device         NETCONF device (ssh://user:password@host:port)
@@ -33,24 +33,24 @@ from urlparse import urlparse
 
 from ydk.services import CRUDService
 from ydk.providers import NetconfServiceProvider
-from ydk.models.ifmgr import Cisco_IOS_XR_ifmgr_cfg as xr_ifmgr_cfg
+from ydk.models.cisco_ios_xr import Cisco_IOS_XR_ifmgr_cfg \
+    as xr_ifmgr_cfg
 from ydk.types import Empty
 import logging
 
 
 def config_interface_configurations(interface_configurations):
     """Add config data to interface_configurations object."""
-    # configure IPv6 loopback
+    # configure IPv4 loopback
     interface_configuration = interface_configurations.InterfaceConfiguration()
     interface_configuration.active = "act"
     interface_configuration.interface_name = "Loopback0"
     interface_configuration.interface_virtual = Empty()
     interface_configuration.description = "PRIMARY ROUTER LOOPBACK"
-    addresses = interface_configuration.ipv6_network.addresses
-    regular_address = addresses.regular_addresses.RegularAddress()
-    regular_address.address = "2001:db8::ff:1"
-    regular_address.prefix_length = 128
-    addresses.regular_addresses.regular_address.append(regular_address)
+    primary = interface_configuration.ipv4_network.addresses.Primary()
+    primary.address = "172.16.255.1"
+    primary.netmask = "255.255.255.255"
+    interface_configuration.ipv4_network.addresses.primary = primary
     interface_configurations.interface_configuration.append(interface_configuration)
 
 
@@ -83,12 +83,12 @@ if __name__ == "__main__":
     # create CRUD service
     crud = CRUDService()
 
-    # create config object
-    interface_configurations = xr_ifmgr_cfg.InterfaceConfigurations()
-    # add object configuration
-    config_interface_configurations(interface_configurations)
+    interface_configurations = xr_ifmgr_cfg.InterfaceConfigurations()  # create object
+    config_interface_configurations(interface_configurations)  # add object configuration
 
-    crud.create(provider, interface_configurations)  # create object on device
+    # create configuration on NETCONF device
+    crud.create(provider, interface_configurations)
+
     provider.close()
     exit()
 # End of script

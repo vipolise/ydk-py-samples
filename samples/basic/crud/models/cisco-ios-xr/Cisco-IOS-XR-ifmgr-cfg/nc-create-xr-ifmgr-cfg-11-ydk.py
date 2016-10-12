@@ -16,9 +16,9 @@
 #
 
 """
-Create config for model Cisco-IOS-XR-ifmgr-cfg.
+Create configuration for model Cisco-IOS-XR-ifmgr-cfg.
 
-usage: nc-create-config-ifmgr-24-ydk.py [-h] [-v] device
+usage: nc-create-xr-ifmgr-cfg-11-ydk.py [-h] [-v] device
 
 positional arguments:
   device         NETCONF device (ssh://user:password@host:port)
@@ -33,14 +33,14 @@ from urlparse import urlparse
 
 from ydk.services import CRUDService
 from ydk.providers import NetconfServiceProvider
-from ydk.models.ifmgr import Cisco_IOS_XR_ifmgr_cfg as xr_ifmgr_cfg
+from ydk.models.cisco_ios_xr import Cisco_IOS_XR_ifmgr_cfg \
+    as xr_ifmgr_cfg
 import logging
 
 
-def config_global_interface_configuration(global_interface_configuration):
-    """Add config data to global_interface_configuration object."""
-    # display link status messages for all interfaces
-    global_interface_configuration.link_status = xr_ifmgr_cfg.LinkStatusEnumEnum.SOFTWARE_INTERFACES
+def config_interface_configurations(interface_configurations):
+    """Add config data to interface_configurations object."""
+    pass
 
 
 if __name__ == "__main__":
@@ -72,13 +72,12 @@ if __name__ == "__main__":
     # create CRUD service
     crud = CRUDService()
 
-    # create config object
-    global_interface_configuration = xr_ifmgr_cfg.GlobalInterfaceConfiguration()
-    # add object configuration
-    config_global_interface_configuration(global_interface_configuration)
+    interface_configurations = xr_ifmgr_cfg.InterfaceConfigurations()  # create object
+    config_interface_configurations(interface_configurations)  # add object configuration
 
-    # create object on NETCONF device
-    crud.create(provider, global_interface_configuration)
+    # create configuration on NETCONF device
+    # crud.create(provider, interface_configurations)
+
     provider.close()
     exit()
 # End of script
