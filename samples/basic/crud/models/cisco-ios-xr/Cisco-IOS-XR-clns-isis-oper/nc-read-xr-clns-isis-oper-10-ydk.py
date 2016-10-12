@@ -18,7 +18,7 @@
 """
 Read all data for model Cisco-IOS-XR-clns-isis-oper.
 
-usage: nc-read-oper-clns-isis-10-ydk.py [-h] [-v] device
+usage: nc-read-xr-clns-isis-oper-10-ydk.py [-h] [-v] device
 
 positional arguments:
   device         NETCONF device (ssh://user:password@host:port)
@@ -33,7 +33,8 @@ from urlparse import urlparse
 
 from ydk.services import CRUDService
 from ydk.providers import NetconfServiceProvider
-from ydk.models.clns import Cisco_IOS_XR_clns_isis_oper as xr_clns_isis_oper
+from ydk.models.cisco_ios_xr import Cisco_IOS_XR_clns_isis_oper \
+    as xr_clns_isis_oper
 import logging
 
 
@@ -71,8 +72,10 @@ if __name__ == "__main__":
     # create CRUD service
     crud = CRUDService()
 
-    isis = xr_clns_isis_oper.Isis()  # create oper object
-    # isis = crud.read(provider, isis)  # read object from NETCONF device
+    isis = xr_clns_isis_oper.Isis()  # create object
+
+    # read data from NETCONF device
+    # isis = crud.read(provider, isis)
     process_isis(isis)  # process object data
 
     provider.close()

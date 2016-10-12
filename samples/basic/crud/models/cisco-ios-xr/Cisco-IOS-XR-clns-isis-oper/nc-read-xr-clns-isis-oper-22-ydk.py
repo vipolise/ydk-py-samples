@@ -18,7 +18,7 @@
 """
 Read all data for model Cisco-IOS-XR-clns-isis-oper.
 
-usage: nc-read-oper-clns-isis-22-ydk.py [-h] [-v] device
+usage: nc-read-xr-clns-isis-oper-22-ydk.py [-h] [-v] device
 
 positional arguments:
   device         NETCONF device (ssh://user:password@host:port)
@@ -33,7 +33,8 @@ from urlparse import urlparse
 
 from ydk.services import CRUDService
 from ydk.providers import NetconfServiceProvider
-from ydk.models.clns import Cisco_IOS_XR_clns_isis_oper as xr_clns_isis_oper
+from ydk.models.cisco_ios_xr import Cisco_IOS_XR_clns_isis_oper \
+    as xr_clns_isis_oper
 from datetime import timedelta
 import re
 import logging
@@ -70,8 +71,8 @@ def process_isis(isis):
         # iterate over all levels
         for level in instance.levels.level:
             if show_isis_adj:
-                 show_isis_adj += "\n\n"
-                  
+                show_isis_adj += "\n\n"
+
             show_isis_adj += isis_header.format(instance=instance.instance_name,
                                                 level=level.level.value)
             adj_count = 0
@@ -87,11 +88,11 @@ def process_isis(isis):
                 changed = str(timedelta(seconds=adjacency.adjacency_uptime))
                 if adjacency.adjacency_ietf_nsf_capable_flag:
                     ietf_nsf = "Yes"
-                else:  
+                else:
                     ietf_nsf = "No"
                 v4_bfd = adj_bfd_state[adjacency.adjacency_ipv6bfd_state.value]
                 v6_bfd = adj_bfd_state[adjacency.adjacency_bfd_state.value]
-    
+
                 show_isis_adj += ("\n" +
                                   isis_row.format(sys_id=sys_id,
                                                   intf=intf,
@@ -139,8 +140,10 @@ if __name__ == "__main__":
     # create CRUD service
     crud = CRUDService()
 
-    isis = xr_clns_isis_oper.Isis()  # create oper object
-    isis = crud.read(provider, isis)  # read object from NETCONF device
+    isis = xr_clns_isis_oper.Isis()  # create object
+
+    # read data from NETCONF device
+    isis = crud.read(provider, isis)
     print(process_isis(isis))  # process object data
 
     provider.close()
