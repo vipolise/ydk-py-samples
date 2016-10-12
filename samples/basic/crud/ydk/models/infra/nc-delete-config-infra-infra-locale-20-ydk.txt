@@ -1,3 +1,0 @@
-no locale country US
-no locale language en
-end

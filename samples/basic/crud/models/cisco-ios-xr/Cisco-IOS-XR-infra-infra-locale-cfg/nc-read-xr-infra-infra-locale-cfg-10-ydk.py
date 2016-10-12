@@ -16,9 +16,9 @@
 #
 
 """
-Delete all config data for model Cisco-IOS-XR-infra-infra-locale-cfg.
+Read all data for model Cisco-IOS-XR-infra-infra-locale-cfg.
 
-usage: nc-delete-config-infra-infra-locale-20-ydk.py [-h] [-v] device
+usage: nc-read-xr-infra-infra-locale-cfg-10-ydk.py [-h] [-v] device
 
 positional arguments:
   device         NETCONF device (ssh://user:password@host:port)
@@ -33,9 +33,14 @@ from urlparse import urlparse
 
 from ydk.services import CRUDService
 from ydk.providers import NetconfServiceProvider
-from ydk.models.infra import Cisco_IOS_XR_infra_infra_locale_cfg \
+from ydk.models.cisco_ios_xr import Cisco_IOS_XR_infra_infra_locale_cfg \
     as xr_infra_infra_locale_cfg
 import logging
+
+
+def process_locale(locale):
+    """Process data in locale object."""
+    pass
 
 
 if __name__ == "__main__":
@@ -67,8 +72,12 @@ if __name__ == "__main__":
     # create CRUD service
     crud = CRUDService()
 
-    locale = xr_infra_infra_locale_cfg.Locale()  # create config object
-    crud.delete(provider, locale)  # delete object on NETCONF device
+    locale = xr_infra_infra_locale_cfg.Locale()  # create object
+
+    # read data from NETCONF device
+    # locale = crud.read(provider, locale)
+    process_locale(locale)  # process object data
+
     provider.close()
     exit()
 # End of script

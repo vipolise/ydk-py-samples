@@ -16,9 +16,9 @@
 #
 
 """
-Create config for model Cisco-IOS-XR-infra-infra-locale-cfg.
+Read all data for model Cisco-IOS-XR-infra-infra-locale-cfg.
 
-usage: nc-create-config-infra-infra-locale-22-ydk.py [-h] [-v] device
+usage: nc-read-xr-infra-infra-locale-cfg-20-ydk.py [-h] [-v] device
 
 positional arguments:
   device         NETCONF device (ssh://user:password@host:port)
@@ -33,16 +33,23 @@ from urlparse import urlparse
 
 from ydk.services import CRUDService
 from ydk.providers import NetconfServiceProvider
-from ydk.models.infra import Cisco_IOS_XR_infra_infra_locale_cfg \
+from ydk.models.cisco_ios_xr import Cisco_IOS_XR_infra_infra_locale_cfg \
     as xr_infra_infra_locale_cfg
+import textwrap
 import logging
 
 
-def config_locale(locale):
-    """Add config data to locale object."""
-    # country and language configuration
-    locale.country = xr_infra_infra_locale_cfg.LocaleCountryEnum.CN
-    locale.language = xr_infra_infra_locale_cfg.LocaleLanguageEnum.ZH
+def process_locale(locale):
+    """Process data in locale object."""
+    # format string for locale
+    show_locale = textwrap.dedent("""
+        Country: {country}
+        Language: {language}
+        """).strip()
+
+    # return formatted string
+    return(show_locale.format(country=locale.country.name,
+                              language=locale.language.name))
 
 
 if __name__ == "__main__":
@@ -74,10 +81,12 @@ if __name__ == "__main__":
     # create CRUD service
     crud = CRUDService()
 
-    locale = xr_infra_infra_locale_cfg.Locale()  # create config object
-    config_locale(locale)  # add object configuration
+    locale = xr_infra_infra_locale_cfg.Locale()  # create object
 
-    crud.create(provider, locale)  # create object on NETCONF device
+    # read data from NETCONF device
+    locale = crud.read(provider, locale)
+    print(process_locale(locale))  # process object data
+
     provider.close()
     exit()
 # End of script
