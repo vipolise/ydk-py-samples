@@ -16,9 +16,9 @@
 #
 
 """
-Update config for model Cisco-IOS-XR-ip-ntp-cfg.
+Create configuration for model Cisco-IOS-XR-ip-ntp-cfg.
 
-usage: nc-update-config-ip-ntp-10-ydk.py [-h] [-v] device
+usage: nc-create-xr-ip-ntp-cfg-20-ydk.py [-h] [-v] device
 
 positional arguments:
   device         NETCONF device (ssh://user:password@host:port)
@@ -33,13 +33,22 @@ from urlparse import urlparse
 
 from ydk.services import CRUDService
 from ydk.providers import NetconfServiceProvider
-from ydk.models.ip import Cisco_IOS_XR_ip_ntp_cfg as xr_ip_ntp_cfg
+from ydk.models.cisco_ios_xr import Cisco_IOS_XR_ip_ntp_cfg \
+    as xr_ip_ntp_cfg
 import logging
 
 
 def config_ntp(ntp):
     """Add config data to ntp object."""
-    pass
+    peer_vrf = ntp.peer_vrfs.PeerVrf()
+    peer_vrf.vrf_name = "default"
+    peer_ipv4 = peer_vrf.peer_ipv4s.PeerIpv4()
+    peer_ipv4.address_ipv4 = "10.0.0.1"
+    peer_type_ipv4 = peer_ipv4.PeerTypeIpv4()
+    peer_type_ipv4.peer_type = xr_ip_ntp_cfg.NtpPeerEnum.SERVER
+    peer_ipv4.peer_type_ipv4.append(peer_type_ipv4)
+    peer_vrf.peer_ipv4s.peer_ipv4.append(peer_ipv4)
+    ntp.peer_vrfs.peer_vrf.append(peer_vrf)
 
 
 if __name__ == "__main__":
@@ -71,10 +80,12 @@ if __name__ == "__main__":
     # create CRUD service
     crud = CRUDService()
 
-    ntp = xr_ip_ntp_cfg.Ntp()  # create config object
+    ntp = xr_ip_ntp_cfg.Ntp()  # create object
     config_ntp(ntp)  # add object configuration
 
-    # crud.update(provider, ntp)  # update object on NETCONF device
+    # create configuration on NETCONF device
+    crud.create(provider, ntp)
+
     provider.close()
     exit()
 # End of script

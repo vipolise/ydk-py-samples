@@ -16,9 +16,9 @@
 #
 
 """
-Create config for model Cisco-IOS-XR-ip-ntp-cfg.
+Read all data for model Cisco-IOS-XR-ip-ntp-cfg.
 
-usage: nc-create-config-ip-ntp-10-ydk.py [-h] [-v] device
+usage: nc-read-xr-ip-ntp-cfg-10-ydk.py [-h] [-v] device
 
 positional arguments:
   device         NETCONF device (ssh://user:password@host:port)
@@ -33,12 +33,13 @@ from urlparse import urlparse
 
 from ydk.services import CRUDService
 from ydk.providers import NetconfServiceProvider
-from ydk.models.ip import Cisco_IOS_XR_ip_ntp_cfg as xr_ip_ntp_cfg
+from ydk.models.cisco_ios_xr import Cisco_IOS_XR_ip_ntp_cfg \
+    as xr_ip_ntp_cfg
 import logging
 
 
-def config_ntp(ntp):
-    """Add config data to ntp object."""
+def process_ntp(ntp):
+    """Process data in ntp object."""
     pass
 
 
@@ -71,10 +72,12 @@ if __name__ == "__main__":
     # create CRUD service
     crud = CRUDService()
 
-    ntp = xr_ip_ntp_cfg.Ntp()  # create config object
-    config_ntp(ntp)  # add object configuration
+    ntp = xr_ip_ntp_cfg.Ntp()  # create object
 
-    # crud.create(provider, ntp)  # create object on NETCONF device
+    # read data from NETCONF device
+    # ntp = crud.read(provider, ntp)
+    process_ntp(ntp)  # process object data
+
     provider.close()
     exit()
 # End of script
