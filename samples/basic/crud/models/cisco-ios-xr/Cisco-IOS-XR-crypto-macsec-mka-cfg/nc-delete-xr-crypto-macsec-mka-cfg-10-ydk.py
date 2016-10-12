@@ -18,7 +18,7 @@
 """
 Delete all config data for model Cisco-IOS-XR-crypto-macsec-mka-cfg.
 
-usage: nc-delete-config-crypto-macsec-mka-10-ydk.py [-h] [-v] device
+usage: nc-delete-xr-crypto-macsec-mka-cfg-10-ydk.py [-h] [-v] device
 
 positional arguments:
   device         NETCONF device (ssh://user:password@host:port)
@@ -33,7 +33,8 @@ from urlparse import urlparse
 
 from ydk.services import CRUDService
 from ydk.providers import NetconfServiceProvider
-from ydk.models.crypto import Cisco_IOS_XR_crypto_macsec_mka_cfg as xr_crypto_macsec_mka_cfg
+from ydk.models.cisco_ios_xr import Cisco_IOS_XR_crypto_macsec_mka_cfg \
+    as xr_crypto_macsec_mka_cfg
 import logging
 
 
@@ -66,8 +67,10 @@ if __name__ == "__main__":
     # create CRUD service
     crud = CRUDService()
 
-    mac_sec = xr_crypto_macsec_mka_cfg.MacSec()  # create config object
-    # crud.delete(provider, mac_sec)  # delete object on NETCONF device
+    macsec = xr_crypto_macsec_mka_cfg.Macsec()  # create object
+    # delete configuration on NETCONF device
+    # crud.delete(provider, macsec)
+
     provider.close()
     exit()
 # End of script

@@ -16,9 +16,9 @@
 #
 
 """
-Create config for model Cisco-IOS-XR-crypto-macsec-mka-cfg.
+Create configuration for model Cisco-IOS-XR-crypto-macsec-mka-cfg.
 
-usage: nc-create-config-crypto-macsec-mka-10-ydk.py [-h] [-v] device
+usage: nc-create-xr-crypto-macsec-mka-cfg-10-ydk.py [-h] [-v] device
 
 positional arguments:
   device         NETCONF device (ssh://user:password@host:port)
@@ -33,12 +33,13 @@ from urlparse import urlparse
 
 from ydk.services import CRUDService
 from ydk.providers import NetconfServiceProvider
-from ydk.models.crypto import Cisco_IOS_XR_crypto_macsec_mka_cfg as xr_crypto_macsec_mka_cfg
+from ydk.models.cisco_ios_xr import Cisco_IOS_XR_crypto_macsec_mka_cfg \
+    as xr_crypto_macsec_mka_cfg
 import logging
 
 
-def config_mac_sec(mac_sec):
-    """Add config data to mac_sec object."""
+def config_macsec(macsec):
+    """Add config data to macsec object."""
     pass
 
 
@@ -71,10 +72,12 @@ if __name__ == "__main__":
     # create CRUD service
     crud = CRUDService()
 
-    mac_sec = xr_crypto_macsec_mka_cfg.MacSec()  # create config object
-    config_mac_sec(mac_sec)  # add object configuration
+    macsec = xr_crypto_macsec_mka_cfg.Macsec()  # create object
+    config_macsec(macsec)  # add object configuration
 
-    # crud.create(provider, mac_sec)  # create object on NETCONF device
+    # create configuration on NETCONF device
+    # crud.create(provider, macsec)
+
     provider.close()
     exit()
 # End of script

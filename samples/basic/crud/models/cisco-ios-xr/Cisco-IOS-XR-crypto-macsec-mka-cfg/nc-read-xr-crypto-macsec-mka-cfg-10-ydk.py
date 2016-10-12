@@ -18,7 +18,7 @@
 """
 Read all data for model Cisco-IOS-XR-crypto-macsec-mka-cfg.
 
-usage: nc-read-config-crypto-macsec-mka-10-ydk.py [-h] [-v] device
+usage: nc-read-xr-crypto-macsec-mka-cfg-10-ydk.py [-h] [-v] device
 
 positional arguments:
   device         NETCONF device (ssh://user:password@host:port)
@@ -33,12 +33,13 @@ from urlparse import urlparse
 
 from ydk.services import CRUDService
 from ydk.providers import NetconfServiceProvider
-from ydk.models.crypto import Cisco_IOS_XR_crypto_macsec_mka_cfg as xr_crypto_macsec_mka_cfg
+from ydk.models.cisco_ios_xr import Cisco_IOS_XR_crypto_macsec_mka_cfg \
+    as xr_crypto_macsec_mka_cfg
 import logging
 
 
-def process_mac_sec(mac_sec):
-    """Process data in mac_sec object."""
+def process_macsec(macsec):
+    """Process data in macsec object."""
     pass
 
 
@@ -71,9 +72,11 @@ if __name__ == "__main__":
     # create CRUD service
     crud = CRUDService()
 
-    mac_sec = xr_crypto_macsec_mka_cfg.MacSec()  # create config object
-    # mac_sec = crud.read(provider, mac_sec)  # read object from NETCONF device
-    process_mac_sec(mac_sec)  # process object data
+    macsec = xr_crypto_macsec_mka_cfg.Macsec()  # create object
+
+    # read data from NETCONF device
+    # macsec = crud.read(provider, macsec)
+    process_macsec(macsec)  # process object data
 
     provider.close()
     exit()
