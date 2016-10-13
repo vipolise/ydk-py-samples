@@ -18,7 +18,7 @@
 """
 Read all data for model Cisco-IOS-XR-ip-ntp-oper.
 
-usage: nc-read-oper-ip-ntp-10-ydk.py [-h] [-v] device
+usage: nc-read-xr-ip-ntp-oper-10-ydk.py [-h] [-v] device
 
 positional arguments:
   device         NETCONF device (ssh://user:password@host:port)
@@ -33,7 +33,8 @@ from urlparse import urlparse
 
 from ydk.services import CRUDService
 from ydk.providers import NetconfServiceProvider
-from ydk.models.ip import Cisco_IOS_XR_ip_ntp_oper as xr_ip_ntp_oper
+from ydk.models.cisco_ios_xr import Cisco_IOS_XR_ip_ntp_oper \
+    as xr_ip_ntp_oper
 import logging
 
 
@@ -71,8 +72,10 @@ if __name__ == "__main__":
     # create CRUD service
     crud = CRUDService()
 
-    ntp = xr_ip_ntp_oper.Ntp()  # create oper object
-    # ntp = crud.read(provider, ntp)  # read object from NETCONF device
+    ntp = xr_ip_ntp_oper.Ntp()  # create object
+
+    # read data from NETCONF device
+    # ntp = crud.read(provider, ntp)
     process_ntp(ntp)  # process object data
 
     provider.close()
