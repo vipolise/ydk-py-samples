@@ -18,7 +18,7 @@
 """
 Delete all config data for model Cisco-IOS-XR-ip-static-cfg.
 
-usage: nc-delete-config-ip-static-21-ydk.py [-h] [-v] device
+usage: nc-delete-xr-ip-static-cfg-40-ydk.py [-h] [-v] device
 
 positional arguments:
   device         NETCONF device (ssh://user:password@host:port)
@@ -33,8 +33,18 @@ from urlparse import urlparse
 
 from ydk.services import CRUDService
 from ydk.providers import NetconfServiceProvider
-from ydk.models.ip import Cisco_IOS_XR_ip_static_cfg as xr_ip_static_cfg
+from ydk.models.cisco_ios_xr import Cisco_IOS_XR_ip_static_cfg \
+    as xr_ip_static_cfg
 import logging
+
+
+def config_router_static(router_static):
+    """Add config data to router_static object."""
+    vrf_unicast = router_static.default_vrf.address_family.vrfipv4.vrf_unicast
+    vrf_prefix = vrf_unicast.vrf_prefixes.VrfPrefix()
+    vrf_prefix.prefix = "172.16.0.0"
+    vrf_prefix.prefix_length = 16
+    vrf_unicast.vrf_prefixes.vrf_prefix.append(vrf_prefix)
 
 
 if __name__ == "__main__":
@@ -66,11 +76,12 @@ if __name__ == "__main__":
     # create CRUD service
     crud = CRUDService()
 
-    router_static = xr_ip_static_cfg.RouterStatic()  # create config object
+    router_static = xr_ip_static_cfg.RouterStatic()  # create object
+    config_router_static(router_static)  # add object configuration
 
-    # delete object on NETCONF device
+    # delete configuration on NETCONF device
     crud.delete(provider,
-                router_static.default_vrf.address_family.vrfipv6.vrf_unicast)
+                router_static.default_vrf.address_family.vrfipv4.vrf_unicast.vrf_prefixes.vrf_prefix[0])
     provider.close()
     exit()
 # End of script

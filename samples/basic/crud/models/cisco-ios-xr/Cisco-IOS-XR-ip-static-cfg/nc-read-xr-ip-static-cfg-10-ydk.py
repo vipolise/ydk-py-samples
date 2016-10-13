@@ -16,9 +16,9 @@
 #
 
 """
-Create config for model Cisco-IOS-XR-ip-static-cfg.
+Read all data for model Cisco-IOS-XR-ip-static-cfg.
 
-usage: nc-create-config-ip-static-21-ydk.py [-h] [-v] device
+usage: nc-read-xr-ip-static-cfg-10-ydk.py [-h] [-v] device
 
 positional arguments:
   device         NETCONF device (ssh://user:password@host:port)
@@ -33,22 +33,14 @@ from urlparse import urlparse
 
 from ydk.services import CRUDService
 from ydk.providers import NetconfServiceProvider
-from ydk.models.ip import Cisco_IOS_XR_ip_static_cfg as xr_ip_static_cfg
+from ydk.models.cisco_ios_xr import Cisco_IOS_XR_ip_static_cfg \
+    as xr_ip_static_cfg
 import logging
 
 
-def config_router_static(router_static):
-    """Add config data to router_static object."""
-    vrf_unicast = router_static.default_vrf.address_family.vrfipv6.vrf_unicast
-    vrf_prefix = vrf_unicast.vrf_prefixes.VrfPrefix()
-    vrf_prefix.prefix = "::"
-    vrf_prefix.prefix_length = 0
-    vrf_next_hop_next_hop_address = vrf_prefix.vrf_route.vrf_next_hop_table. \
-        VrfNextHopNextHopAddress()
-    vrf_next_hop_next_hop_address.next_hop_address = "2001:db8::1:3"
-    vrf_prefix.vrf_route.vrf_next_hop_table.vrf_next_hop_next_hop_address. \
-        append(vrf_next_hop_next_hop_address)
-    vrf_unicast.vrf_prefixes.vrf_prefix.append(vrf_prefix)
+def process_router_static(router_static):
+    """Process data in router_static object."""
+    pass
 
 
 if __name__ == "__main__":
@@ -80,10 +72,12 @@ if __name__ == "__main__":
     # create CRUD service
     crud = CRUDService()
 
-    router_static = xr_ip_static_cfg.RouterStatic()  # create config object
-    config_router_static(router_static)  # add object configuration
+    router_static = xr_ip_static_cfg.RouterStatic()  # create object
 
-    crud.create(provider, router_static)  # create object on NETCONF device
+    # read data from NETCONF device
+    # router_static = crud.read(provider, router_static)
+    process_router_static(router_static)  # process object data
+
     provider.close()
     exit()
 # End of script

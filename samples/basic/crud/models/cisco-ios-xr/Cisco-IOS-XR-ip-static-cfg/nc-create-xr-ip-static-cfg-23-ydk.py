@@ -16,9 +16,9 @@
 #
 
 """
-Create config for model Cisco-IOS-XR-ip-static-cfg.
+Create configuration for model Cisco-IOS-XR-ip-static-cfg.
 
-usage: nc-create-config-ip-static-25-ydk.py [-h] [-v] device
+usage: nc-create-xr-ip-static-cfg-23-ydk.py [-h] [-v] device
 
 positional arguments:
   device         NETCONF device (ssh://user:password@host:port)
@@ -33,7 +33,8 @@ from urlparse import urlparse
 
 from ydk.services import CRUDService
 from ydk.providers import NetconfServiceProvider
-from ydk.models.ip import Cisco_IOS_XR_ip_static_cfg as xr_ip_static_cfg
+from ydk.models.cisco_ios_xr import Cisco_IOS_XR_ip_static_cfg \
+    as xr_ip_static_cfg
 import logging
 
 
@@ -43,13 +44,11 @@ def config_router_static(router_static):
     vrf_prefix = vrf_unicast.vrf_prefixes.VrfPrefix()
     vrf_prefix.prefix = "2001:db8:a::"
     vrf_prefix.prefix_length = 64
-    vrf_next_hop_next_hop_address = vrf_prefix.vrf_route.vrf_next_hop_table. \
-        VrfNextHopNextHopAddress()
-    vrf_next_hop_next_hop_address.next_hop_address = "2001:db8::1:3"
-    vrf_next_hop_next_hop_address.metric = 254
-    vrf_next_hop_next_hop_address.object_name = "TRACKED_OBJ"
-    vrf_prefix.vrf_route.vrf_next_hop_table.vrf_next_hop_next_hop_address. \
-        append(vrf_next_hop_next_hop_address)
+    vrf_next_hop_interface_name = vrf_prefix.vrf_route.vrf_next_hop_table. \
+        VrfNextHopInterfaceName()
+    vrf_next_hop_interface_name.interface_name = "Null0"
+    vrf_prefix.vrf_route.vrf_next_hop_table.vrf_next_hop_interface_name. \
+        append(vrf_next_hop_interface_name)
     vrf_unicast.vrf_prefixes.vrf_prefix.append(vrf_prefix)
 
 
@@ -82,10 +81,12 @@ if __name__ == "__main__":
     # create CRUD service
     crud = CRUDService()
 
-    router_static = xr_ip_static_cfg.RouterStatic()  # create config object
+    router_static = xr_ip_static_cfg.RouterStatic()  # create object
     config_router_static(router_static)  # add object configuration
 
-    crud.create(provider, router_static)  # create object on NETCONF device
+    # create configuration on NETCONF device
+    crud.create(provider, router_static)
+
     provider.close()
     exit()
 # End of script

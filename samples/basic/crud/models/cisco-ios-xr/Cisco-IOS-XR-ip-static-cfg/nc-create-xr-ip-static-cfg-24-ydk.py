@@ -16,9 +16,9 @@
 #
 
 """
-Create config for model Cisco-IOS-XR-ip-static-cfg.
+Create configuration for model Cisco-IOS-XR-ip-static-cfg.
 
-usage: nc-create-config-ip-static-24-ydk.py [-h] [-v] device
+usage: nc-create-xr-ip-static-cfg-24-ydk.py [-h] [-v] device
 
 positional arguments:
   device         NETCONF device (ssh://user:password@host:port)
@@ -33,7 +33,8 @@ from urlparse import urlparse
 
 from ydk.services import CRUDService
 from ydk.providers import NetconfServiceProvider
-from ydk.models.ip import Cisco_IOS_XR_ip_static_cfg as xr_ip_static_cfg
+from ydk.models.cisco_ios_xr import Cisco_IOS_XR_ip_static_cfg \
+    as xr_ip_static_cfg
 import logging
 
 
@@ -82,10 +83,12 @@ if __name__ == "__main__":
     # create CRUD service
     crud = CRUDService()
 
-    router_static = xr_ip_static_cfg.RouterStatic()  # create config object
+    router_static = xr_ip_static_cfg.RouterStatic()  # create object
     config_router_static(router_static)  # add object configuration
 
-    crud.create(provider, router_static)  # create object on NETCONF device
+    # create configuration on NETCONF device
+    crud.create(provider, router_static)
+
     provider.close()
     exit()
 # End of script

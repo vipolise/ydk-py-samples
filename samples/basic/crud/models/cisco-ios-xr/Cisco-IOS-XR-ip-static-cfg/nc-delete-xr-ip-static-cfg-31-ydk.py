@@ -18,7 +18,7 @@
 """
 Delete all config data for model Cisco-IOS-XR-ip-static-cfg.
 
-usage: nc-delete-config-ip-static-10-ydk.py [-h] [-v] device
+usage: nc-delete-xr-ip-static-cfg-31-ydk.py [-h] [-v] device
 
 positional arguments:
   device         NETCONF device (ssh://user:password@host:port)
@@ -33,7 +33,8 @@ from urlparse import urlparse
 
 from ydk.services import CRUDService
 from ydk.providers import NetconfServiceProvider
-from ydk.models.ip import Cisco_IOS_XR_ip_static_cfg as xr_ip_static_cfg
+from ydk.models.cisco_ios_xr import Cisco_IOS_XR_ip_static_cfg \
+    as xr_ip_static_cfg
 import logging
 
 
@@ -66,8 +67,11 @@ if __name__ == "__main__":
     # create CRUD service
     crud = CRUDService()
 
-    router_static = xr_ip_static_cfg.RouterStatic()  # create config object
-    # crud.delete(provider, router_static)  # delete object on NETCONF device
+    router_static = xr_ip_static_cfg.RouterStatic()  # create object
+    # delete configuration on NETCONF device
+    crud.delete(provider,
+                router_static.default_vrf.address_family.vrfipv6.vrf_unicast)
+
     provider.close()
     exit()
 # End of script

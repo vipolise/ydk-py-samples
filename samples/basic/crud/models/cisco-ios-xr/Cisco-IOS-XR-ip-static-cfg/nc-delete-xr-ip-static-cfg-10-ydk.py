@@ -16,9 +16,9 @@
 #
 
 """
-Read all data for model Cisco-IOS-XR-ip-static-cfg.
+Delete all config data for model Cisco-IOS-XR-ip-static-cfg.
 
-usage: nc-read-config-ip-static-10-ydk.py [-h] [-v] device
+usage: nc-delete-xr-ip-static-cfg-10-ydk.py [-h] [-v] device
 
 positional arguments:
   device         NETCONF device (ssh://user:password@host:port)
@@ -33,13 +33,9 @@ from urlparse import urlparse
 
 from ydk.services import CRUDService
 from ydk.providers import NetconfServiceProvider
-from ydk.models.ip import Cisco_IOS_XR_ip_static_cfg as xr_ip_static_cfg
+from ydk.models.cisco_ios_xr import Cisco_IOS_XR_ip_static_cfg \
+    as xr_ip_static_cfg
 import logging
-
-
-def process_router_static(router_static):
-    """Process data in router_static object."""
-    pass
 
 
 if __name__ == "__main__":
@@ -71,9 +67,9 @@ if __name__ == "__main__":
     # create CRUD service
     crud = CRUDService()
 
-    router_static = xr_ip_static_cfg.RouterStatic()  # create config object
-    # router_static = crud.read(provider, router_static)  # read object from NETCONF device
-    process_router_static(router_static)  # process object data
+    router_static = xr_ip_static_cfg.RouterStatic()  # create object
+    # delete configuration on NETCONF device
+    # crud.delete(provider, router_static)
 
     provider.close()
     exit()
