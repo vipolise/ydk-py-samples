@@ -16,9 +16,9 @@
 #
 
 """
-Create config for model Cisco-IOS-XR-ipv4-bgp-cfg.
+Create configuration for model Cisco-IOS-XR-ipv4-bgp-cfg.
 
-usage: nc-create-config-ipv4-bgp-40-ydk.py [-h] [-v] device
+usage: nc-create-xr-ipv4-bgp-cfg-41-ydk.py [-h] [-v] device
 
 positional arguments:
   device         NETCONF device (ssh://user:password@host:port)
@@ -33,9 +33,10 @@ from urlparse import urlparse
 
 from ydk.services import CRUDService
 from ydk.providers import NetconfServiceProvider
-from ydk.models.ipv4 import Cisco_IOS_XR_ipv4_bgp_cfg as xr_ipv4_bgp_cfg
-from ydk.models.ipv4.Cisco_IOS_XR_ipv4_bgp_datatypes \
-    import BgpAddressFamilyEnum
+from ydk.models.cisco_ios_xr import Cisco_IOS_XR_ipv4_bgp_cfg \
+    as xr_ipv4_bgp_cfg
+from ydk.models.cisco_ios_xr import Cisco_IOS_XR_ipv4_bgp_datatypes \
+    as xr_ipv4_bgp_datatypes
 from ydk.types import Empty
 import logging
 
@@ -52,7 +53,7 @@ def config_bgp(bgp):
     four_byte_as.bgp_running = Empty()
     # global address family
     global_af = four_byte_as.default_vrf.global_.global_afs.GlobalAf()
-    global_af.af_name = BgpAddressFamilyEnum.IPV4_UNICAST
+    global_af.af_name = xr_ipv4_bgp_datatypes.BgpAddressFamilyEnum.IPV6_UNICAST
     global_af.enable = Empty()
     four_byte_as.default_vrf.global_.global_afs.global_af.append(global_af)
     instance_as.four_byte_as.append(four_byte_as)
@@ -71,14 +72,14 @@ def config_bgp(bgp):
     neighbor_groups.neighbor_group.append(neighbor_group)
     # ipv4 unicast
     neighbor_group_af = neighbor_group.neighbor_group_afs.NeighborGroupAf()
-    neighbor_group_af.af_name = BgpAddressFamilyEnum.IPV4_UNICAST
+    neighbor_group_af.af_name = xr_ipv4_bgp_datatypes.BgpAddressFamilyEnum.IPV6_UNICAST
     neighbor_group_af.activate = Empty()
     neighbor_group_afs = neighbor_group.neighbor_group_afs
     neighbor_group_afs.neighbor_group_af.append(neighbor_group_af)
 
     # configure IBGP neighbor
     neighbor = four_byte_as.default_vrf.bgp_entity.neighbors.Neighbor()
-    neighbor.neighbor_address = "172.16.255.2"
+    neighbor.neighbor_address = "2001:db8::ff:2"
     neighbor.neighbor_group_add_member = "IBGP"
     four_byte_as.default_vrf.bgp_entity.neighbors.neighbor.append(neighbor)
 
@@ -112,10 +113,12 @@ if __name__ == "__main__":
     # create CRUD service
     crud = CRUDService()
 
-    bgp = xr_ipv4_bgp_cfg.Bgp()  # create config object
+    bgp = xr_ipv4_bgp_cfg.Bgp()  # create object
     config_bgp(bgp)  # add object configuration
 
-    crud.create(provider, bgp)  # create object on NETCONF device
+    # create configuration on NETCONF device
+    crud.create(provider, bgp)
+
     provider.close()
     exit()
 # End of script

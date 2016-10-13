@@ -16,9 +16,9 @@
 #
 
 """
-Delete all config data for model Cisco-IOS-XR-ipv4-bgp-cfg.
+Read all data for model Cisco-IOS-XR-ipv4-bgp-cfg.
 
-usage: nc-delete-config-ipv4-bgp-20-ydk.py [-h] [-v] device
+usage: nc-read-xr-ipv4-bgp-cfg-10-ydk.py [-h] [-v] device
 
 positional arguments:
   device         NETCONF device (ssh://user:password@host:port)
@@ -33,8 +33,14 @@ from urlparse import urlparse
 
 from ydk.services import CRUDService
 from ydk.providers import NetconfServiceProvider
-from ydk.models.ipv4 import Cisco_IOS_XR_ipv4_bgp_cfg as xr_ipv4_bgp_cfg
+from ydk.models.cisco_ios_xr import Cisco_IOS_XR_ipv4_bgp_cfg \
+    as xr_ipv4_bgp_cfg
 import logging
+
+
+def process_bgp(bgp):
+    """Process data in bgp object."""
+    pass
 
 
 if __name__ == "__main__":
@@ -66,8 +72,12 @@ if __name__ == "__main__":
     # create CRUD service
     crud = CRUDService()
 
-    bgp = xr_ipv4_bgp_cfg.Bgp()  # create config object
-    crud.delete(provider, bgp)  # delete object on NETCONF device
+    bgp = xr_ipv4_bgp_cfg.Bgp()  # create object
+
+    # read data from NETCONF device
+    # bgp = crud.read(provider, bgp)
+    process_bgp(bgp)  # process object data
+
     provider.close()
     exit()
 # End of script
