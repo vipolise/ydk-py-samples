@@ -16,9 +16,9 @@
 #
 
 """
-Create config for model openconfig-routing-policy.
+Create configuration for model openconfig-routing-policy.
 
-usage: nc-create-config-routing-policy-24-ydk.py [-h] [-v] device
+usage: nc-create-oc-routing-policy-26-ydk.py [-h] [-v] device
 
 positional arguments:
   device         NETCONF device (ssh://user:password@host:port)
@@ -33,52 +33,49 @@ from urlparse import urlparse
 
 from ydk.services import CRUDService
 from ydk.providers import NetconfServiceProvider
-from ydk.models.routing import routing_policy as oc_routing_policy
+from ydk.models.openconfig import openconfig_routing_policy \
+    as oc_routing_policy
 from ydk.types import Empty
 import logging
 
 
 def config_routing_policy(routing_policy):
     """Add config data to routing_policy object."""
-    # configure as-path set
-    bgp_defined_sets = routing_policy.defined_sets.bgp_defined_sets
-    as_path_set = bgp_defined_sets.as_path_sets.AsPathSet()
-    as_path_set.as_path_set_name = "AS-PATH-SET1"
-    as_path_set.as_path_set_member.append("^65172")
-    bgp_defined_sets.as_path_sets.as_path_set.append(as_path_set)
+    # configure prefix set
+    prefix_set = routing_policy.defined_sets.prefix_sets.PrefixSet()
+    prefix_set.prefix_set_name = "PREFIX-SET1"
+    prefix = prefix_set.Prefix()
+    prefix.ip_prefix = "10.0.0.0/16"
+    prefix.masklength_range = "24..32"
+    prefix_set.prefix.append(prefix)
+    prefix = prefix_set.Prefix()
+    prefix.ip_prefix = "172.0.0.0/8"
+    prefix.masklength_range = "16..32"
+    prefix_set.prefix.append(prefix)
+    routing_policy.defined_sets.prefix_sets.prefix_set.append(prefix_set)
 
     # configure community set
     bgp_defined_sets = routing_policy.defined_sets.bgp_defined_sets
     community_set = bgp_defined_sets.community_sets.CommunitySet()
-    community_set.community_set_name = "COMMUNITY-SET1"
-    community_set.community_member.append("ios-regex '^65172:17...$'")
-    community_set.community_member.append("65172:16001")
+    community_set.community_set_name = "COMMUNITY-SET2"
+    community_set.community_member.append("65172:17001")
     bgp_defined_sets.community_sets.community_set.append(community_set)
 
     # configure policy definition
     policy_definition = routing_policy.policy_definitions.PolicyDefinition()
-    policy_definition.name = "POLICY2"
-    # community-set statement
+    policy_definition.name = "POLICY3"
+    # prefix-set statement
     statement = policy_definition.statements.Statement()
-    statement.name = "community-set1"
-    bgp_conditions = statement.conditions.bgp_conditions
-    match_community_set = bgp_conditions.MatchCommunitySet()
-    match_community_set.community_set = "COMMUNITY-SET1"
-    match_set_options = oc_routing_policy.MatchSetOptionsTypeEnum.ALL
-    match_community_set.match_set_options = match_set_options
-    bgp_conditions.match_community_set = match_community_set
-    statement.actions.accept_route = Empty()
-    policy_definition.statements.statement.append(statement)
-    # as-path-set statement
-    statement = policy_definition.statements.Statement()
-    statement.name = "as-path-set1"
-    bgp_conditions = statement.conditions.bgp_conditions
-    match_as_path_set = bgp_conditions.MatchAsPathSet()
-    match_as_path_set.as_path_set = "AS-PATH-SET1"
-    match_set_options = oc_routing_policy.MatchSetOptionsTypeEnum.ANY
-    match_as_path_set.match_set_options = match_set_options
-    bgp_conditions.match_as_path_set = match_as_path_set
-    statement.actions.bgp_actions.set_local_pref = 50
+    statement.name = "prefix-set1"
+    match_prefix_set = statement.conditions.MatchPrefixSet()
+    match_prefix_set.prefix_set = "PREFIX-SET1"
+    match_set_options = oc_routing_policy.MatchSetOptionsRestrictedTypeEnum.ANY
+    match_prefix_set.match_set_options = match_set_options
+    statement.conditions.match_prefix_set = match_prefix_set
+    statement.actions.bgp_actions.set_local_pref = 1000
+    set_community = statement.actions.bgp_actions.SetCommunity()
+    set_community.community_set_ref = "COMMUNITY-SET2"
+    statement.actions.bgp_actions.set_community = set_community
     statement.actions.accept_route = Empty()
     policy_definition.statements.statement.append(statement)
     # reject statement
@@ -119,10 +116,12 @@ if __name__ == "__main__":
     # create CRUD service
     crud = CRUDService()
 
-    routing_policy = oc_routing_policy.RoutingPolicy()  # create config object
+    routing_policy = oc_routing_policy.RoutingPolicy()  # create object
     config_routing_policy(routing_policy)  # add object configuration
 
-    crud.create(provider, routing_policy)  # create object on NETCONF device
+    # create configuration on NETCONF device
+    crud.create(provider, routing_policy)
+
     provider.close()
     exit()
 # End of script

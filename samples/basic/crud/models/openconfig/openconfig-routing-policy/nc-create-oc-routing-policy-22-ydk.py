@@ -16,9 +16,9 @@
 #
 
 """
-Delete all config data for model openconfig-routing-policy.
+Create configuration for model openconfig-routing-policy.
 
-usage: nc-delete-config-routing-policy-10-ydk.py [-h] [-v] device
+usage: nc-create-oc-routing-policy-22-ydk.py [-h] [-v] device
 
 positional arguments:
   device         NETCONF device (ssh://user:password@host:port)
@@ -33,8 +33,22 @@ from urlparse import urlparse
 
 from ydk.services import CRUDService
 from ydk.providers import NetconfServiceProvider
-from ydk.models.routing import routing_policy as oc_routing_policy
+from ydk.models.openconfig import openconfig_routing_policy \
+    as oc_routing_policy
+from ydk.types import Empty
 import logging
+
+
+def config_routing_policy(routing_policy):
+    """Add config data to routing_policy object."""
+    # configure routing policy
+    policy_definition = routing_policy.policy_definitions.PolicyDefinition()
+    policy_definition.name = "POLICY1"
+    statement = policy_definition.statements.Statement()
+    statement.name = "accept route"
+    statement.actions.accept_route = Empty()
+    policy_definition.statements.statement.append(statement)
+    routing_policy.policy_definitions.policy_definition.append(policy_definition)
 
 
 if __name__ == "__main__":
@@ -66,8 +80,12 @@ if __name__ == "__main__":
     # create CRUD service
     crud = CRUDService()
 
-    routing_policy = oc_routing_policy.RoutingPolicy()  # create config object
-    crud.delete(provider, routing_policy)  # delete object on NETCONF device
+    routing_policy = oc_routing_policy.RoutingPolicy()  # create object
+    config_routing_policy(routing_policy)  # add object configuration
+
+    # create configuration on NETCONF device
+    crud.create(provider, routing_policy)
+
     provider.close()
     exit()
 # End of script

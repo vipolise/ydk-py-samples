@@ -18,7 +18,7 @@
 """
 Delete all config data for model openconfig-routing-policy.
 
-usage: nc-delete-config-routing-policy-10-ydk.py [-h] [-v] device
+usage: nc-delete-oc-routing-policy-20-ydk.py [-h] [-v] device
 
 positional arguments:
   device         NETCONF device (ssh://user:password@host:port)
@@ -33,7 +33,8 @@ from urlparse import urlparse
 
 from ydk.services import CRUDService
 from ydk.providers import NetconfServiceProvider
-from ydk.models.routing import routing_policy as oc_routing_policy
+from ydk.models.openconfig import openconfig_routing_policy \
+    as oc_routing_policy
 import logging
 
 
@@ -66,8 +67,10 @@ if __name__ == "__main__":
     # create CRUD service
     crud = CRUDService()
 
-    routing_policy = oc_routing_policy.RoutingPolicy()  # create config object
-    # crud.delete(provider, routing_policy)  # delete object on NETCONF device
+    routing_policy = oc_routing_policy.RoutingPolicy()  # create object
+    # delete configuration on NETCONF device
+    crud.delete(provider, routing_policy)
+
     provider.close()
     exit()
 # End of script

@@ -16,9 +16,9 @@
 #
 
 """
-Update config for model openconfig-routing-policy.
+Read all data for model openconfig-routing-policy.
 
-usage: nc-update-config-routing-policy-10-ydk.py [-h] [-v] device
+usage: nc-read-oc-routing-policy-10-ydk.py [-h] [-v] device
 
 positional arguments:
   device         NETCONF device (ssh://user:password@host:port)
@@ -33,12 +33,13 @@ from urlparse import urlparse
 
 from ydk.services import CRUDService
 from ydk.providers import NetconfServiceProvider
-from ydk.models.routing import routing_policy as oc_routing_policy
+from ydk.models.openconfig import openconfig_routing_policy \
+    as oc_routing_policy
 import logging
 
 
-def config_routing_policy(routing_policy):
-    """Add config data to routing_policy object."""
+def process_routing_policy(routing_policy):
+    """Process data in routing_policy object."""
     pass
 
 
@@ -71,10 +72,12 @@ if __name__ == "__main__":
     # create CRUD service
     crud = CRUDService()
 
-    routing_policy = oc_routing_policy.RoutingPolicy()  # create config object
-    config_routing_policy(routing_policy)  # add object configuration
+    routing_policy = oc_routing_policy.RoutingPolicy()  # create object
 
-    # crud.update(provider, routing_policy)  # update object on NETCONF device
+    # read data from NETCONF device
+    # routing_policy = crud.read(provider, routing_policy)
+    process_routing_policy(routing_policy)  # process object data
+
     provider.close()
     exit()
 # End of script
