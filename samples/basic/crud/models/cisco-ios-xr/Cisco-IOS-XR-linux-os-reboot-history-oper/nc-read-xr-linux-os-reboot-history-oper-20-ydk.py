@@ -18,7 +18,7 @@
 """
 Read all data for model Cisco-IOS-XR-linux-os-reboot-history-oper.
 
-usage: nc-read-oper-linux-os-reboot-history-20-ydk.py [-h] [-v] device
+usage: nc-read-xr-linux-os-reboot-history-oper-20-ydk.py [-h] [-v] device
 
 positional arguments:
   device         NETCONF device (ssh://user:password@host:port)
@@ -33,7 +33,7 @@ from urlparse import urlparse
 
 from ydk.services import CRUDService
 from ydk.providers import NetconfServiceProvider
-from ydk.models.linux import Cisco_IOS_XR_linux_os_reboot_history_oper \
+from ydk.models.cisco_ios_xr import Cisco_IOS_XR_linux_os_reboot_history_oper \
     as xr_linux_os_reboot_history_oper
 import textwrap
 import logging
@@ -101,9 +101,10 @@ if __name__ == "__main__":
     # create CRUD service
     crud = CRUDService()
 
-    # create oper object
-    reboot_history = xr_linux_os_reboot_history_oper.RebootHistory()
-    reboot_history = crud.read(provider, reboot_history)  # read from device
+    reboot_history = xr_linux_os_reboot_history_oper.RebootHistory()  # create object
+
+    # read data from NETCONF device
+    reboot_history = crud.read(provider, reboot_history)
     print(process_reboot_history(reboot_history))  # process object data
 
     provider.close()
