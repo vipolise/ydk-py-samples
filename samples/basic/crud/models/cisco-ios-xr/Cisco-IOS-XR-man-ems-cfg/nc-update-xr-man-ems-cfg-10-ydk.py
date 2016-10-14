@@ -16,9 +16,9 @@
 #
 
 """
-Create config for model Cisco-IOS-XR-man-ems-cfg.
+Update configuration for model Cisco-IOS-XR-man-ems-cfg.
 
-usage: nc-create-config-man-ems-24-ydk.py [-h] [-v] device
+usage: nc-update-xr-man-ems-cfg-10-ydk.py [-h] [-v] device
 
 positional arguments:
   device         NETCONF device (ssh://user:password@host:port)
@@ -33,17 +33,14 @@ from urlparse import urlparse
 
 from ydk.services import CRUDService
 from ydk.providers import NetconfServiceProvider
-from ydk.models.man import Cisco_IOS_XR_man_ems_cfg as xr_man_ems_cfg
-from ydk.types import Empty
+from ydk.models.cisco_ios_xr import Cisco_IOS_XR_man_ems_cfg \
+    as xr_man_ems_cfg
 import logging
 
 
 def config_grpc(grpc):
     """Add config data to grpc object."""
-    grpc.enable = Empty()
-    grpc.max_request_per_user = 8
-    grpc.max_request_total = 32
-    grpc.tls.enable = Empty()
+    pass
 
 
 if __name__ == "__main__":
@@ -75,10 +72,12 @@ if __name__ == "__main__":
     # create CRUD service
     crud = CRUDService()
 
-    grpc = xr_man_ems_cfg.Grpc()  # create config object
+    grpc = xr_man_ems_cfg.Grpc()  # create object
     config_grpc(grpc)  # add object configuration
 
-    crud.create(provider, grpc)  # create object on NETCONF device
+    # update configuration on NETCONF device
+    # crud.update(provider, grpc)
+
     provider.close()
     exit()
 # End of script

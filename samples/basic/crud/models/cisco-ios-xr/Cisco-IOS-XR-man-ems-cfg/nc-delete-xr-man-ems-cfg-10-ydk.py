@@ -18,7 +18,7 @@
 """
 Delete all config data for model Cisco-IOS-XR-man-ems-cfg.
 
-usage: nc-delete-config-man-ems-20-ydk.py [-h] [-v] device
+usage: nc-delete-xr-man-ems-cfg-10-ydk.py [-h] [-v] device
 
 positional arguments:
   device         NETCONF device (ssh://user:password@host:port)
@@ -33,7 +33,8 @@ from urlparse import urlparse
 
 from ydk.services import CRUDService
 from ydk.providers import NetconfServiceProvider
-from ydk.models.man import Cisco_IOS_XR_man_ems_cfg as xr_man_ems_cfg
+from ydk.models.cisco_ios_xr import Cisco_IOS_XR_man_ems_cfg \
+    as xr_man_ems_cfg
 import logging
 
 
@@ -66,8 +67,10 @@ if __name__ == "__main__":
     # create CRUD service
     crud = CRUDService()
 
-    grpc = xr_man_ems_cfg.Grpc()  # create config object
-    crud.delete(provider, grpc)  # delete object on NETCONF device
+    grpc = xr_man_ems_cfg.Grpc()  # create object
+    # delete configuration on NETCONF device
+    # crud.delete(provider, grpc)
+
     provider.close()
     exit()
 # End of script

@@ -16,9 +16,9 @@
 #
 
 """
-Create config for model Cisco-IOS-XR-man-ems-cfg.
+Delete all config data for model Cisco-IOS-XR-man-ems-cfg.
 
-usage: nc-create-config-man-ems-21-ydk.py [-h] [-v] device
+usage: nc-delete-xr-man-ems-cfg-20-ydk.py [-h] [-v] device
 
 positional arguments:
   device         NETCONF device (ssh://user:password@host:port)
@@ -33,15 +33,9 @@ from urlparse import urlparse
 
 from ydk.services import CRUDService
 from ydk.providers import NetconfServiceProvider
-from ydk.models.man import Cisco_IOS_XR_man_ems_cfg as xr_man_ems_cfg
-from ydk.types import Empty
+from ydk.models.cisco_ios_xr import Cisco_IOS_XR_man_ems_cfg \
+    as xr_man_ems_cfg
 import logging
-
-
-def config_grpc(grpc):
-    """Add config data to grpc object."""
-    grpc.enable = Empty()
-    grpc.address_family = "ipv6"
 
 
 if __name__ == "__main__":
@@ -73,10 +67,10 @@ if __name__ == "__main__":
     # create CRUD service
     crud = CRUDService()
 
-    grpc = xr_man_ems_cfg.Grpc()  # create config object
-    config_grpc(grpc)  # add object configuration
+    grpc = xr_man_ems_cfg.Grpc()  # create object
+    # delete configuration on NETCONF device
+    crud.delete(provider, grpc)
 
-    crud.create(provider, grpc)  # create object on NETCONF device
     provider.close()
     exit()
 # End of script

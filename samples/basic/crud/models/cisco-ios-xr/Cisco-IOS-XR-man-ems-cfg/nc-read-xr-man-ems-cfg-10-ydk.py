@@ -16,9 +16,9 @@
 #
 
 """
-Create config for model Cisco-IOS-XR-man-ems-cfg.
+Read all data for model Cisco-IOS-XR-man-ems-cfg.
 
-usage: nc-create-config-man-ems-10-ydk.py [-h] [-v] device
+usage: nc-read-xr-man-ems-cfg-10-ydk.py [-h] [-v] device
 
 positional arguments:
   device         NETCONF device (ssh://user:password@host:port)
@@ -33,12 +33,13 @@ from urlparse import urlparse
 
 from ydk.services import CRUDService
 from ydk.providers import NetconfServiceProvider
-from ydk.models.man import Cisco_IOS_XR_man_ems_cfg as xr_man_ems_cfg
+from ydk.models.cisco_ios_xr import Cisco_IOS_XR_man_ems_cfg \
+    as xr_man_ems_cfg
 import logging
 
 
-def config_grpc(grpc):
-    """Add config data to grpc object."""
+def process_grpc(grpc):
+    """Process data in grpc object."""
     pass
 
 
@@ -71,10 +72,12 @@ if __name__ == "__main__":
     # create CRUD service
     crud = CRUDService()
 
-    grpc = xr_man_ems_cfg.Grpc()  # create config object
-    config_grpc(grpc)  # add object configuration
+    grpc = xr_man_ems_cfg.Grpc()  # create object
 
-    # crud.create(provider, grpc)  # create object on NETCONF device
+    # read data from NETCONF device
+    # grpc = crud.read(provider, grpc)
+    process_grpc(grpc)  # process object data
+
     provider.close()
     exit()
 # End of script
