@@ -18,7 +18,7 @@
 """
 Read all data for model Cisco-IOS-XR-shellutil-filesystem-oper.
 
-usage: nc-read-oper-shellutil-filesystem-20-ydk.py [-h] [-v] device
+usage: nc-read-xr-shellutil-filesystem-oper-20-ydk.py [-h] [-v] device
 
 positional arguments:
   device         NETCONF device (ssh://user:password@host:port)
@@ -33,7 +33,7 @@ from urlparse import urlparse
 
 from ydk.services import CRUDService
 from ydk.providers import NetconfServiceProvider
-from ydk.models.shellutil import Cisco_IOS_XR_shellutil_filesystem_oper \
+from ydk.models.cisco_ios_xr import Cisco_IOS_XR_shellutil_filesystem_oper \
     as xr_shellutil_filesystem_oper
 import textwrap
 import logging
@@ -102,7 +102,9 @@ if __name__ == "__main__":
     crud = CRUDService()
 
     file_system = xr_shellutil_filesystem_oper.FileSystem()  # create object
-    file_system = crud.read(provider, file_system)  # read object from device
+
+    # read data from NETCONF device
+    file_system = crud.read(provider, file_system)
     print(process_file_system(file_system))  # process object data
 
     provider.close()
