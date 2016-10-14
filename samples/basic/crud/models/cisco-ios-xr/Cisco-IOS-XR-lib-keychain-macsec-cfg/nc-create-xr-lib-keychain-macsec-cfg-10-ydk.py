@@ -16,9 +16,9 @@
 #
 
 """
-Delete all config data for model Cisco-IOS-XR-lib-keychain-macsec-cfg.
+Create configuration for model Cisco-IOS-XR-lib-keychain-macsec-cfg.
 
-usage: nc-delete-config-lib-keychain-macsec-10-ydk.py [-h] [-v] device
+usage: nc-create-xr-lib-keychain-macsec-cfg-10-ydk.py [-h] [-v] device
 
 positional arguments:
   device         NETCONF device (ssh://user:password@host:port)
@@ -33,8 +33,14 @@ from urlparse import urlparse
 
 from ydk.services import CRUDService
 from ydk.providers import NetconfServiceProvider
-from ydk.models.lib import Cisco_IOS_XR_lib_keychain_macsec_cfg as xr_lib_keychain_macsec_cfg
+from ydk.models.cisco_ios_xr import Cisco_IOS_XR_lib_keychain_macsec_cfg \
+    as xr_lib_keychain_macsec_cfg
 import logging
+
+
+def config_mac_sec_keychains(mac_sec_keychains):
+    """Add config data to mac_sec_keychains object."""
+    pass
 
 
 if __name__ == "__main__":
@@ -66,8 +72,12 @@ if __name__ == "__main__":
     # create CRUD service
     crud = CRUDService()
 
-    mac_sec_keychains = xr_lib_keychain_macsec_cfg.MacSecKeychains()  # create config object
-    # crud.delete(provider, mac_sec_keychains)  # delete object on NETCONF device
+    mac_sec_keychains = xr_lib_keychain_macsec_cfg.MacSecKeychains()  # create object
+    config_mac_sec_keychains(mac_sec_keychains)  # add object configuration
+
+    # create configuration on NETCONF device
+    # crud.create(provider, mac_sec_keychains)
+
     provider.close()
     exit()
 # End of script

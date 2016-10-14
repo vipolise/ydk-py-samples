@@ -18,7 +18,7 @@
 """
 Read all data for model Cisco-IOS-XR-lib-keychain-macsec-cfg.
 
-usage: nc-read-config-lib-keychain-macsec-10-ydk.py [-h] [-v] device
+usage: nc-read-xr-lib-keychain-macsec-cfg-10-ydk.py [-h] [-v] device
 
 positional arguments:
   device         NETCONF device (ssh://user:password@host:port)
@@ -33,7 +33,8 @@ from urlparse import urlparse
 
 from ydk.services import CRUDService
 from ydk.providers import NetconfServiceProvider
-from ydk.models.lib import Cisco_IOS_XR_lib_keychain_macsec_cfg as xr_lib_keychain_macsec_cfg
+from ydk.models.cisco_ios_xr import Cisco_IOS_XR_lib_keychain_macsec_cfg \
+    as xr_lib_keychain_macsec_cfg
 import logging
 
 
@@ -71,8 +72,10 @@ if __name__ == "__main__":
     # create CRUD service
     crud = CRUDService()
 
-    mac_sec_keychains = xr_lib_keychain_macsec_cfg.MacSecKeychains()  # create config object
-    # mac_sec_keychains = crud.read(provider, mac_sec_keychains)  # read object from NETCONF device
+    mac_sec_keychains = xr_lib_keychain_macsec_cfg.MacSecKeychains()  # create object
+
+    # read data from NETCONF device
+    # mac_sec_keychains = crud.read(provider, mac_sec_keychains)
     process_mac_sec_keychains(mac_sec_keychains)  # process object data
 
     provider.close()
