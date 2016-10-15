@@ -16,9 +16,9 @@
 #
 
 """
-Read all data for model Cisco-IOS-XR-policy-repository-cfg.
+Create configuration for model Cisco-IOS-XR-policy-repository-cfg.
 
-usage: nc-read-config-policy-repository-10-ydk.py [-h] [-v] device
+usage: nc-create-xr-policy-repository-cfg-28-ydk.py [-h] [-v] device
 
 positional arguments:
   device         NETCONF device (ssh://user:password@host:port)
@@ -33,13 +33,26 @@ from urlparse import urlparse
 
 from ydk.services import CRUDService
 from ydk.providers import NetconfServiceProvider
-from ydk.models.policy import Cisco_IOS_XR_policy_repository_cfg as xr_policy_repository_cfg
+from ydk.models.cisco_ios_xr import Cisco_IOS_XR_policy_repository_cfg \
+    as xr_policy_repository_cfg
 import logging
 
 
-def process_routing_policy(routing_policy):
-    """Process data in routing_policy object."""
-    pass
+def config_routing_policy(routing_policy):
+    """Add config data to routing_policy object."""
+    route_policy_name = "POLICY4"
+    rpl_route_policy = """
+        route-policy POLICY4
+          #statement-name next-hop-self
+          set next-hop self
+          done
+        end-policy
+        """
+    # configure RPL policy
+    route_policy = routing_policy.route_policies.RoutePolicy()
+    route_policy.route_policy_name = route_policy_name
+    route_policy.rpl_route_policy = rpl_route_policy
+    routing_policy.route_policies.route_policy.append(route_policy)
 
 
 if __name__ == "__main__":
@@ -71,9 +84,11 @@ if __name__ == "__main__":
     # create CRUD service
     crud = CRUDService()
 
-    routing_policy = xr_policy_repository_cfg.RoutingPolicy()  # create config object
-    # routing_policy = crud.read(provider, routing_policy)  # read object from NETCONF device
-    process_routing_policy(routing_policy)  # process object data
+    routing_policy = xr_policy_repository_cfg.RoutingPolicy()  # create object
+    config_routing_policy(routing_policy)  # add object configuration
+
+    # create configuration on NETCONF device
+    crud.create(provider, routing_policy)
 
     provider.close()
     exit()

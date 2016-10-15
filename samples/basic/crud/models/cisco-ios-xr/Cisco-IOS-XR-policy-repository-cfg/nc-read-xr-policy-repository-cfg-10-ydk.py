@@ -16,9 +16,9 @@
 #
 
 """
-Create config for model Cisco-IOS-XR-policy-repository-cfg.
+Read all data for model Cisco-IOS-XR-policy-repository-cfg.
 
-usage: nc-create-config-policy-repository-20-ydk.py [-h] [-v] device
+usage: nc-read-xr-policy-repository-cfg-10-ydk.py [-h] [-v] device
 
 positional arguments:
   device         NETCONF device (ssh://user:password@host:port)
@@ -33,25 +33,14 @@ from urlparse import urlparse
 
 from ydk.services import CRUDService
 from ydk.providers import NetconfServiceProvider
-from ydk.models.policy import Cisco_IOS_XR_policy_repository_cfg \
+from ydk.models.cisco_ios_xr import Cisco_IOS_XR_policy_repository_cfg \
     as xr_policy_repository_cfg
 import logging
 
 
-def config_routing_policy(routing_policy):
-    """Add config data to routing_policy object."""
-    route_policy_name = "PASS-ALL"
-    rpl_route_policy = """
-        route-policy PASS-ALL
-          #statement-name pass-all
-          pass
-        end-policy
-        """
-    # configure RPL policy
-    route_policy = routing_policy.route_policies.RoutePolicy()
-    route_policy.route_policy_name = route_policy_name
-    route_policy.rpl_route_policy = rpl_route_policy
-    routing_policy.route_policies.route_policy.append(route_policy)
+def process_routing_policy(routing_policy):
+    """Process data in routing_policy object."""
+    pass
 
 
 if __name__ == "__main__":
@@ -84,9 +73,11 @@ if __name__ == "__main__":
     crud = CRUDService()
 
     routing_policy = xr_policy_repository_cfg.RoutingPolicy()  # create object
-    config_routing_policy(routing_policy)  # add object configuration
 
-    crud.create(provider, routing_policy)  # create object on NETCONF device
+    # read data from NETCONF device
+    # routing_policy = crud.read(provider, routing_policy)
+    process_routing_policy(routing_policy)  # process object data
+
     provider.close()
     exit()
 # End of script

@@ -16,9 +16,9 @@
 #
 
 """
-Create config for model Cisco-IOS-XR-policy-repository-cfg.
+Create configuration for model Cisco-IOS-XR-policy-repository-cfg.
 
-usage: nc-create-config-policy-repository-28-ydk.py [-h] [-v] device
+usage: nc-create-xr-policy-repository-cfg-26-ydk.py [-h] [-v] device
 
 positional arguments:
   device         NETCONF device (ssh://user:password@host:port)
@@ -33,21 +33,51 @@ from urlparse import urlparse
 
 from ydk.services import CRUDService
 from ydk.providers import NetconfServiceProvider
-from ydk.models.policy import Cisco_IOS_XR_policy_repository_cfg \
+from ydk.models.cisco_ios_xr import Cisco_IOS_XR_policy_repository_cfg \
     as xr_policy_repository_cfg
 import logging
 
 
 def config_routing_policy(routing_policy):
     """Add config data to routing_policy object."""
-    route_policy_name = "POLICY4"
+    set_name = "PREFIX-SET1"
+    rpl_prefix_set = """
+        prefix-set PREFIX-SET1
+          10.0.0.0/16 ge 24 le 32,
+          172.0.0.0/8 ge 16 le 32
+        end-set
+        """
+    community_set_name = "COMMUNITY-SET2"
+    rpl_community_set = """
+        community-set COMMUNITY-SET2
+          65172:17001
+        end-set
+        """
+    route_policy_name = "POLICY3"
     rpl_route_policy = """
-        route-policy POLICY4
-          #statement-name next-hop-self
-          set next-hop self
-          done
+        route-policy POLICY3
+          #statement-name prefix-set1
+          if destination in PREFIX-SET1 then
+            set local-preference 1000
+            set community COMMUNITY-SET2
+            done
+          endif
+          #statement-name reject
+          drop
         end-policy
         """
+    # configure prefix set
+    prefix_set = routing_policy.sets.prefix_sets.PrefixSet()
+    prefix_set.set_name = set_name
+    prefix_set.rpl_prefix_set = rpl_prefix_set
+    routing_policy.sets.prefix_sets.prefix_set.append(prefix_set)
+
+    # configure community set
+    community_set = routing_policy.sets.community_sets.CommunitySet()
+    community_set.set_name = community_set_name
+    community_set.rpl_community_set = rpl_community_set
+    routing_policy.sets.community_sets.community_set.append(community_set)
+
     # configure RPL policy
     route_policy = routing_policy.route_policies.RoutePolicy()
     route_policy.route_policy_name = route_policy_name
@@ -87,7 +117,9 @@ if __name__ == "__main__":
     routing_policy = xr_policy_repository_cfg.RoutingPolicy()  # create object
     config_routing_policy(routing_policy)  # add object configuration
 
-    crud.create(provider, routing_policy)  # create object on NETCONF device
+    # create configuration on NETCONF device
+    crud.create(provider, routing_policy)
+
     provider.close()
     exit()
 # End of script
