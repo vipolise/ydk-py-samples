@@ -16,9 +16,9 @@
 #
 
 """
-Create config for model openconfig-mpls.
+Create configuration for model openconfig-mpls.
 
-usage: nc-create-config-mpls-34-ydk.py [-h] [-v] device
+usage: nc-create-oc-mpls-34-ydk.py [-h] [-v] device
 
 positional arguments:
   device         NETCONF device (ssh://user:password@host:port)
@@ -33,7 +33,8 @@ from urlparse import urlparse
 
 from ydk.services import CRUDService
 from ydk.providers import NetconfServiceProvider
-from ydk.models.openconfig import openconfig_mpls as oc_mpls
+from ydk.models.openconfig import openconfig_mpls \
+    as oc_mpls
 import logging
 
 
@@ -89,10 +90,12 @@ if __name__ == "__main__":
     # create CRUD service
     crud = CRUDService()
 
-    mpls = oc_mpls.Mpls()  # create config object
+    mpls = oc_mpls.Mpls()  # create object
     config_mpls(mpls)  # add object configuration
 
-    crud.create(provider, mpls)  # create object on NETCONF device
+    # create configuration on NETCONF device
+    crud.create(provider, mpls)
+
     provider.close()
     exit()
 # End of script

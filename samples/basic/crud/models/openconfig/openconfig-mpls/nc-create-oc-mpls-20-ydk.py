@@ -16,9 +16,9 @@
 #
 
 """
-Create config for model openconfig-mpls.
+Create configuration for model openconfig-mpls.
 
-usage: nc-create-config-mpls-32-ydk.py [-h] [-v] device
+usage: nc-create-oc-mpls-20-ydk.py [-h] [-v] device
 
 positional arguments:
   device         NETCONF device (ssh://user:password@host:port)
@@ -33,23 +33,29 @@ from urlparse import urlparse
 
 from ydk.services import CRUDService
 from ydk.providers import NetconfServiceProvider
-from ydk.models.openconfig import openconfig_mpls as oc_mpls
+from ydk.models.openconfig import openconfig_mpls \
+    as oc_mpls
 import logging
 
 
 def config_mpls(mpls):
     """Add config data to mpls object."""
-    # interface attributes gi0/0/0/0
-    interface = mpls.te_interface_attributes.Interface()
-    interface.name = "GigabitEthernet0/0/0/0"
-    interface.config.name = "GigabitEthernet0/0/0/0"
-    mpls.te_interface_attributes.interface.append(interface)
+    # signaling protocols interface gi0/0/0/0
+    rsvp_te = mpls.signaling_protocols.rsvp_te
+    interface = rsvp_te.interface_attributes.Interface()
+    interface.interface_name = "GigabitEthernet0/0/0/0"
+    interface.config.interface_name = "GigabitEthernet0/0/0/0"
+    interface.subscription.config.subscription = 100
+    rsvp_te.interface_attributes.interface.append(interface)
 
-    # interface attributes gi0/0/0/1
-    interface = mpls.te_interface_attributes.Interface()
-    interface.name = "GigabitEthernet0/0/0/1"
-    interface.config.name = "GigabitEthernet0/0/0/1"
-    mpls.te_interface_attributes.interface.append(interface)
+    # signaling protocols interface gi0/0/0/1
+    interface = rsvp_te.interface_attributes.Interface()
+    interface.interface_name = "GigabitEthernet0/0/0/1"
+    interface.config.interface_name = "GigabitEthernet0/0/0/1"
+    interface.subscription.config.subscription = 100
+    rsvp_te.interface_attributes.interface.append(interface)
+
+    mpls.signaling_protocols.rsvp_te = rsvp_te
 
 
 if __name__ == "__main__":
@@ -81,10 +87,12 @@ if __name__ == "__main__":
     # create CRUD service
     crud = CRUDService()
 
-    mpls = oc_mpls.Mpls()  # create config object
+    mpls = oc_mpls.Mpls()  # create object
     config_mpls(mpls)  # add object configuration
 
-    crud.create(provider, mpls)  # create object on NETCONF device
+    # create configuration on NETCONF device
+    crud.create(provider, mpls)
+
     provider.close()
     exit()
 # End of script

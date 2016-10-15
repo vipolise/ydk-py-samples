@@ -16,9 +16,9 @@
 #
 
 """
-Delete all config data for model openconfig-mpls.
+Create configuration for model openconfig-mpls.
 
-usage: nc-delete-config-mpls-30-ydk.py [-h] [-v] device
+usage: nc-create-oc-mpls-50-ydk.py [-h] [-v] device
 
 positional arguments:
   device         NETCONF device (ssh://user:password@host:port)
@@ -33,8 +33,31 @@ from urlparse import urlparse
 
 from ydk.services import CRUDService
 from ydk.providers import NetconfServiceProvider
-from ydk.models.openconfig import openconfig_mpls as oc_mpls
+from ydk.models.openconfig import openconfig_mpls \
+    as oc_mpls
+from ydk.models.openconfig import openconfig_mpls_types as oc_mpls_types
 import logging
+
+
+def config_mpls(mpls):
+    """Add config data to mpls object."""
+    # dynamic tunnel
+    tunnel = mpls.lsps.constrained_path.Tunnel()
+    tunnel.name = "LER1-LER2-t50"
+    tunnel.config.name = "LER1-LER2-t50"
+    tunnel.config.type = oc_mpls_types.P2PIdentity()
+    tunnel.type = oc_mpls_types.P2PIdentity()
+    p2p_primary_paths = tunnel.p2p_tunnel_attributes.P2PPrimaryPaths()
+    p2p_primary_paths.name = "DYNAMIC"
+    p2p_primary_paths.config.name = "DYNAMIC"
+    p2p_primary_paths.config.preference = 10
+    path_computation_method = oc_mpls.LocallyComputedIdentity()
+    p2p_primary_paths.config.path_computation_method = path_computation_method
+    tunnel.p2p_tunnel_attributes.p2p_primary_paths.append(p2p_primary_paths)
+    tunnel.p2p_tunnel_attributes.config.destination = "172.16.255.2"
+    tunnel.bandwidth.config.set_bandwidth = 100000
+
+    mpls.lsps.constrained_path.tunnel.append(tunnel)
 
 
 if __name__ == "__main__":
@@ -66,8 +89,12 @@ if __name__ == "__main__":
     # create CRUD service
     crud = CRUDService()
 
-    mpls = oc_mpls.Mpls()  # create config object
-    crud.delete(provider, mpls)  # delete object on NETCONF device
+    mpls = oc_mpls.Mpls()  # create object
+    config_mpls(mpls)  # add object configuration
+
+    # create configuration on NETCONF device
+    crud.create(provider, mpls)
+
     provider.close()
     exit()
 # End of script

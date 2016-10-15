@@ -1,6 +1,6 @@
 mpls traffic-eng
  named-tunnels
-  tunnel-te LER1-LER2-t20
+  tunnel-te LER1-LER2-t52
    path-option DYNAMIC
     preference 10
     computation dynamic

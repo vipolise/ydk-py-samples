@@ -16,9 +16,9 @@
 #
 
 """
-Create config for model openconfig-mpls.
+Create configuration for model openconfig-mpls.
 
-usage: nc-create-config-mpls-40-ydk.py [-h] [-v] device
+usage: nc-create-oc-mpls-32-ydk.py [-h] [-v] device
 
 positional arguments:
   device         NETCONF device (ssh://user:password@host:port)
@@ -33,34 +33,24 @@ from urlparse import urlparse
 
 from ydk.services import CRUDService
 from ydk.providers import NetconfServiceProvider
-from ydk.models.openconfig import openconfig_mpls as oc_mpls
+from ydk.models.openconfig import openconfig_mpls \
+    as oc_mpls
 import logging
 
 
 def config_mpls(mpls):
     """Add config data to mpls object."""
-    # constrained path
-    named_explicit_paths = mpls.lsps.constrained_path.NamedExplicitPaths()
-    named_explicit_paths.name = "LER1-LSR1-LER2"
-    named_explicit_paths.config.name = "LER1-LSR1-LER2"
+    # interface attributes gi0/0/0/0
+    interface = mpls.te_interface_attributes.Interface()
+    interface.name = "GigabitEthernet0/0/0/0"
+    interface.config.name = "GigabitEthernet0/0/0/0"
+    mpls.te_interface_attributes.interface.append(interface)
 
-    # strict hop
-    explicit_route_objects = named_explicit_paths.ExplicitRouteObjects()
-    explicit_route_objects.index = 10
-    explicit_route_objects.config.index = 10
-    explicit_route_objects.config.address = "172.16.1.1"
-    explicit_route_objects.config.hop_type = oc_mpls.MplsHopTypeEnum.STRICT
-    named_explicit_paths.explicit_route_objects.append(explicit_route_objects)
-
-    # strict hop
-    explicit_route_objects = named_explicit_paths.ExplicitRouteObjects()
-    explicit_route_objects.index = 20
-    explicit_route_objects.config.index = 20
-    explicit_route_objects.config.address = "172.16.1.5"
-    explicit_route_objects.config.hop_type = oc_mpls.MplsHopTypeEnum.STRICT
-    named_explicit_paths.explicit_route_objects.append(explicit_route_objects)
-
-    mpls.lsps.constrained_path.named_explicit_paths.append(named_explicit_paths)
+    # interface attributes gi0/0/0/1
+    interface = mpls.te_interface_attributes.Interface()
+    interface.name = "GigabitEthernet0/0/0/1"
+    interface.config.name = "GigabitEthernet0/0/0/1"
+    mpls.te_interface_attributes.interface.append(interface)
 
 
 if __name__ == "__main__":
@@ -92,10 +82,12 @@ if __name__ == "__main__":
     # create CRUD service
     crud = CRUDService()
 
-    mpls = oc_mpls.Mpls()  # create config object
+    mpls = oc_mpls.Mpls()  # create object
     config_mpls(mpls)  # add object configuration
 
-    crud.create(provider, mpls)  # create object on NETCONF device
+    # create configuration on NETCONF device
+    crud.create(provider, mpls)
+
     provider.close()
     exit()
 # End of script

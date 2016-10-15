@@ -18,7 +18,7 @@
 """
 Read all data for model openconfig-mpls.
 
-usage: nc-read-config-mpls-10-ydk.py [-h] [-v] device
+usage: nc-read-oc-mpls-10-ydk.py [-h] [-v] device
 
 positional arguments:
   device         NETCONF device (ssh://user:password@host:port)
@@ -33,7 +33,8 @@ from urlparse import urlparse
 
 from ydk.services import CRUDService
 from ydk.providers import NetconfServiceProvider
-from ydk.models.openconfig import openconfig_mpls as oc_mpls
+from ydk.models.openconfig import openconfig_mpls \
+    as oc_mpls
 import logging
 
 
@@ -71,8 +72,10 @@ if __name__ == "__main__":
     # create CRUD service
     crud = CRUDService()
 
-    mpls = oc_mpls.Mpls()  # create config object
-    # mpls = crud.read(provider, mpls)  # read object from NETCONF device
+    mpls = oc_mpls.Mpls()  # create object
+
+    # read data from NETCONF device
+    # mpls = crud.read(provider, mpls)
     process_mpls(mpls)  # process object data
 
     provider.close()

@@ -16,9 +16,9 @@
 #
 
 """
-Delete all config data for model openconfig-mpls.
+Create configuration for model openconfig-mpls.
 
-usage: nc-delete-config-mpls-10-ydk.py [-h] [-v] device
+usage: nc-create-oc-mpls-10-ydk.py [-h] [-v] device
 
 positional arguments:
   device         NETCONF device (ssh://user:password@host:port)
@@ -33,8 +33,14 @@ from urlparse import urlparse
 
 from ydk.services import CRUDService
 from ydk.providers import NetconfServiceProvider
-from ydk.models.openconfig import openconfig_mpls as oc_mpls
+from ydk.models.openconfig import openconfig_mpls \
+    as oc_mpls
 import logging
+
+
+def config_mpls(mpls):
+    """Add config data to mpls object."""
+    pass
 
 
 if __name__ == "__main__":
@@ -66,8 +72,12 @@ if __name__ == "__main__":
     # create CRUD service
     crud = CRUDService()
 
-    mpls = oc_mpls.Mpls()  # create config object
-    # crud.delete(provider, mpls)  # delete object on NETCONF device
+    mpls = oc_mpls.Mpls()  # create object
+    config_mpls(mpls)  # add object configuration
+
+    # create configuration on NETCONF device
+    # crud.create(provider, mpls)
+
     provider.close()
     exit()
 # End of script
