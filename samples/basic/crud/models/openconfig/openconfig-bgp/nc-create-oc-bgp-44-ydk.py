@@ -35,6 +35,7 @@ from ydk.services import CRUDService
 from ydk.providers import NetconfServiceProvider
 from ydk.models.openconfig import openconfig_bgp \
     as oc_bgp
+from ydk.models.openconfig import openconfig_bgp_types as oc_bgp_types
 import logging
 
 
@@ -43,8 +44,8 @@ def config_bgp(bgp):
     # global configuration
     bgp.global_.config.as_ = 65001
     afi_safi = bgp.global_.afi_safis.AfiSafi()
-    afi_safi.afi_safi_name = "ipv4-unicast"
-    afi_safi.config.afi_safi_name = "ipv4-unicast"
+    afi_safi.afi_safi_name = oc_bgp_types.Ipv4UnicastIdentity
+    afi_safi.config.afi_safi_name = oc_bgp_types.Ipv4UnicastIdentity
     afi_safi.config.enabled = True
     bgp.global_.afi_safis.afi_safi.append(afi_safi)
 
@@ -55,8 +56,8 @@ def config_bgp(bgp):
     peer_group.config.peer_as = 65002
     peer_group.transport.config.local_address = "Loopback0"
     afi_safi = peer_group.afi_safis.AfiSafi()
-    afi_safi.afi_safi_name = "ipv4-unicast"
-    afi_safi.config.afi_safi_name = "ipv4-unicast"
+    afi_safi.afi_safi_name = oc_bgp_types.Ipv4UnicastIdentity
+    afi_safi.config.afi_safi_name = oc_bgp_types.Ipv4UnicastIdentity
     afi_safi.config.enabled = True
     afi_safi.apply_policy.config.import_policy.append("POLICY3")
     afi_safi.apply_policy.config.export_policy.append("POLICY1")
