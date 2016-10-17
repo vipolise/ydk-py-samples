@@ -51,10 +51,13 @@ $
 This repository include a large number of basic sample apps. They focus on a single model and have no or minimal programming logic (conditionals, loops, etc).  They should be your starting point if you don't have strong experience with models or with programming.  They are grouped by service and model. Version 0.5.0 of the YDK Python (YDK-Py) package is required to run the applications.
 
 ## Installation
-The sample apps do not require any special installation, but they do require that YDK-Py is installed
+The sample apps do not require any special installation, but they do require that YDK-Py is installed including the Cisco IOS XR, OpenConfig and IETF model bundles:
 ```
 $ pip list | grep ydk
 ydk (0.5.0)
+ydk-models-cisco-ios-xr (0.1.0)
+ydk-models-ietf (0.1.0)
+ydk-models-openconfig (0.1.0)
 $
 ```
 
