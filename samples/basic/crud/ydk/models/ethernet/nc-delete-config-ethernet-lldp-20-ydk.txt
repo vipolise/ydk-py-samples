@@ -1,5 +1,0 @@
-lldp
- no timer 15
-!
-no lldp
-end

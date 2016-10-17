@@ -1,8 +1,0 @@
-Node: RP/0/RP0/CPU0
-File Systems:
-
-    Size(b)     Free(b)        Type  Flags  Prefixes
-  1015308288   773820416    harddisk     rw  harddisk:
-           0           0     network     rw  ftp:
-  1036963840  1032732672  flash-disk     rw  disk0:
-           0           0     network     rw  tftp:

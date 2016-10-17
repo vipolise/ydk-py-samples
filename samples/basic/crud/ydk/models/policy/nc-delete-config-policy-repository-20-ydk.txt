@@ -1,2 +1,0 @@
-no route-policy PASS-ALL
-end

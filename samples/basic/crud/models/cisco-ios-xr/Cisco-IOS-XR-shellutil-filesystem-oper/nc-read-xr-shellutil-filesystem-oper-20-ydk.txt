@@ -1,0 +1,9 @@
+Node: RP/0/RP0/CPU0
+File Systems:
+
+    Size(b)     Free(b)        Type  Flags  Prefixes
+   497318912   486045696       flash     rw  /misc/config
+  1514586112  1497083904    harddisk     rw  harddisk:
+  1036963840   807485440  flash-disk     rw  disk0:
+           0           0     network     rw  ftp:
+           0           0     network     rw  tftp:
