@@ -16,9 +16,9 @@
 #
 
 """
-Create config for model Cisco-IOS-XR-infra-infra-clock-linux-cfg.
+Read all data for model Cisco-IOS-XR-infra-infra-clock-linux-cfg.
 
-usage: nc-create-config-infra-infra-clock-linux-10-ydk.py [-h] [-v] device
+usage: nc-read-xr-infra-infra-clock-linux-cfg-10-ydk.py [-h] [-v] device
 
 positional arguments:
   device         NETCONF device (ssh://user:password@host:port)
@@ -33,12 +33,13 @@ from urlparse import urlparse
 
 from ydk.services import CRUDService
 from ydk.providers import NetconfServiceProvider
-from ydk.models.infra import Cisco_IOS_XR_infra_infra_clock_linux_cfg as xr_infra_infra_clock_linux_cfg
+from ydk.models.cisco_ios_xr import Cisco_IOS_XR_infra_infra_clock_linux_cfg \
+    as xr_infra_infra_clock_linux_cfg
 import logging
 
 
-def config_clock(clock):
-    """Add config data to clock object."""
+def process_clock(clock):
+    """Process data in clock object."""
     pass
 
 
@@ -71,10 +72,12 @@ if __name__ == "__main__":
     # create CRUD service
     crud = CRUDService()
 
-    clock = xr_infra_infra_clock_linux_cfg.Clock()  # create config object
-    config_clock(clock)  # add object configuration
+    clock = xr_infra_infra_clock_linux_cfg.Clock()  # create object
 
-    # crud.create(provider, clock)  # create object on NETCONF device
+    # read data from NETCONF device
+    # clock = crud.read(provider, clock)
+    process_clock(clock)  # process object data
+
     provider.close()
     exit()
 # End of script

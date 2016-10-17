@@ -1,3 +1,0 @@
-no clock timezone PST PST8PDT
-end
-

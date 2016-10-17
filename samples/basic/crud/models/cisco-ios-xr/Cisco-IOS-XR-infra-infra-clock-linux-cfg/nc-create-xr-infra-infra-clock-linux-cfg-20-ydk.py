@@ -16,9 +16,9 @@
 #
 
 """
-Create config for model Cisco-IOS-XR-infra-infra-clock-linux-cfg.
+Create configuration for model Cisco-IOS-XR-infra-infra-clock-linux-cfg.
 
-usage: nc-create-config-infra-infra-clock-linux-24-ydk.py [-h] [-v] device
+usage: nc-create-xr-infra-infra-clock-linux-cfg-20-ydk.py [-h] [-v] device
 
 positional arguments:
   device         NETCONF device (ssh://user:password@host:port)
@@ -33,7 +33,7 @@ from urlparse import urlparse
 
 from ydk.services import CRUDService
 from ydk.providers import NetconfServiceProvider
-from ydk.models.infra import Cisco_IOS_XR_infra_infra_clock_linux_cfg \
+from ydk.models.cisco_ios_xr import Cisco_IOS_XR_infra_infra_clock_linux_cfg \
     as xr_infra_infra_clock_linux_cfg
 import logging
 
@@ -42,8 +42,8 @@ def config_clock(clock):
     """Add config data to clock object."""
     # time zone configuration
     time_zone = clock.TimeZone()
-    time_zone.time_zone_name = "CET"
-    time_zone.area_name = "CET"
+    time_zone.time_zone_name = "PST"
+    time_zone.area_name = "PST8PDT"
     clock.time_zone = time_zone
 
 
@@ -76,10 +76,12 @@ if __name__ == "__main__":
     # create CRUD service
     crud = CRUDService()
 
-    clock = xr_infra_infra_clock_linux_cfg.Clock()  # create config object
+    clock = xr_infra_infra_clock_linux_cfg.Clock()  # create object
     config_clock(clock)  # add object configuration
 
-    crud.create(provider, clock)  # create object on NETCONF device
+    # create configuration on NETCONF device
+    crud.create(provider, clock)
+
     provider.close()
     exit()
 # End of script
