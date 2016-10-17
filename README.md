@@ -8,7 +8,7 @@ The `hello-ydk.py` script illustrates a minimalistic app that prints the uptime 
 # import providers, services and models
 from ydk.services import CRUDService
 from ydk.providers import NetconfServiceProvider
-from ydk.models.shellutil import Cisco_IOS_XR_shellutil_oper \
+from ydk.models.cisco_ios_xr import Cisco_IOS_XR_shellutil_oper \
     as xr_shellutil_oper
 from datetime import timedelta
 
@@ -48,20 +48,23 @@ $
 ```
 
 ## Sample App Library
-This repository include a large number of basic sample apps. They focus on a single model and have no or minimal programming logic (conditionals, loops, etc).  They should be your starting point if you don't have strong experience with models or with programming.  They are grouped by service and model. Version 0.4.2 of the YDK Python (YDK-Py) package is required to run the applications.
+This repository include a large number of basic sample apps. They focus on a single model and have no or minimal programming logic (conditionals, loops, etc).  They should be your starting point if you don't have strong experience with models or with programming.  They are grouped by service and model. Version 0.5.0 of the YDK Python (YDK-Py) package is required to run the applications.
 
 ## Installation
 The sample apps do not require any special installation, but they do require that YDK-Py is installed
 ```
 $ pip list | grep ydk
-ydk (0.4.2)
+ydk (0.5.0)
 $
 ```
 
-If it is not installed, verify first that you have Python 2.7 (or later) installed:
+If it is not installed, verify first that you have Python 2.7 / 3.4 (or later) installed:
 ```
 $ python --version
 Python 2.7.6
+$
+$ python3 --version
+Python 3.5.2
 $
 ```
 [Download](https://github.com/CiscoDevNet/ydk-py/archive/master.zip) or clone the [YDK-Py repository](https://github.com/CiscoDevNet/ydk-py).  Then, follow the installation instructions for YDK-Py in its README file.
