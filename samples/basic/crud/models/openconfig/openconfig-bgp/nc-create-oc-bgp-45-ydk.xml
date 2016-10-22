@@ -1,0 +1,55 @@
+<bgp xmlns="http://openconfig.net/yang/bgp">
+  <global>
+    <afi-safis>
+      <afi-safi>
+        <afi-safi-name xmlns:idx="http://openconfig.net/yang/bgp-types">idx:IPV6-UNICAST</afi-safi-name>
+        <config>
+          <afi-safi-name xmlns:idx="http://openconfig.net/yang/bgp-types">idx:IPV6-UNICAST</afi-safi-name>
+          <enabled>true</enabled>
+        </config>
+      </afi-safi>
+    </afi-safis>
+    <config>
+      <as>65001</as>
+    </config>
+  </global>
+  <neighbors>
+    <neighbor>
+      <neighbor-address>2001:db8:e:1::1</neighbor-address>
+      <config>
+        <neighbor-address>2001:db8:e:1::1</neighbor-address>
+        <peer-group>EBGP</peer-group>
+      </config>
+    </neighbor>
+  </neighbors>
+  <peer-groups>
+    <peer-group>
+      <peer-group-name>EBGP</peer-group-name>
+      <afi-safis>
+        <afi-safi>
+          <afi-safi-name xmlns:idx="http://openconfig.net/yang/bgp-types">idx:IPV6-UNICAST</afi-safi-name>
+          <apply-policy>
+            <config>
+              <export-policy>POLICY1</export-policy>
+              <import-policy>POLICY3</import-policy>
+            </config>
+          </apply-policy>
+          <config>
+            <afi-safi-name xmlns:idx="http://openconfig.net/yang/bgp-types">idx:IPV6-UNICAST</afi-safi-name>
+            <enabled>true</enabled>
+          </config>
+        </afi-safi>
+      </afi-safis>
+      <config>
+        <peer-as>65002</peer-as>
+        <peer-group-name>EBGP</peer-group-name>
+      </config>
+      <transport>
+        <config>
+          <local-address>Loopback0</local-address>
+        </config>
+      </transport>
+    </peer-group>
+  </peer-groups>
+</bgp>
+
