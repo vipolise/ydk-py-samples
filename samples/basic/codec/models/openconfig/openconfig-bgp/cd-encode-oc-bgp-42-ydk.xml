@@ -1,0 +1,54 @@
+<bgp xmlns="http://openconfig.net/yang/bgp">
+  <global>
+    <afi-safis>
+      <afi-safi>
+        <afi-safi-name xmlns:idx="http://openconfig.net/yang/bgp-types">idx:IPV4-UNICAST</afi-safi-name>
+        <config>
+          <afi-safi-name xmlns:idx="http://openconfig.net/yang/bgp-types">idx:IPV4-UNICAST</afi-safi-name>
+          <enabled>true</enabled>
+        </config>
+      </afi-safi>
+    </afi-safis>
+    <config>
+      <as>65001</as>
+    </config>
+  </global>
+  <neighbors>
+    <neighbor>
+      <neighbor-address>172.16.255.2</neighbor-address>
+      <config>
+        <neighbor-address>172.16.255.2</neighbor-address>
+        <peer-group>IBGP</peer-group>
+      </config>
+    </neighbor>
+  </neighbors>
+  <peer-groups>
+    <peer-group>
+      <peer-group-name>IBGP</peer-group-name>
+      <afi-safis>
+        <afi-safi>
+          <afi-safi-name xmlns:idx="http://openconfig.net/yang/bgp-types">idx:IPV4-UNICAST</afi-safi-name>
+          <apply-policy>
+            <config>
+              <export-policy>POLICY2</export-policy>
+            </config>
+          </apply-policy>
+          <config>
+            <afi-safi-name xmlns:idx="http://openconfig.net/yang/bgp-types">idx:IPV4-UNICAST</afi-safi-name>
+            <enabled>true</enabled>
+          </config>
+        </afi-safi>
+      </afi-safis>
+      <config>
+        <peer-as>65001</peer-as>
+        <peer-group-name>IBGP</peer-group-name>
+      </config>
+      <transport>
+        <config>
+          <local-address>Loopback0</local-address>
+        </config>
+      </transport>
+    </peer-group>
+  </peer-groups>
+</bgp>
+
