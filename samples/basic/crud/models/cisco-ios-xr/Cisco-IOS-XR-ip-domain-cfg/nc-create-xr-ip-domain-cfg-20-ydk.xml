@@ -1,0 +1,28 @@
+<ip-domain xmlns="http://cisco.com/ns/yang/Cisco-IOS-XR-ip-domain-cfg">
+  <vrfs>
+    <vrf>
+      <vrf-name>default</vrf-name>
+      <ipv4-hosts>
+        <ipv4-host>
+          <host-name>east</host-name>
+          <address>172.16.1.1</address>
+        </ipv4-host>
+        <ipv4-host>
+          <host-name>west</host-name>
+          <address>172.16.1.2</address>
+        </ipv4-host>
+        <ipv4-host>
+          <host-name>north</host-name>
+          <address>172.16.1.3</address>
+          <address>172.16.1.4</address>
+        </ipv4-host>
+        <ipv4-host>
+          <host-name>south</host-name>
+          <address>172.16.1.5</address>
+          <address>172.16.1.6</address>
+        </ipv4-host>
+      </ipv4-hosts>
+    </vrf>
+  </vrfs>
+</ip-domain>
+
