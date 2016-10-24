@@ -32,7 +32,7 @@ if __name__ == "__main__":
     system_time = crud.read(provider, system_time)
 
     # print system uptime
-    print("System uptime is" +
+    print("System uptime is " +
           str(timedelta(seconds=system_time.uptime.uptime)))
 
     # close NETCONF session and exit
