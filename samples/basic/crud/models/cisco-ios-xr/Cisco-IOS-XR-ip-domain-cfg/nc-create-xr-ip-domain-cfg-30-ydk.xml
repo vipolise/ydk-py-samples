@@ -1,0 +1,28 @@
+<ip-domain xmlns="http://cisco.com/ns/yang/Cisco-IOS-XR-ip-domain-cfg">
+  <vrfs>
+    <vrf>
+      <vrf-name>RED</vrf-name>
+      <ipv4-hosts>
+        <ipv4-host>
+          <host-name>ruby</host-name>
+          <address>192.168.0.1</address>
+        </ipv4-host>
+        <ipv4-host>
+          <host-name>flame</host-name>
+          <address>192.168.0.2</address>
+        </ipv4-host>
+        <ipv4-host>
+          <host-name>crimson</host-name>
+          <address>192.168.0.3</address>
+          <address>192.168.0.4</address>
+        </ipv4-host>
+        <ipv4-host>
+          <host-name>raspberry</host-name>
+          <address>192.168.0.5</address>
+          <address>192.168.0.6</address>
+        </ipv4-host>
+      </ipv4-hosts>
+    </vrf>
+  </vrfs>
+</ip-domain>
+
