@@ -1,0 +1,27 @@
+<rsvp xmlns="http://cisco.com/ns/yang/Cisco-IOS-XR-ip-rsvp-cfg">
+  <interfaces>
+    <interface>
+      <name>GigabitEthernet0/0/0/0</name>
+      <bandwidth>
+        <mam>
+          <bc0-bandwidth>600000</bc0-bandwidth>
+          <bc1-bandwidth>400000</bc1-bandwidth>
+          <max-resv-bandwidth>1000000</max-resv-bandwidth>
+        </mam>
+      </bandwidth>
+      <enable></enable>
+    </interface>
+    <interface>
+      <name>GigabitEthernet0/0/0/1</name>
+      <bandwidth>
+        <mam>
+          <bc0-bandwidth>600000</bc0-bandwidth>
+          <bc1-bandwidth>400000</bc1-bandwidth>
+          <max-resv-bandwidth>1000000</max-resv-bandwidth>
+        </mam>
+      </bandwidth>
+      <enable></enable>
+    </interface>
+  </interfaces>
+</rsvp>
+
