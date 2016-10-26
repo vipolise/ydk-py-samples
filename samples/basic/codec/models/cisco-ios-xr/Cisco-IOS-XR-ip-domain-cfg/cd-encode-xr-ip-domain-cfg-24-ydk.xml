@@ -1,0 +1,36 @@
+<ip-domain xmlns="http://cisco.com/ns/yang/Cisco-IOS-XR-ip-domain-cfg">
+  <vrfs>
+    <vrf>
+      <vrf-name>default</vrf-name>
+      <lists>
+        <list>
+          <list-name>example.com</list-name>
+          <order>0</order>
+        </list>
+        <list>
+          <list-name>example.net</list-name>
+          <order>1</order>
+        </list>
+        <list>
+          <list-name>example.org</list-name>
+          <order>2</order>
+        </list>
+      </lists>
+      <servers>
+        <server>
+          <order>0</order>
+          <server-address>172.16.128.1</server-address>
+        </server>
+        <server>
+          <order>1</order>
+          <server-address>172.16.128.2</server-address>
+        </server>
+        <server>
+          <order>2</order>
+          <server-address>172.16.128.3</server-address>
+        </server>
+      </servers>
+    </vrf>
+  </vrfs>
+</ip-domain>
+

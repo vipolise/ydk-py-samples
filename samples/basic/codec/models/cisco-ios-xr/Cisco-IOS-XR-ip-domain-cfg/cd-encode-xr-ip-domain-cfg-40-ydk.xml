@@ -1,0 +1,9 @@
+<ip-domain xmlns="http://cisco.com/ns/yang/Cisco-IOS-XR-ip-domain-cfg">
+  <vrfs>
+    <vrf>
+      <vrf-name>default</vrf-name>
+      <lookup></lookup>
+    </vrf>
+  </vrfs>
+</ip-domain>
+
