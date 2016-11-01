@@ -1,0 +1,23 @@
+<ip-domain xmlns="http://cisco.com/ns/yang/Cisco-IOS-XR-ip-domain-cfg">
+  <vrfs>
+    <vrf>
+      <vrf-name>RED</vrf-name>
+      <name>red.example</name>
+      <servers>
+        <server>
+          <order>0</order>
+          <server-address>2001:db8:800a::1</server-address>
+        </server>
+        <server>
+          <order>1</order>
+          <server-address>2001:db8:800a::2</server-address>
+        </server>
+        <server>
+          <order>2</order>
+          <server-address>2001:db8:800a::3</server-address>
+        </server>
+      </servers>
+    </vrf>
+  </vrfs>
+</ip-domain>
+

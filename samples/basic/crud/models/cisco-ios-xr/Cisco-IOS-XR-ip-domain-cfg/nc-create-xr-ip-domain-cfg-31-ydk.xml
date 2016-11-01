@@ -1,0 +1,28 @@
+<ip-domain xmlns="http://cisco.com/ns/yang/Cisco-IOS-XR-ip-domain-cfg">
+  <vrfs>
+    <vrf>
+      <vrf-name>RED</vrf-name>
+      <ipv6-hosts>
+        <ipv6-host>
+          <host-name>ruby</host-name>
+          <address>2001:db8:a::1</address>
+        </ipv6-host>
+        <ipv6-host>
+          <host-name>flame</host-name>
+          <address>2001:db8:a::2</address>
+        </ipv6-host>
+        <ipv6-host>
+          <host-name>crimson</host-name>
+          <address>2001:db8:a::3</address>
+          <address>2001:db8:a::4</address>
+        </ipv6-host>
+        <ipv6-host>
+          <host-name>raspberry</host-name>
+          <address>2001:db8:a::5</address>
+          <address>2001:db8:a::6</address>
+        </ipv6-host>
+      </ipv6-hosts>
+    </vrf>
+  </vrfs>
+</ip-domain>
+
