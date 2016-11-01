@@ -1,0 +1,28 @@
+<ip-domain xmlns="http://cisco.com/ns/yang/Cisco-IOS-XR-ip-domain-cfg">
+  <vrfs>
+    <vrf>
+      <vrf-name>default</vrf-name>
+      <ipv6-hosts>
+        <ipv6-host>
+          <host-name>east</host-name>
+          <address>2001:db8::1</address>
+        </ipv6-host>
+        <ipv6-host>
+          <host-name>west</host-name>
+          <address>2001:db8::2</address>
+        </ipv6-host>
+        <ipv6-host>
+          <host-name>north</host-name>
+          <address>2001:db8::3</address>
+          <address>2001:db8::4</address>
+        </ipv6-host>
+        <ipv6-host>
+          <host-name>south</host-name>
+          <address>2001:db8::5</address>
+          <address>2001:db8::6</address>
+        </ipv6-host>
+      </ipv6-hosts>
+    </vrf>
+  </vrfs>
+</ip-domain>
+
