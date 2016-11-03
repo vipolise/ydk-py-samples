@@ -23,6 +23,7 @@
         </area-addresses>
         <router-id>172.16.255.1</router-id>
       </default-vrf>
+      <enable></enable>
     </process>
   </processes>
 </ospfv3>
