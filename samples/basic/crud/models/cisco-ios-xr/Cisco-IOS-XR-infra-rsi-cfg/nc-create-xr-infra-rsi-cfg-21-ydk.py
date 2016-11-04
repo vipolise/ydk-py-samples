@@ -66,7 +66,7 @@ def config_vrfs(vrfs):
     route_target.as_or_four_byte_as.append(as_or_four_byte_as)
     af.bgp.import_route_targets.route_targets.route_target.append(route_target)
 
-    # import route targets
+    # export route targets
     route_target = af.bgp.export_route_targets.route_targets.RouteTarget()
     route_target.type = xr_ipv4_bgp_cfg.BgpVrfRouteTargetEnum.AS
     as_or_four_byte_as = route_target.AsOrFourByteAs()
