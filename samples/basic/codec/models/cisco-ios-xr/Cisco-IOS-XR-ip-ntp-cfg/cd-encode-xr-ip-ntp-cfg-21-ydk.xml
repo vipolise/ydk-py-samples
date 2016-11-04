@@ -1,0 +1,16 @@
+<ntp xmlns="http://cisco.com/ns/yang/Cisco-IOS-XR-ip-ntp-cfg">
+  <peer-vrfs>
+    <peer-vrf>
+      <vrf-name>default</vrf-name>
+      <peer-ipv6s>
+        <peer-ipv6>
+          <address-ipv6>2001:db8::a:1</address-ipv6>
+          <peer-type-ipv6>
+            <peer-type>server</peer-type>
+          </peer-type-ipv6>
+        </peer-ipv6>
+      </peer-ipv6s>
+    </peer-vrf>
+  </peer-vrfs>
+</ntp>
+
