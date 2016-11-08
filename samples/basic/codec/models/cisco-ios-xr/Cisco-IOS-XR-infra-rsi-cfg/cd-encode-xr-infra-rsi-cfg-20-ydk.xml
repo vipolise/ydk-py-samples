@@ -1,0 +1,43 @@
+<vrfs xmlns="http://cisco.com/ns/yang/Cisco-IOS-XR-infra-rsi-cfg">
+  <vrf>
+    <vrf-name>RED</vrf-name>
+    <afs>
+      <af>
+        <af-name>ipv4</af-name>
+        <saf-name>unicast</saf-name>
+        <topology-name>default</topology-name>
+        <bgp xmlns="http://cisco.com/ns/yang/Cisco-IOS-XR-ipv4-bgp-cfg">
+          <export-route-targets>
+            <route-targets>
+              <route-target>
+                <type>as</type>
+                <as-or-four-byte-as>
+                  <as>65172</as>
+                  <as-index>1</as-index>
+                  <as-xx>0</as-xx>
+                  <stitching-rt>0</stitching-rt>
+                </as-or-four-byte-as>
+              </route-target>
+            </route-targets>
+          </export-route-targets>
+          <import-route-targets>
+            <route-targets>
+              <route-target>
+                <type>as</type>
+                <as-or-four-byte-as>
+                  <as>65172</as>
+                  <as-index>1</as-index>
+                  <as-xx>0</as-xx>
+                  <stitching-rt>0</stitching-rt>
+                </as-or-four-byte-as>
+              </route-target>
+            </route-targets>
+          </import-route-targets>
+        </bgp>
+        <create></create>
+      </af>
+    </afs>
+    <create></create>
+  </vrf>
+</vrfs>
+
