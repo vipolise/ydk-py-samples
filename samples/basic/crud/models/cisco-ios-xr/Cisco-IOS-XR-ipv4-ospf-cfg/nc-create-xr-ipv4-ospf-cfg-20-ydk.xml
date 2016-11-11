@@ -1,0 +1,29 @@
+<ospf xmlns="http://cisco.com/ns/yang/Cisco-IOS-XR-ipv4-ospf-cfg">
+  <processes>
+    <process>
+      <process-name>DEFAULT</process-name>
+      <default-vrf>
+        <area-addresses>
+          <area-area-id>
+            <area-id>0</area-id>
+            <name-scopes>
+              <name-scope>
+                <interface-name>Loopback0</interface-name>
+                <passive>true</passive>
+                <running></running>
+              </name-scope>
+              <name-scope>
+                <interface-name>GigabitEthernet0/0/0/0</interface-name>
+                <network-type>point-to-point</network-type>
+                <running></running>
+              </name-scope>
+            </name-scopes>
+            <running></running>
+          </area-area-id>
+        </area-addresses>
+        <router-id>172.16.255.1</router-id>
+      </default-vrf>
+    </process>
+  </processes>
+</ospf>
+
