@@ -1,0 +1,28 @@
+<telemetry-system xmlns="http://openconfig.net/yang/telemetry">
+  <sensor-groups>
+    <sensor-group>
+      <sensor-group-id>SGROUP1</sensor-group-id>
+      <sensor-paths>
+        <sensor-path>
+          <path>Cisco-IOS-XR-infra-statsd-oper:infra-statistics/interfaces/interface/latest/generic-counters</path>
+        </sensor-path>
+      </sensor-paths>
+    </sensor-group>
+  </sensor-groups>
+  <subscriptions>
+    <persistent>
+      <subscription>
+        <subscription-id>1</subscription-id>
+        <sensor-profiles>
+          <sensor-profile>
+            <config>
+              <sample-interval>30000</sample-interval>
+              <sensor-group>SGROUP1</sensor-group>
+            </config>
+          </sensor-profile>
+        </sensor-profiles>
+      </subscription>
+    </persistent>
+  </subscriptions>
+</telemetry-system>
+
