@@ -43,31 +43,31 @@ def config_bgp(bgp):
     """Add config data to bgp object."""
     # global configuration
     bgp.global_.config.as_ = 65001
-    v4_afi_safi = bgp.global_.afi_safis.AfiSafi()
-    v4_afi_safi.afi_safi_name = oc_bgp_types.Ipv4UnicastIdentity()
-    v4_afi_safi.config.afi_safi_name = oc_bgp_types.Ipv4UnicastIdentity()
-    v4_afi_safi.config.enabled = True
-    bgp.global_.afi_safis.afi_safi.append(v4_afi_safi)
+    afi_safi = bgp.global_.afi_safis.AfiSafi()
+    afi_safi.afi_safi_name = oc_bgp_types.Ipv4UnicastIdentity()
+    afi_safi.config.afi_safi_name = oc_bgp_types.Ipv4UnicastIdentity()
+    afi_safi.config.enabled = True
+    bgp.global_.afi_safis.afi_safi.append(afi_safi)
 
     # configure IBGP peer group
-    ibgp_pg = bgp.peer_groups.PeerGroup()
-    ibgp_pg.peer_group_name = "IBGP"
-    ibgp_pg.config.peer_group_name = "IBGP"
-    ibgp_pg.config.peer_as = 65001
-    ibgp_pg.transport.config.local_address = "Loopback0"
-    v4_afi_safi = ibgp_pg.afi_safis.AfiSafi()
-    v4_afi_safi.afi_safi_name = oc_bgp_types.Ipv4UnicastIdentity()
-    v4_afi_safi.config.afi_safi_name = oc_bgp_types.Ipv4UnicastIdentity()
-    v4_afi_safi.config.enabled = True
-    ibgp_pg.afi_safis.afi_safi.append(v4_afi_safi)
-    bgp.peer_groups.peer_group.append(ibgp_pg)
+    peer_group = bgp.peer_groups.PeerGroup()
+    peer_group.peer_group_name = "IBGP"
+    peer_group.config.peer_group_name = "IBGP"
+    peer_group.config.peer_as = 65001
+    peer_group.transport.config.local_address = "Loopback0"
+    afi_safi = peer_group.afi_safis.AfiSafi()
+    afi_safi.afi_safi_name = oc_bgp_types.Ipv4UnicastIdentity()
+    afi_safi.config.afi_safi_name = oc_bgp_types.Ipv4UnicastIdentity()
+    afi_safi.config.enabled = True
+    peer_group.afi_safis.afi_safi.append(afi_safi)
+    bgp.peer_groups.peer_group.append(peer_group)
 
     # configure IBGP neighbor
-    ibgp_nbr = bgp.neighbors.Neighbor()
-    ibgp_nbr.neighbor_address = "172.16.255.2"
-    ibgp_nbr.config.neighbor_address = "172.16.255.2"
-    ibgp_nbr.config.peer_group = "IBGP"
-    bgp.neighbors.neighbor.append(ibgp_nbr)
+    neighbor = bgp.neighbors.Neighbor()
+    neighbor.neighbor_address = "172.16.255.2"
+    neighbor.config.neighbor_address = "172.16.255.2"
+    neighbor.config.peer_group = "IBGP"
+    bgp.neighbors.neighbor.append(neighbor)
 
 
 if __name__ == "__main__":
