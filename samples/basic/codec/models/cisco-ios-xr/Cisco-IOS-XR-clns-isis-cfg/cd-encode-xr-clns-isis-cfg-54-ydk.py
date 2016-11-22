@@ -32,6 +32,8 @@ from ydk.services import CodecService
 from ydk.providers import CodecServiceProvider
 from ydk.models.cisco_ios_xr import Cisco_IOS_XR_clns_isis_cfg \
     as xr_clns_isis_cfg
+from ydk.models.cisco_ios_xr import Cisco_IOS_XR_clns_isis_datatypes \
+    as xr_clns_isis_datatypes
 from ydk.types import Empty
 import logging
 
@@ -49,12 +51,12 @@ def config_isis(isis):
     isis.instances.instance.append(instance)
     # global address family
     af = instance.afs.Af()
-    af.af_name = xr_clns_isis_cfg.IsisAddressFamilyEnum.IPV6
-    af.saf_name = xr_clns_isis_cfg.IsisSubAddressFamilyEnum.UNICAST
+    af.af_name = xr_clns_isis_datatypes.IsisAddressFamilyEnum.IPV6
+    af.saf_name = xr_clns_isis_datatypes.IsisSubAddressFamilyEnum.UNICAST
     af.af_data = af.AfData()
     metric_style = af.af_data.metric_styles.MetricStyle()
     metric_style.style = xr_clns_isis_cfg.IsisMetricStyleEnum.NEW_METRIC_STYLE
-    metric_style.level = xr_clns_isis_cfg.IsisInternalLevelEnum.NOT_SET
+    metric_style.level = xr_clns_isis_datatypes.IsisInternalLevelEnum.NOT_SET
     transition_state = xr_clns_isis_cfg.IsisMetricStyleTransitionEnum.DISABLED
     metric_style.transition_state = transition_state
     # segment routing
@@ -70,8 +72,8 @@ def config_isis(isis):
     interface.state = xr_clns_isis_cfg.IsisInterfaceStateEnum.PASSIVE
     # interface address family
     interface_af = interface.interface_afs.InterfaceAf()
-    interface_af.af_name = xr_clns_isis_cfg.IsisAddressFamilyEnum.IPV6
-    interface_af.saf_name = xr_clns_isis_cfg.IsisSubAddressFamilyEnum.UNICAST
+    interface_af.af_name = xr_clns_isis_datatypes.IsisAddressFamilyEnum.IPV6
+    interface_af.saf_name = xr_clns_isis_datatypes.IsisSubAddressFamilyEnum.UNICAST
     interface_af.interface_af_data.running = Empty()
     # segment routing
     prefix_sid = interface_af.interface_af_data.PrefixSid()
@@ -92,8 +94,8 @@ def config_isis(isis):
     interface.point_to_point = Empty()
     # interface address familiy
     interface_af = interface.interface_afs.InterfaceAf()
-    interface_af.af_name = xr_clns_isis_cfg.IsisAddressFamilyEnum.IPV6
-    interface_af.saf_name = xr_clns_isis_cfg.IsisSubAddressFamilyEnum.UNICAST
+    interface_af.af_name = xr_clns_isis_datatypes.IsisAddressFamilyEnum.IPV6
+    interface_af.saf_name = xr_clns_isis_datatypes.IsisSubAddressFamilyEnum.UNICAST
     interface_af.interface_af_data.running = Empty()
     interface.interface_afs.interface_af.append(interface_af)
     instance.interfaces.interface.append(interface)
