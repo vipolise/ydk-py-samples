@@ -18,7 +18,7 @@
 """
 Encode configuration for model Cisco-IOS-XR-clns-isis-cfg.
 
-usage: cd-encode-xr-clns-isis-cfg-51-ydk.py [-h] [-v]
+usage: cd-encode-xr-clns-isis-cfg-41-ydk.py [-h] [-v]
 
 optional arguments:
   -h, --help     show this help message and exit
