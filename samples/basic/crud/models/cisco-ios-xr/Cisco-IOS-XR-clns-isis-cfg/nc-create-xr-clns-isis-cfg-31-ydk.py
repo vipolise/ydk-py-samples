@@ -18,7 +18,7 @@
 """
 Create configuration for model Cisco-IOS-XR-clns-isis-cfg.
 
-usage: nc-create-xr-clns-isis-cfg-36-ydk.py [-h] [-v] device
+usage: nc-create-xr-clns-isis-cfg-31-ydk.py [-h] [-v] device
 
 positional arguments:
   device         NETCONF device (ssh://user:password@host:port)
@@ -62,11 +62,6 @@ def config_isis(isis):
     transition_state = xr_clns_isis_cfg.IsisMetricStyleTransitionEnum.DISABLED
     metric_style.transition_state = transition_state
     af.af_data.metric_styles.metric_style.append(metric_style)
-    propagation = af.af_data.propagations.Propagation()
-    propagation.source_level = xr_clns_isis_datatypes.IsisInternalLevelEnum.LEVEL2
-    propagation.destination_level = xr_clns_isis_datatypes.IsisInternalLevelEnum.LEVEL1
-    propagation.route_policy_name = "LOOPBACKS"
-    af.af_data.propagations.propagation.append(propagation)
     instance.afs.af.append(af)
 
     # loopback interface

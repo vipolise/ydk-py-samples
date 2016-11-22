@@ -18,7 +18,7 @@
 """
 Create configuration for model Cisco-IOS-XR-clns-isis-cfg.
 
-usage: nc-create-xr-clns-isis-cfg-24-ydk.py [-h] [-v] device
+usage: nc-create-xr-clns-isis-cfg-21-ydk.py [-h] [-v] device
 
 positional arguments:
   device         NETCONF device (ssh://user:password@host:port)
