@@ -18,7 +18,7 @@
 """
 Encode configuration for model Cisco-IOS-XR-clns-isis-cfg.
 
-usage: cd-encode-xr-clns-isis-cfg-34-ydk.py [-h] [-v]
+usage: cd-encode-xr-clns-isis-cfg-21-ydk.py [-h] [-v]
 
 optional arguments:
   -h, --help     show this help message and exit
@@ -44,8 +44,9 @@ def config_isis(isis):
     instance = isis.instances.Instance()
     instance.instance_name = "DEFAULT"
     instance.running = Empty()
+    instance.is_type = xr_clns_isis_cfg.IsisConfigurableLevelsEnum.LEVEL2
     net = instance.nets.Net()
-    net.net_name = "49.0000.1720.1625.5101.00"
+    net.net_name = "49.0000.1720.1625.5001.00"
     instance.nets.net.append(net)
     isis.instances.instance.append(instance)
     # global address family
