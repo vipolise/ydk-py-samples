@@ -48,7 +48,7 @@ def config_isis(isis):
     instance.instance_name = "DEFAULT"
     instance.running = Empty()
     net = instance.nets.Net()
-    net.net_name = "49.0000.1720.1625.5001.00"
+    net.net_name = "49.0000.1720.1625.5101.00"
     instance.nets.net.append(net)
     isis.instances.instance.append(instance)
     # global address family
