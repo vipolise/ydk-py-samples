@@ -60,10 +60,10 @@ def config_isis(isis):
     metric_style.level = xr_clns_isis_cfg.IsisInternalLevelEnum.NOT_SET
     transition_state = xr_clns_isis_cfg.IsisMetricStyleTransitionEnum.DISABLED
     metric_style.transition_state = transition_state
+    af.af_data.metric_styles.metric_style.append(metric_style)
     # segment routing
     mpls = xr_clns_isis_cfg.IsisLabelPreferenceEnum.LDP
     af.af_data.segment_routing.mpls = mpls
-    af.af_data.metric_styles.metric_style.append(metric_style)
     instance.afs.af.append(af)
 
     # loopback interface
