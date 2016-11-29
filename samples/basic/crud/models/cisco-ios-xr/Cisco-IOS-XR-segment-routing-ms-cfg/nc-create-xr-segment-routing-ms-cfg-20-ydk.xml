@@ -1,0 +1,12 @@
+<sr xmlns="http://cisco.com/ns/yang/Cisco-IOS-XR-segment-routing-ms-cfg">
+  <mappings>
+    <mapping>
+      <af>ipv4</af>
+      <ip>172.16.255.1</ip>
+      <mask>32</mask>
+      <sid-range>1</sid-range>
+      <sid-start>4041</sid-start>
+    </mapping>
+  </mappings>
+</sr>
+
