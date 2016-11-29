@@ -23,10 +23,6 @@
             </propagations>
             <segment-routing>
               <mpls>ldp</mpls>
-              <prefix-sid-map>
-                <advertise-local></advertise-local>
-                <receive>true</receive>
-              </prefix-sid-map>
             </segment-routing>
           </af-data>
         </af>

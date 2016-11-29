@@ -5,8 +5,6 @@ router isis DEFAULT
   metric-style wide
   propagate level 2 into level 1 route-policy LOOPBACKS
   segment-routing mpls
-  segment-routing prefix-sid-map receive
-  segment-routing prefix-sid-map advertise-local
  !
  interface Loopback0
   passive
