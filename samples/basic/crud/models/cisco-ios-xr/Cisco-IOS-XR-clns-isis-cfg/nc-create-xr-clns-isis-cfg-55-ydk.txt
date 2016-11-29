@@ -5,7 +5,6 @@ router isis DEFAULT
  address-family ipv6 unicast
   metric-style wide
   segment-routing mpls
-  segment-routing prefix-sid-map receive
  !
  interface Loopback0
   passive
