@@ -70,8 +70,6 @@ def config_isis(isis):
     # segment routing
     mpls = xr_clns_isis_cfg.IsisLabelPreferenceEnum.LDP
     af.af_data.segment_routing.mpls = mpls
-    af.af_data.segment_routing.prefix_sid_map.receive = True
-    af.af_data.segment_routing.prefix_sid_map.advertise_local = Empty()
     instance.afs.af.append(af)
 
     # loopback interface
