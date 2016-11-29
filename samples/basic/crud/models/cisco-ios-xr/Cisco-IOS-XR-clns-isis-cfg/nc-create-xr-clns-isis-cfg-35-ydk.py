@@ -16,9 +16,12 @@
 #
 
 """
-Encode configuration for model Cisco-IOS-XR-clns-isis-cfg.
+Create configuration for model Cisco-IOS-XR-clns-isis-cfg.
 
-usage: cd-encode-xr-clns-isis-cfg-54-ydk.py [-h] [-v]
+usage: nc-create-xr-clns-isis-cfg-35-ydk.py [-h] [-v] device
+
+positional arguments:
+  device         NETCONF device (ssh://user:password@host:port)
 
 optional arguments:
   -h, --help     show this help message and exit
@@ -28,8 +31,8 @@ optional arguments:
 from argparse import ArgumentParser
 from urlparse import urlparse
 
-from ydk.services import CodecService
-from ydk.providers import CodecServiceProvider
+from ydk.services import CRUDService
+from ydk.providers import NetconfServiceProvider
 from ydk.models.cisco_ios_xr import Cisco_IOS_XR_clns_isis_cfg \
     as xr_clns_isis_cfg
 from ydk.models.cisco_ios_xr import Cisco_IOS_XR_clns_isis_datatypes \
@@ -51,7 +54,7 @@ def config_isis(isis):
     isis.instances.instance.append(instance)
     # global address family
     af = instance.afs.Af()
-    af.af_name = xr_clns_isis_datatypes.IsisAddressFamilyEnum.IPV4
+    af.af_name = xr_clns_isis_datatypes.IsisAddressFamilyEnum.IPV6
     af.saf_name = xr_clns_isis_datatypes.IsisSubAddressFamilyEnum.UNICAST
     af.af_data = af.AfData()
     metric_style = af.af_data.metric_styles.MetricStyle()
@@ -60,9 +63,6 @@ def config_isis(isis):
     transition_state = xr_clns_isis_cfg.IsisMetricStyleTransitionEnum.DISABLED
     metric_style.transition_state = transition_state
     af.af_data.metric_styles.metric_style.append(metric_style)
-    # segment routing
-    mpls = xr_clns_isis_cfg.IsisLabelPreferenceEnum.LDP
-    af.af_data.segment_routing.mpls = mpls
     instance.afs.af.append(af)
 
     # loopback interface
@@ -72,19 +72,10 @@ def config_isis(isis):
     interface.state = xr_clns_isis_cfg.IsisInterfaceStateEnum.PASSIVE
     # interface address family
     interface_af = interface.interface_afs.InterfaceAf()
-    interface_af.af_name = xr_clns_isis_datatypes.IsisAddressFamilyEnum.IPV4
+    interface_af.af_name = xr_clns_isis_datatypes.IsisAddressFamilyEnum.IPV6
     interface_af.saf_name = xr_clns_isis_datatypes.IsisSubAddressFamilyEnum.UNICAST
     interface_af.interface_af_data.running = Empty()
     interface.interface_afs.interface_af.append(interface_af)
-    # segment routing
-    prefix_sid = interface_af.interface_af_data.PrefixSid()
-    prefix_sid.type = xr_clns_isis_cfg.IsissidEnum.ABSOLUTE
-    prefix_sid.value = 16041
-    prefix_sid.php = xr_clns_isis_cfg.IsisphpFlagEnum.ENABLE
-    explicit_null = xr_clns_isis_cfg.IsisexplicitNullFlagEnum.DISABLE
-    prefix_sid.explicit_null = explicit_null
-    prefix_sid.nflag_clear = xr_clns_isis_cfg.NflagClearEnum.DISABLE
-    interface_af.interface_af_data.prefix_sid = prefix_sid
     instance.interfaces.interface.append(interface)
 
     # gi0/0/0/0 interface
@@ -94,7 +85,7 @@ def config_isis(isis):
     interface.point_to_point = Empty()
     # interface address familiy
     interface_af = interface.interface_afs.InterfaceAf()
-    interface_af.af_name = xr_clns_isis_datatypes.IsisAddressFamilyEnum.IPV4
+    interface_af.af_name = xr_clns_isis_datatypes.IsisAddressFamilyEnum.IPV6
     interface_af.saf_name = xr_clns_isis_datatypes.IsisSubAddressFamilyEnum.UNICAST
     interface_af.interface_af_data.running = Empty()
     interface.interface_afs.interface_af.append(interface_af)
@@ -106,7 +97,10 @@ if __name__ == "__main__":
     parser = ArgumentParser()
     parser.add_argument("-v", "--verbose", help="print debugging messages",
                         action="store_true")
+    parser.add_argument("device",
+                        help="NETCONF device (ssh://user:password@host:port)")
     args = parser.parse_args()
+    device = urlparse(args.device)
 
     # log debug messages if verbose argument specified
     if args.verbose:
@@ -118,17 +112,20 @@ if __name__ == "__main__":
         handler.setFormatter(formatter)
         logger.addHandler(handler)
 
-    # create codec provider
-    provider = CodecServiceProvider(type="xml")
-
-    # create codec service
-    codec = CodecService()
+    # create NETCONF provider
+    provider = NetconfServiceProvider(address=device.hostname,
+                                      port=device.port,
+                                      username=device.username,
+                                      password=device.password,
+                                      protocol=device.scheme)
+    # create CRUD service
+    crud = CRUDService()
 
     isis = xr_clns_isis_cfg.Isis()  # create object
     config_isis(isis)  # add object configuration
 
-    # encode and print object
-    print(codec.encode(provider, isis))
+    # create configuration on NETCONF device
+    crud.create(provider, isis)
 
     provider.close()
     exit()

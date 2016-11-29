@@ -18,7 +18,7 @@
 """
 Encode configuration for model Cisco-IOS-XR-clns-isis-cfg.
 
-usage: cd-encode-xr-clns-isis-cfg-54-ydk.py [-h] [-v]
+usage: cd-encode-xr-clns-isis-cfg-34-ydk.py [-h] [-v]
 
 optional arguments:
   -h, --help     show this help message and exit
@@ -60,9 +60,6 @@ def config_isis(isis):
     transition_state = xr_clns_isis_cfg.IsisMetricStyleTransitionEnum.DISABLED
     metric_style.transition_state = transition_state
     af.af_data.metric_styles.metric_style.append(metric_style)
-    # segment routing
-    mpls = xr_clns_isis_cfg.IsisLabelPreferenceEnum.LDP
-    af.af_data.segment_routing.mpls = mpls
     instance.afs.af.append(af)
 
     # loopback interface
@@ -76,15 +73,6 @@ def config_isis(isis):
     interface_af.saf_name = xr_clns_isis_datatypes.IsisSubAddressFamilyEnum.UNICAST
     interface_af.interface_af_data.running = Empty()
     interface.interface_afs.interface_af.append(interface_af)
-    # segment routing
-    prefix_sid = interface_af.interface_af_data.PrefixSid()
-    prefix_sid.type = xr_clns_isis_cfg.IsissidEnum.ABSOLUTE
-    prefix_sid.value = 16041
-    prefix_sid.php = xr_clns_isis_cfg.IsisphpFlagEnum.ENABLE
-    explicit_null = xr_clns_isis_cfg.IsisexplicitNullFlagEnum.DISABLE
-    prefix_sid.explicit_null = explicit_null
-    prefix_sid.nflag_clear = xr_clns_isis_cfg.NflagClearEnum.DISABLE
-    interface_af.interface_af_data.prefix_sid = prefix_sid
     instance.interfaces.interface.append(interface)
 
     # gi0/0/0/0 interface
