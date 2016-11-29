@@ -18,7 +18,7 @@
 """
 Encode configuration for model Cisco-IOS-XR-clns-isis-cfg.
 
-usage: cd-encode-xr-clns-isis-cfg-52-ydk.py [-h] [-v]
+usage: cd-encode-xr-clns-isis-cfg-50-ydk.py [-h] [-v]
 
 optional arguments:
   -h, --help     show this help message and exit
@@ -67,8 +67,6 @@ def config_isis(isis):
     # segment routing
     mpls = xr_clns_isis_cfg.IsisLabelPreferenceEnum.LDP
     af.af_data.segment_routing.mpls = mpls
-    af.af_data.segment_routing.prefix_sid_map.receive = True
-    af.af_data.segment_routing.prefix_sid_map.advertise_local = Empty()
     instance.afs.af.append(af)
 
     # loopback interface
