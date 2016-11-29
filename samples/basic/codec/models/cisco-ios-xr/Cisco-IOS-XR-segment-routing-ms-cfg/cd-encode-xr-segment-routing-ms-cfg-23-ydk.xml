@@ -1,0 +1,19 @@
+<sr xmlns="http://cisco.com/ns/yang/Cisco-IOS-XR-segment-routing-ms-cfg">
+  <mappings>
+    <mapping>
+      <af>ipv6</af>
+      <ip>2001:db8::ff:1</ip>
+      <mask>128</mask>
+      <sid-range>2</sid-range>
+      <sid-start>4061</sid-start>
+    </mapping>
+    <mapping>
+      <af>ipv6</af>
+      <ip>2001:db8::1ff:1</ip>
+      <mask>128</mask>
+      <sid-range>8</sid-range>
+      <sid-start>5061</sid-start>
+    </mapping>
+  </mappings>
+</sr>
+
