@@ -16,9 +16,6 @@
             </metric-styles>
             <segment-routing>
               <mpls>ldp</mpls>
-              <prefix-sid-map>
-                <receive>true</receive>
-              </prefix-sid-map>
             </segment-routing>
           </af-data>
         </af>
