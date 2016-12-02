@@ -67,7 +67,7 @@ if __name__ == "__main__":
     config_ospf(ospf)  # add object configuration
 
     # encode and print object
-    print(codec.encode(provider, ospf))
+    # print(codec.encode(provider, ospf))
 
     provider.close()
     exit()
