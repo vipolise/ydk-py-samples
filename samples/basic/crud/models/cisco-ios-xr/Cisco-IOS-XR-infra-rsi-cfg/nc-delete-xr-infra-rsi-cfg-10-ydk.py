@@ -68,6 +68,7 @@ if __name__ == "__main__":
     crud = CRUDService()
 
     vrfs = xr_infra_rsi_cfg.Vrfs()  # create object
+
     # delete configuration on NETCONF device
     # crud.delete(provider, vrfs)
 

@@ -68,6 +68,7 @@ if __name__ == "__main__":
     crud = CRUDService()
 
     locale = xr_infra_infra_locale_cfg.Locale()  # create object
+
     # delete configuration on NETCONF device
     # crud.delete(provider, locale)
 

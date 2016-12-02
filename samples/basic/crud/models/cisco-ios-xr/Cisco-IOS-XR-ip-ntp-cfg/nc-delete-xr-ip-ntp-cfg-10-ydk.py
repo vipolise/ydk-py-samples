@@ -68,6 +68,7 @@ if __name__ == "__main__":
     crud = CRUDService()
 
     ntp = xr_ip_ntp_cfg.Ntp()  # create object
+
     # delete configuration on NETCONF device
     # crud.delete(provider, ntp)
 

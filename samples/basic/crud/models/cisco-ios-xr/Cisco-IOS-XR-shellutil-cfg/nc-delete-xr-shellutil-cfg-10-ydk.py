@@ -68,6 +68,7 @@ if __name__ == "__main__":
     crud = CRUDService()
 
     host_names = xr_shellutil_cfg.HostNames()  # create object
+
     # delete configuration on NETCONF device
     # crud.delete(provider, host_names)
 

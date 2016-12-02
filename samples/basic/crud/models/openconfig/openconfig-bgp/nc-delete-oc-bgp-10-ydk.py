@@ -68,6 +68,7 @@ if __name__ == "__main__":
     crud = CRUDService()
 
     bgp = oc_bgp.Bgp()  # create object
+
     # delete configuration on NETCONF device
     # crud.delete(provider, bgp)
 

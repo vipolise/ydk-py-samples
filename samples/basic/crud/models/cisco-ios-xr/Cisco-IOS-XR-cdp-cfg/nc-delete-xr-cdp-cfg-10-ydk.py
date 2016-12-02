@@ -68,6 +68,7 @@ if __name__ == "__main__":
     crud = CRUDService()
 
     cdp = xr_cdp_cfg.Cdp()  # create object
+
     # delete configuration on NETCONF device
     # crud.delete(provider, cdp)
 

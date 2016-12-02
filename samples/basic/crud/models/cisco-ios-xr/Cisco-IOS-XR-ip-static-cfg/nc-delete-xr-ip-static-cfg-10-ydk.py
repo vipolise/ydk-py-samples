@@ -68,6 +68,7 @@ if __name__ == "__main__":
     crud = CRUDService()
 
     router_static = xr_ip_static_cfg.RouterStatic()  # create object
+
     # delete configuration on NETCONF device
     # crud.delete(provider, router_static)
 

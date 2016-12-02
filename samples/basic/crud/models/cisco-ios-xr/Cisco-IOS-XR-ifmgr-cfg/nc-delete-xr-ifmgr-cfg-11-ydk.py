@@ -68,6 +68,7 @@ if __name__ == "__main__":
     crud = CRUDService()
 
     interface_configurations = xr_ifmgr_cfg.InterfaceConfigurations()  # create object
+
     # delete configuration on NETCONF device
     # crud.delete(provider, interface_configurations)
 

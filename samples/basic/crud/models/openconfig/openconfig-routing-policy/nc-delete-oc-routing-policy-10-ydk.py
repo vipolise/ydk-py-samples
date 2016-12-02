@@ -68,6 +68,7 @@ if __name__ == "__main__":
     crud = CRUDService()
 
     routing_policy = oc_routing_policy.RoutingPolicy()  # create object
+
     # delete configuration on NETCONF device
     # crud.delete(provider, routing_policy)
 

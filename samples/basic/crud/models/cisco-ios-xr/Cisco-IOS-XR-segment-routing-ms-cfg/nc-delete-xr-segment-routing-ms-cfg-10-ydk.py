@@ -68,6 +68,7 @@ if __name__ == "__main__":
     crud = CRUDService()
 
     sr = xr_segment_routing_ms_cfg.Sr()  # create object
+
     # delete configuration on NETCONF device
     # crud.delete(provider, sr)
 

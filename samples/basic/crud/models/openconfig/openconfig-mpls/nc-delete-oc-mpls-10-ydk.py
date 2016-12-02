@@ -68,6 +68,7 @@ if __name__ == "__main__":
     crud = CRUDService()
 
     mpls = oc_mpls.Mpls()  # create object
+
     # delete configuration on NETCONF device
     # crud.delete(provider, mpls)
 

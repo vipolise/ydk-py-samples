@@ -68,6 +68,7 @@ if __name__ == "__main__":
     crud = CRUDService()
 
     clock = xr_infra_infra_clock_linux_cfg.Clock()  # create object
+
     # delete configuration on NETCONF device
     # crud.delete(provider, clock)
 

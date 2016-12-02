@@ -68,6 +68,7 @@ if __name__ == "__main__":
     crud = CRUDService()
 
     lldp = xr_ethernet_lldp_cfg.Lldp()  # create object
+
     # delete configuration on NETCONF device
     # crud.delete(provider, lldp)
 

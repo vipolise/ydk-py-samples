@@ -68,6 +68,7 @@ if __name__ == "__main__":
     crud = CRUDService()
 
     macsec = xr_crypto_macsec_mka_cfg.Macsec()  # create object
+
     # delete configuration on NETCONF device
     # crud.delete(provider, macsec)
 

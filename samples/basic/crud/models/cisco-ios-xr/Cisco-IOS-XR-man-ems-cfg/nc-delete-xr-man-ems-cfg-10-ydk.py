@@ -68,6 +68,7 @@ if __name__ == "__main__":
     crud = CRUDService()
 
     grpc = xr_man_ems_cfg.Grpc()  # create object
+
     # delete configuration on NETCONF device
     # crud.delete(provider, grpc)
 
