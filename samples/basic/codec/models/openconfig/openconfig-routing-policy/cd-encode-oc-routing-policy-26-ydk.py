@@ -32,6 +32,8 @@ from ydk.services import CodecService
 from ydk.providers import CodecServiceProvider
 from ydk.models.openconfig import openconfig_routing_policy \
     as oc_routing_policy
+from ydk.models.openconfig import openconfig_policy_types \
+    as oc_policy_types
 from ydk.types import Empty
 import logging
 
@@ -66,7 +68,7 @@ def config_routing_policy(routing_policy):
     statement.name = "prefix-set1"
     match_prefix_set = statement.conditions.MatchPrefixSet()
     match_prefix_set.prefix_set = "PREFIX-SET1"
-    match_set_options = oc_routing_policy.MatchSetOptionsRestrictedTypeEnum.ANY
+    match_set_options = oc_policy_types.MatchSetOptionsRestrictedTypeEnum.ANY
     match_prefix_set.match_set_options = match_set_options
     statement.conditions.match_prefix_set = match_prefix_set
     statement.actions.bgp_actions.set_local_pref = 1000
