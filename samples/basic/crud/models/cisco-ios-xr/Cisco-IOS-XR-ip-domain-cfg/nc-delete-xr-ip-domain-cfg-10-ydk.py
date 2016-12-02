@@ -68,6 +68,7 @@ if __name__ == "__main__":
     crud = CRUDService()
 
     ip_domain = xr_ip_domain_cfg.IpDomain()  # create object
+
     # delete configuration on NETCONF device
     # crud.delete(provider, ip_domain)
 

@@ -68,6 +68,7 @@ if __name__ == "__main__":
     crud = CRUDService()
 
     mac_sec_keychains = xr_lib_keychain_macsec_cfg.MacSecKeychains()  # create object
+
     # delete configuration on NETCONF device
     # crud.delete(provider, mac_sec_keychains)
 

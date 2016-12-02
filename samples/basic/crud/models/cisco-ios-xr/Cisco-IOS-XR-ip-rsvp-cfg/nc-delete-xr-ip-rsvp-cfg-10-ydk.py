@@ -68,6 +68,7 @@ if __name__ == "__main__":
     crud = CRUDService()
 
     rsvp = xr_ip_rsvp_cfg.Rsvp()  # create object
+
     # delete configuration on NETCONF device
     # crud.delete(provider, rsvp)
 

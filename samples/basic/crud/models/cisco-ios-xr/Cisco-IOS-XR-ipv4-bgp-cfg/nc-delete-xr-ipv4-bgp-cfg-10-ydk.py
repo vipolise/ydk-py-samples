@@ -68,6 +68,7 @@ if __name__ == "__main__":
     crud = CRUDService()
 
     bgp = xr_ipv4_bgp_cfg.Bgp()  # create object
+
     # delete configuration on NETCONF device
     # crud.delete(provider, bgp)
 

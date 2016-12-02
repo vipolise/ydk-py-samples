@@ -68,6 +68,7 @@ if __name__ == "__main__":
     crud = CRUDService()
 
     telemetry_model_driven = xr_telemetry_model_driven_cfg.TelemetryModelDriven()  # create object
+
     # delete configuration on NETCONF device
     # crud.delete(provider, telemetry_model_driven)
 

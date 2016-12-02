@@ -68,6 +68,7 @@ if __name__ == "__main__":
     crud = CRUDService()
 
     ospf = xr_ipv4_ospf_cfg.Ospf()  # create object
+
     # delete configuration on NETCONF device
     # crud.delete(provider, ospf)
 

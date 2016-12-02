@@ -68,6 +68,7 @@ if __name__ == "__main__":
     crud = CRUDService()
 
     isis = xr_clns_isis_cfg.Isis()  # create object
+
     # delete configuration on NETCONF device
     # crud.delete(provider, isis)
 

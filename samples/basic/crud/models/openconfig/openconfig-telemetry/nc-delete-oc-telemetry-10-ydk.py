@@ -68,6 +68,7 @@ if __name__ == "__main__":
     crud = CRUDService()
 
     telemetry_system = oc_telemetry.TelemetrySystem()  # create object
+
     # delete configuration on NETCONF device
     # crud.delete(provider, telemetry_system)
 
