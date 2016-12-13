@@ -1,0 +1,2 @@
+RP/0/RP0/CPU0:Dec 12 16:27:39.847 : netconf[1101]: %OS-SYSLOG-4-LOG_WARNING : A custom warning message 
+
