@@ -1,0 +1,2 @@
+RP/0/RP0/CPU0:Dec 12 16:29:47.854 : netconf[1101]: %OS-SYSLOG-2-LOG_CRIT : A custom critical message 
+
