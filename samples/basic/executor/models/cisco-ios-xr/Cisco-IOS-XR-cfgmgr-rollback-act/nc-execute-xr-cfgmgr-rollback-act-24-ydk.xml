@@ -1,0 +1,6 @@
+<roll-back-configuration-last xmlns="http://cisco.com/ns/yang/Cisco-IOS-XR-cfgmgr-rollback-act">
+  <count>5</count>
+  <force>true</force>
+  <label>PRB-005</label>
+  <comment>Forced programmatic rollback</comment>
+</roll-back-configuration-last>
