@@ -1,0 +1,4 @@
+<logmsg xmlns="http://cisco.com/ns/yang/Cisco-IOS-XR-syslog-act">
+  <severity>critical</severity>
+  <message>A custom critical message</message>
+</logmsg>
