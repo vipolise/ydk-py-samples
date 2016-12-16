@@ -1,0 +1,3 @@
+<roll-back-configuration-to xmlns="http://cisco.com/ns/yang/Cisco-IOS-XR-cfgmgr-rollback-act">
+  <commit-id>1000000010</commit-id>
+</roll-back-configuration-to>
