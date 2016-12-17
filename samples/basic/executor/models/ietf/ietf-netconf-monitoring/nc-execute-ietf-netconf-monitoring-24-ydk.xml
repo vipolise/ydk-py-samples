@@ -1,0 +1,5 @@
+<get-schema xmlns="urn:ietf:params:xml:ns:yang:ietf-netconf-monitoring">
+  <identifier>openconfig-mpls</identifier>
+  <version>2015-11-05</version>
+  <format>yang</format>
+</get-schema>
