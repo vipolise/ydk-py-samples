@@ -1,0 +1,3 @@
+<rpc xmlns="urn:ietf:params:xml:ns:netconf:base:1.0" message-id="urn:uuid:2923709d-9098-40f8-b236-e1f05358af6c">
+  <sonet-path-status xmlns="http://cisco.com/ns/yang/Cisco-IOS-XR-snmp-test-trap-act"/>
+</rpc>

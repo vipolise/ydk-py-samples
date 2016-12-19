@@ -1,0 +1,3 @@
+<interface-link-down xmlns="http://cisco.com/ns/yang/Cisco-IOS-XR-snmp-test-trap-act">
+  <ifindex>3</ifindex>
+</interface-link-down>
