@@ -1,0 +1,3 @@
+<routing-ospf-neighbor-state-change xmlns="http://cisco.com/ns/yang/Cisco-IOS-XR-snmp-test-trap-act">
+  <ifindex>0</ifindex>
+</routing-ospf-neighbor-state-change>
