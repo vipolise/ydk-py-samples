@@ -1,0 +1,3 @@
+<platform-hfr-bundle-state xmlns="http://cisco.com/ns/yang/Cisco-IOS-XR-snmp-test-trap-act">
+  <bundle-name>F0/SM0/FM/0</bundle-name>
+</platform-hfr-bundle-state>

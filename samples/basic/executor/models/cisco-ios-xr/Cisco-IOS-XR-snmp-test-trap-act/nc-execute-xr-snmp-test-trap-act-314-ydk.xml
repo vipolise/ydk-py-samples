@@ -1,0 +1,3 @@
+<sonet-line-status xmlns="http://cisco.com/ns/yang/Cisco-IOS-XR-snmp-test-trap-act">
+  <ifindex>5</ifindex>
+</sonet-line-status>

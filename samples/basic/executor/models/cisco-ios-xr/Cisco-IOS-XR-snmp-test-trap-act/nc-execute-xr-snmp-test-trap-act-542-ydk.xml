@@ -1,0 +1,6 @@
+<routing-mpls-tunnel-re-optimized xmlns="http://cisco.com/ns/yang/Cisco-IOS-XR-snmp-test-trap-act">
+  <index>1</index>
+  <instance>0</instance>
+  <source>172.16.255.1</source>
+  <destination>172.16.255.2</destination>
+</routing-mpls-tunnel-re-optimized>
