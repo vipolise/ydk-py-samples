@@ -1,0 +1,24 @@
+<telemetry-model-driven xmlns="http://cisco.com/ns/yang/Cisco-IOS-XR-telemetry-model-driven-cfg">
+  <sensor-groups>
+    <sensor-group>
+      <sensor-group-identifier>SGROUP1</sensor-group-identifier>
+      <sensor-paths>
+        <sensor-path>
+          <telemetry-sensor-path>Cisco-IOS-XR-infra-statsd-oper:infra-statistics/interfaces/interface/latest/generic-counters</telemetry-sensor-path>
+        </sensor-path>
+      </sensor-paths>
+    </sensor-group>
+  </sensor-groups>
+  <subscriptions>
+    <subscription>
+      <subscription-identifier>SUB1</subscription-identifier>
+      <sensor-profiles>
+        <sensor-profile>
+          <sensorgroupid>SGROUP1</sensorgroupid>
+          <sample-interval>30000</sample-interval>
+        </sensor-profile>
+      </sensor-profiles>
+    </subscription>
+  </subscriptions>
+</telemetry-model-driven>
+
