@@ -1,4 +1,6 @@
 test
-TODO*
 samples/intermediate
+projects/*
+!projects/README.md
 .vagrant/
+TODO*
