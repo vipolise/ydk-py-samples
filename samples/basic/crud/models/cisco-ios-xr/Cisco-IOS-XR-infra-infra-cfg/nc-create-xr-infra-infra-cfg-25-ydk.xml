@@ -1,0 +1,12 @@
+<banners xmlns="http://cisco.com/ns/yang/Cisco-IOS-XR-infra-infra-cfg">
+  <banner>
+    <banner-name>prompt-timeout</banner-name>
+    <banner-text>;
+------------------------------------------
+ Message for login authentication timeout
+------------------------------------------
+;
+</banner-text>
+  </banner>
+</banners>
+

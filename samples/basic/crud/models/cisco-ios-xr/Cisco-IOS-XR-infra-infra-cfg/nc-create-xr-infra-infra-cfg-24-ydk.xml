@@ -1,0 +1,12 @@
+<banners xmlns="http://cisco.com/ns/yang/Cisco-IOS-XR-infra-infra-cfg">
+  <banner>
+    <banner-name>slip-ppp</banner-name>
+    <banner-text>;
+----------------------------------
+ Message for SLIP/PPP connections
+----------------------------------
+;
+</banner-text>
+  </banner>
+</banners>
+
