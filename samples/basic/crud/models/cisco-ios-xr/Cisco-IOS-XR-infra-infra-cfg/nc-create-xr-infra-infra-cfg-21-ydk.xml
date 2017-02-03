@@ -1,0 +1,12 @@
+<banners xmlns="http://cisco.com/ns/yang/Cisco-IOS-XR-infra-infra-cfg">
+  <banner>
+    <banner-name>incoming</banner-name>
+    <banner-text>;
+-------------------------------------------------------------------
+ Incoming connection to a terminal line from a host on the network
+-------------------------------------------------------------------
+;
+</banner-text>
+  </banner>
+</banners>
+

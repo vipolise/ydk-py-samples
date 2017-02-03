@@ -1,0 +1,12 @@
+<banners xmlns="http://cisco.com/ns/yang/Cisco-IOS-XR-infra-infra-cfg">
+  <banner>
+    <banner-name>motd</banner-name>
+    <banner-text>;
+--------------------
+ Message of the day
+--------------------
+;
+</banner-text>
+  </banner>
+</banners>
+

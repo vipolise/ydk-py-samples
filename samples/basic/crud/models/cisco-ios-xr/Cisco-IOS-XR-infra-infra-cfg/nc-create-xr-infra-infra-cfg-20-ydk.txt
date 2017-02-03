@@ -1,0 +1,7 @@
+!! IOS XR Configuration version = 6.1.2
+banner exec ;
+----------------------
+ EXEC process created
+----------------------
+;
+end

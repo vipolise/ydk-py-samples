@@ -1,0 +1,7 @@
+!! IOS XR Configuration version = 6.1.2
+banner motd ;
+--------------------
+ Message of the day
+--------------------
+;
+end

@@ -1,0 +1,7 @@
+!! IOS XR Configuration version = 6.1.2
+banner incoming ;
+-------------------------------------------------------------------
+ Incoming connection to a terminal line from a host on the network
+-------------------------------------------------------------------
+;
+end

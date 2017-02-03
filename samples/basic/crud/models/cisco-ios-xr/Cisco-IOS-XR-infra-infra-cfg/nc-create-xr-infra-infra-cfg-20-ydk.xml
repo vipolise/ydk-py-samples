@@ -1,0 +1,12 @@
+<banners xmlns="http://cisco.com/ns/yang/Cisco-IOS-XR-infra-infra-cfg">
+  <banner>
+    <banner-name>exec</banner-name>
+    <banner-text>;
+----------------------
+ EXEC process created
+----------------------
+;
+</banner-text>
+  </banner>
+</banners>
+

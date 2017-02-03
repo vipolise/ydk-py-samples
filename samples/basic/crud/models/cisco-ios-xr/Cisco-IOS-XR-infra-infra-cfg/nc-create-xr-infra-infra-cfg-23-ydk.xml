@@ -1,0 +1,12 @@
+<banners xmlns="http://cisco.com/ns/yang/Cisco-IOS-XR-infra-infra-cfg">
+  <banner>
+    <banner-name>login</banner-name>
+    <banner-text>;
+----------------------
+ Device login message
+----------------------
+;
+</banner-text>
+  </banner>
+</banners>
+
