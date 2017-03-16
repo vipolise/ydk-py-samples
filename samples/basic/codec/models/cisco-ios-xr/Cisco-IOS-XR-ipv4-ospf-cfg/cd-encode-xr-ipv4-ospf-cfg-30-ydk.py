@@ -42,6 +42,7 @@ def config_ospf(ospf):
     process = ospf.processes.Process()
     process.process_name = "DEFAULT"
     process.default_vrf.router_id = "172.16.255.1"
+    process.start = Empty()
 
     # Area 0
     area_area_id = process.default_vrf.area_addresses.AreaAreaId()
