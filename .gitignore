@@ -4,3 +4,4 @@ projects/*
 !projects/README.md
 .vagrant/
 TODO*
+.DS_Store
